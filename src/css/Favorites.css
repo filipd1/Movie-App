@@ -34,7 +34,6 @@
 }
 
 
-/* Animation for new favorites being added */
 @keyframes fadeIn {
   from {
     opacity: 0;

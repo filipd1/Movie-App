@@ -1,6 +1,7 @@
 import MovieCard from "../components/MovieCard"
 import { useState, useEffect } from "react"
 import { searchMovies, getPopularMovies } from "../services/api"
+import { Link } from "react-router-dom"
 import "../css/Home.css"
 
 function Home() {
@@ -63,7 +64,10 @@ function Home() {
             {loading ? <div className="loading">Loading...</div> : (
                 <div className="movies-grid">
                     {movies.map(movie => (
-                        movie.title.toLowerCase().startsWith(searchQuery) && <MovieCard movie={movie} key={movie.id}/>
+                        movie.title.toLowerCase().startsWith(searchQuery) && (
+                            <Link to={`/movie/${movie.id}`} key={movie.id}>
+                                <MovieCard movie={movie} key={movie.id}/>
+                            </Link>)
                     ))}
                 </div>)}
 
