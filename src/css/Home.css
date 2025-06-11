@@ -61,3 +61,7 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+.home-title {
+  font-size: 34px;
+}

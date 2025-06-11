@@ -11,10 +11,14 @@ function MoviePage() {
     const [error, setError] = useState(false)
 
     useEffect(() => {
-        const loadMovieById = async () => {
+        const loadMovieData = async () => {
             try {
-                const movieId = await getMovieById(id)
-                setMovie(movieId)
+                const [movieData, reviewData] = await Promise.all([
+                    getMovieById(id),
+                    getMovieReviews(id)
+                ])
+                setMovie(movieData)
+                setReview(reviewData)
             } catch (err) {
                 console.log(err)
                 setError("Failed to load movie...")
@@ -22,23 +26,7 @@ function MoviePage() {
                 setLoading(false)
             }
         }
-        loadMovieById()
-    }, [id])
-
-    useEffect(() => {
-        const loadRewievs = async () => {
-            try {
-                const movieId = await getMovieReviews(id)
-                setReview(movieId)
-                console.log(movieId)
-            } catch (err) {
-                console.log(err)
-                setError("Failed to load movie...")
-            } finally {
-                setLoading(false)
-            }
-        }
-        loadRewievs()
+        loadMovieData()
     }, [id])
 
     return (

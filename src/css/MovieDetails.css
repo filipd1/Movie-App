@@ -19,16 +19,12 @@
 
 .movie-page-container-left {
     color: #fff;
+    padding: 1em;
 }
 
 .movie-page-votes {
     display: flex;
     gap: 1em;
-}
-
-.movie-page-text {
-    margin-top: 1em;
-    padding: .2em;
 }
 
 .movie-page-subtitle {
@@ -46,4 +42,23 @@
 
 .movie-page-review {
     font-size: 12px;
+    background-color: #fff;
+    color: #000;
+    margin: .6em;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+.review-link {
+    font-style: italic;
+    color: #4b4b4b;
+}
+
+.review-link:hover {
+    color: #000;
+}
+
+.review-created {
+    font-style: italic;
+    font-size: 11px;
 }

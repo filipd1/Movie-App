@@ -24,3 +24,9 @@ export const getMovieReviews = async (id) => {
     const data = await response.json()
     return data
 }
+
+export const getTopMovies = async () => {
+    const response = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data.results
+}

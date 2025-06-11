@@ -1,4 +1,5 @@
 import "../css/MovieDetails.css"
+import { Link } from "react-router-dom"
 
 function MovieDetails({movie, reviews}) {
 
@@ -6,24 +7,25 @@ function MovieDetails({movie, reviews}) {
         <div className="movie-page-container">
             <div className="movie-page-container-left">
                 <h1 className="movie-page-title">{movie.title}</h1>
-                <p className="movie-page-text">{movie.release_date?.split('-')[0]}</p>
-                <p className="movie-page-text movie-page-subtitle">{movie.tagline}</p>
+                <p>{movie.release_date?.split('-')[0]}</p>
+                <p className="movie-page-subtitle">{movie.tagline}</p>
                 <div className="movie-page-votes">
-                    <p className={`movie-page-text ${movie.vote_average >= 6 ? "vote-avg-high" : "vote-avg-low"}`}>Vote Average: {movie.vote_average}</p>
-                    <p className="movie-page-text">Vote Count: {movie.vote_count}</p>
+                    <p className={`${movie.vote_average >= 6 ? "vote-avg-high" : "vote-avg-low"}`}>Vote Average: {movie.vote_average}</p>
+                    <p>Vote Count: {movie.vote_count}</p>
                 </div>
-                <p className="movie-page-text">Popularity: {movie.popularity}</p>
-                <div className="movie-page-text">Producent: {movie.production_companies.map((company, i) => (
+                <p>Popularity: {movie.popularity}</p>
+                <div>Producent: {movie.production_companies?.map((company, i) => (
                     <span key={i}>{company.name} {company.origin_country}, </span>
                     ))}
                 </div>
-                <p className="movie-page-text">{movie.overview}</p>
+                <p>{movie.overview}</p>
                 <div>
-                    <p className="movie-page-text">Reviews</p>
+                    <p>Reviews</p>
                     {reviews.results?.map((review, i) => (
                         <div key={i} className="movie-page-review">
                             <p className="review-author">{review.author}</p>
-                            <p className="review-content">{review.content.slice(0, 200) + "..."}</p>
+                            <p className="review-content">{review.content.slice(0, 200) + "..."}<Link to={review.url} target="blank" className="review-link"> read more</Link></p>
+                            <p className="review-content review-created">{review.created_at.replace("T", " ").split(".")[0]}</p>
                         </div>
                     ))}
                 </div>
