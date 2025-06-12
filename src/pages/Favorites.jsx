@@ -1,9 +1,14 @@
+import { Link } from "react-router-dom"
 import MovieCard from "../components/MovieCard"
 import { useMovieContext } from "../contexts/MovieContext"
 import "../css/Favorites.css"
 
 function Favorites() {
     const {favorites} = useMovieContext()
+
+    if (favorites === null) {
+        return <div className="loading">Loading favorites...</div>
+    }
 
         return (
             <div className="favorites">

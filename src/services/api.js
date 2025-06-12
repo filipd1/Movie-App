@@ -30,3 +30,15 @@ export const getTopMovies = async () => {
     const data = await response.json()
     return data.results
 }
+
+export const getMovieCredits = async (id) => {
+    const response = await fetch(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}
+
+export const getUpcomingMovies = async () => {
+    const response = await fetch(`${BASE_URL}/movie/upcoming?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data.results
+}

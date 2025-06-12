@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getMovieById, getMovieReviews } from "../services/api"
+import { getMovieById, getMovieReviews, getMovieCredits } from "../services/api"
 import MovieDetails from "../components/MovieDetails"
 
 function MoviePage() {
     const { id } = useParams()
     const [movie, setMovie] = useState([])
     const [review, setReview] = useState([])
+    const [credits, setCredits] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect(() => {
         const loadMovieData = async () => {
             try {
-                const [movieData, reviewData] = await Promise.all([
+                const [movieData, reviewData, creditsData] = await Promise.all([
                     getMovieById(id),
-                    getMovieReviews(id)
+                    getMovieReviews(id),
+                    getMovieCredits(id)
                 ])
                 setMovie(movieData)
                 setReview(reviewData)
+                setCredits(creditsData)
             } catch (err) {
                 console.log(err)
                 setError("Failed to load movie...")
@@ -33,7 +36,7 @@ function MoviePage() {
         <div className="movie-page-wrapper">
             {error && <div className="error-message">{error}</div>}
             {loading ? <div className="loading">Loading...</div> : (
-                <MovieDetails movie={movie} reviews={review}/>
+                <MovieDetails movie={movie} reviews={review} credits={credits}/>
                 )}
         </div>
     )

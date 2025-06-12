@@ -1,0 +1,37 @@
+.footer {
+    background-color: rgb(177, 177, 177);
+    color: rgba(0, 0, 0, .6);
+    padding: 2rem;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    gap: .3em;
+}
+
+.footer-title {
+    font-size: 13px;
+}
+
+.footer-link {
+    font-size: 13px;
+    color: rgba(0, 0, 0, .6);
+}
+
+.footer-link:hover {
+    color: rgb(211, 211, 211);
+}
+
+.footer-social {
+    margin-top: 2em;
+}
+
+.footer-social-link {
+    color: rgba(0, 0, 0, .6);
+    padding-right: .8em;
+}
+
+.footer-social-link img{
+    width: 22px;
+}

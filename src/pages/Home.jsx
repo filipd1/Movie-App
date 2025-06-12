@@ -1,7 +1,6 @@
 import MovieCard from "../components/MovieCard"
 import { useState, useEffect } from "react"
 import { searchMovies, getPopularMovies, getTopMovies } from "../services/api"
-import { Link } from "react-router-dom"
 import "../css/Home.css"
 
 function Home() {
@@ -93,13 +92,11 @@ function Home() {
         <>
           {isSearching ? (
             <>
-              <h1 className="home-title">Search results</h1>
+              <h2 className="home-title">Search results</h2>
               <div className="movies-grid">
                 {searchResults.length > 0 ? (
                   searchResults.map(movie => (
-                    <Link to={`/movie/${movie.id}`} key={movie.id}>
-                      <MovieCard movie={movie} />
-                    </Link>
+                      <MovieCard movie={movie} key={movie.id}/>
                   ))
                 ) : (
                   <p>No results found</p>
@@ -108,21 +105,17 @@ function Home() {
             </>
           ) : (
             <>
-              <h1 className="home-title">Today popular movies</h1>
+              <h2 className="home-title">Now popular movies</h2>
               <div className="movies-grid">
                 {popularMovies.slice(0, 8).map(movie => (
-                  <Link to={`/movie/${movie.id}`} key={movie.id}>
-                    <MovieCard movie={movie} />
-                  </Link>
+                    <MovieCard movie={movie} key={movie.id}/>
                 ))}
               </div>
 
               <h1 className="home-title">Top rated movies</h1>
               <div className="movies-grid">
                 {topMovies.slice(0, 8).map(movie => (
-                  <Link to={`/movie/${movie.id}`} key={movie.id}>
-                    <MovieCard movie={movie} />
-                  </Link>
+                    <MovieCard movie={movie} key={movie.id}/>
                 ))}
               </div>
             </>

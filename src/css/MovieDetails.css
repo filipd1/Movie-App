@@ -1,16 +1,24 @@
-.movie-page-container {
+.movie-page-details {
     display: flex;
     justify-content: space-between;
     align-items: start;
     gap: 20px;
-    padding: 1em;
-    background-color: rgb(122, 122, 122);
+    padding: 2rem;
     border-radius: 5px;
 }
 
 .movie-page-title {
     font-size: 40px;
     margin-bottom: .3em;
+}
+
+.movie-page-flex {
+    display: flex;
+    gap: 5px;
+}
+
+.movie-page-container-right {
+    position: relative;
 }
 
 .movie-page-container-right img {
@@ -32,19 +40,38 @@
     color: rgb(194, 194, 193);
 }
 
-.vote-avg-low {
+.movie-page-genres {
+    background-color: rgba(0, 0, 0, .6);
+    padding: 0 .6em;
+}
+
+.vote-avg {
+    padding: 0 .6em;
+}
+
+.low {
     background-color: rgb(245, 57, 24);
 }
 
-.vote-avg-high {
+.high {
     background-color: rgb(78, 173, 91);
 }
 
-.movie-page-review {
-    font-size: 12px;
+.actor-card img {
+    width: 150px;
+}
+
+.movie-page-reviews {
     background-color: #fff;
     color: #000;
-    margin: .6em;
+    padding: 2rem;
+}
+
+
+.movie-review {
+    font-size: 12px;
+    background-color: #cccccc;
+    margin: .6em 0;
     padding: 1em;
     border-radius: 5px;
 }
