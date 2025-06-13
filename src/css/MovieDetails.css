@@ -1,4 +1,4 @@
-.movie-page-details {
+.movie-details {
     display: flex;
     justify-content: space-between;
     align-items: start;
@@ -7,46 +7,77 @@
     border-radius: 5px;
 }
 
-.movie-page-title {
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.movie-title {
     font-size: 40px;
-    margin-bottom: .3em;
 }
 
-.movie-page-flex {
-    display: flex;
-    gap: 5px;
+.movie-release-date {
+    color: rgba(255, 255, 255, .7);
 }
 
-.movie-page-container-right {
+.movie-title-wrapper {
+    margin-bottom: 1em;
     position: relative;
-}
-
-.movie-page-container-right img {
-    height: 550px;
-}
-
-.movie-page-container-left {
-    color: #fff;
+    min-height: 2%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 1em;
 }
 
-.movie-page-votes {
+.flex {
+    display: flex;
+    align-items: end;
+    gap: 1em;
+}
+
+.movie-hr {
+    border: none;
+    border: 1px solid rgba(255, 255, 255, .4);
+    margin: 1em 0;
+
+}
+
+.movie-producent,
+.movie-director,
+.actor-card-wrapper,
+.movie-votes,
+.movie-genres-wrapper {
     display: flex;
     gap: 1em;
 }
 
-.movie-page-subtitle {
+.movie-container-right {
+    position: relative;
+}
+
+.movie-container-right img {
+    height: 550px;
+}
+
+.movie-container-left {
+    color: #fff;
+    padding: 1em;
+}
+
+.movie-subtitle {
     font-style: italic;
-    color: rgb(194, 194, 193);
+    color: rgba(255, 255, 255, .7);
 }
 
-.movie-page-genres {
-    background-color: rgba(0, 0, 0, .6);
-    padding: 0 .6em;
-}
-
-.vote-avg {
-    padding: 0 .6em;
+.movie-genre {
+    background-color: rgba(0, 0, 0, .4);
+    padding: .2em .6em;
 }
 
 .low {
@@ -57,35 +88,6 @@
     background-color: rgb(78, 173, 91);
 }
 
-.actor-card img {
-    width: 150px;
-}
-
-.movie-page-reviews {
-    background-color: #fff;
-    color: #000;
-    padding: 2rem;
-}
-
-
-.movie-review {
-    font-size: 12px;
-    background-color: #cccccc;
-    margin: .6em 0;
-    padding: 1em;
-    border-radius: 5px;
-}
-
-.review-link {
-    font-style: italic;
-    color: #4b4b4b;
-}
-
-.review-link:hover {
-    color: #000;
-}
-
-.review-created {
-    font-style: italic;
-    font-size: 11px;
+.movie-overview {
+    margin: 1em 0;
 }

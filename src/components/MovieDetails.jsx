@@ -1,7 +1,7 @@
 import { useMovieContext } from "../contexts/MovieContext"
 import "../css/MovieDetails.css"
-import { Link } from "react-router-dom"
 import ActorCard from "./ActorCard"
+import Reviews from "./Reviews"
 
 function MovieDetails({movie, reviews, credits}) {
     const {addFavorites, removeFavorites, isFavorite} = useMovieContext()
@@ -15,33 +15,47 @@ function MovieDetails({movie, reviews, credits}) {
 
     return (
         <>
-            <div className="movie-page-details">
-                <div className="movie-page-container-left">
-                    <h1 className="movie-page-title">{movie.title}</h1>
-                    <p>{movie.release_date?.split('-')[0]}</p>
-                    <p className="movie-page-subtitle">{movie.tagline}</p>
+            <div className="movie-details">
+                <div className="movie-container-left">
 
-                    <div className="movie-page-flex">{movie.genres?.map((m, i) => (
-                            <p className="movie-page-genres" key={i}>{m.name}</p>
+                    <div className="movie-title-wrapper"> 
+                        <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt="" className="bg-image"/>
+                        <div className="flex">
+                            <h1 className="movie-title">{movie.title}</h1>
+                            <p className="movie-release-date">{movie.release_date?.split('-')[0]}</p>
+                        </div>
+                        <p className="movie-subtitle">{movie.tagline}</p>
+                    </div>
+
+                    <hr className="movie-hr"/>
+
+                    <div className="movie-genres-wrapper">{movie.genres?.map((m, i) => (
+                            <p className="movie-genre" key={i}>{m.name}</p>
                         ))}
                     </div>
 
-                    <div className="movie-page-votes">
-                        <p className={`vote-avg ${movie.vote_average >= 6 ? "high" : "low"}`}>Vote Average: {movie.vote_average}</p>
+                    <div className="movie-votes">
+                        <p>Vote Average: <span className={`${movie.vote_average >= 6 ? "high" : "low"}`}>{movie.vote_average}</span></p>
                         <p>Vote Count: {movie.vote_count}</p>
+                        <p>Popularity: {movie.popularity}</p>
                     </div>
+                    
+                    <p className="movie-overview">{movie.overview}</p>
 
-                    <p>Popularity: {movie.popularity}</p>
-                    <div className="movie-page-flex">Producent: {movie.production_companies?.map((company, i) => (
+                    <div className="movie-producent">Producent: {movie.production_companies?.map((company, i) => (
                         <p key={i}>{company.name} {company.origin_country}, </p>
                         ))}
                     </div>
 
-                    <p>{movie.overview}</p>
+                    <div className="movie-director">Director: {credits.crew?.map((c, i) => (
+                        <p key={i}>{c.job === "Director" && c.name}</p>
+                        ))}
+                    </div>
+
                     <ActorCard movie={movie} credits={credits}/>
                 </div>
 
-                <div className="movie-page-container-right">
+                <div className="movie-container-right">
                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                         <button className={`favorite-btn ${favorite ? "active" : ""}`} onClick={onFavoriteClick}>
                             ♥
@@ -49,16 +63,7 @@ function MovieDetails({movie, reviews, credits}) {
                 </div>
             </div>
 
-            <div className="movie-page-reviews">
-                <p>Reviews</p>
-                {reviews.results?.map((review, i) => (
-                    <div key={i} className="movie-review">
-                        <p className="review-author">{review.author}</p>
-                        <p className="review-content">{review.content.slice(0, 200) + "..."}<Link to={review.url} target="blank" className="review-link"> read more</Link></p>
-                        <p className="review-content review-created">{review.created_at.replace("T", " ").split(".")[0]}</p>
-                    </div>
-                ))}
-            </div>
+            <Reviews reviews={reviews} />
         </>
     )
 }

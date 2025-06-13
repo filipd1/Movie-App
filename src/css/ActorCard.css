@@ -1,0 +1,27 @@
+.actor-card-wrapper {
+  display: flex;
+}
+
+.actor-card {
+    max-width: 150px;
+}
+
+.actor-title {
+  font-size: 16px;
+  margin-top: 1em;
+}
+
+.actor-card img {
+    width: 150px;
+}
+
+.actor-name,
+.actor-role {
+  text-align: center;
+  font-size: 13px;
+  margin: 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
