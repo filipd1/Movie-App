@@ -77,8 +77,8 @@ function Home() {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button type="submit" className="search-button">Search</button>
-        {isSearching && (
-          <button type="button" onClick={clearSearch}>
+          {isSearching && (
+        <button type="button" onClick={clearSearch}>
             Clear search
           </button>
         )}

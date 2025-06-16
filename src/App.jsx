@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import { Routes, Route } from 'react-router-dom'
 import { MovieProvider } from './contexts/MovieContext'
+import PersonPage from './pages/PersonPage'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/favorites" element={<Favorites/>} />
           <Route path="/movie/:id" element={<MoviePage/>} />
+          <Route path="/person/:id" element={<PersonPage/>} />
         </Routes>
       </main>
       <Footer/>

@@ -42,3 +42,15 @@ export const getUpcomingMovies = async () => {
     const data = await response.json()
     return data.results
 }
+
+export const getSimilarMovies = async (id) => {
+    const response = await fetch(`${BASE_URL}/movie/${id}/similar?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}
+
+export const getPersonById = async (id) => {
+    const response = await fetch(`${BASE_URL}/person/${id}?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}

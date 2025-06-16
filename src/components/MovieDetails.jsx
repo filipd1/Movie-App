@@ -2,10 +2,13 @@ import { useMovieContext } from "../contexts/MovieContext"
 import "../css/MovieDetails.css"
 import ActorCard from "./ActorCard"
 import Reviews from "./Reviews"
+import SimilarMovies from "./SimilarMovies"
+import { Link } from "react-router-dom"
 
-function MovieDetails({movie, reviews, credits}) {
+function MovieDetails({movie, reviews, credits, similarMovies, person}) {
     const {addFavorites, removeFavorites, isFavorite} = useMovieContext()
     const favorite = isFavorite(movie.id)
+    const directors = credits.crew?.filter(c => c.job === "Director")
 
         function onFavoriteClick(e) {
         e.preventDefault()
@@ -19,7 +22,6 @@ function MovieDetails({movie, reviews, credits}) {
                 <div className="movie-container-left">
 
                     <div className="movie-title-wrapper"> 
-                        <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt="" className="bg-image"/>
                         <div className="flex">
                             <h1 className="movie-title">{movie.title}</h1>
                             <p className="movie-release-date">{movie.release_date?.split('-')[0]}</p>
@@ -47,16 +49,18 @@ function MovieDetails({movie, reviews, credits}) {
                         ))}
                     </div>
 
-                    <div className="movie-director">Director: {credits.crew?.map((c, i) => (
-                        <p key={i}>{c.job === "Director" && c.name}</p>
+                    {directors && directors.length > 0 && (
+                        <div className="movie-director">Director: {directors.map((d, i) => (
+                            <Link key={i} to={`/person/${d.id}`}>{d.name}</Link>
                         ))}
-                    </div>
+                    </div>)}
 
-                    <ActorCard movie={movie} credits={credits}/>
+
+                    <ActorCard movie={movie} credits={credits} person={person}/>
                 </div>
 
                 <div className="movie-container-right">
-                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} onError={(e) => { e.target.src = "/fallback-poster.png" }}/>
                         <button className={`favorite-btn ${favorite ? "active" : ""}`} onClick={onFavoriteClick}>
                             ♥
                         </button>
@@ -64,6 +68,7 @@ function MovieDetails({movie, reviews, credits}) {
             </div>
 
             <Reviews reviews={reviews} />
+            <SimilarMovies movie={similarMovies} />
         </>
     )
 }
