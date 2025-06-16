@@ -34,7 +34,6 @@
     border: none;
     border: 1px solid rgba(255, 255, 255, .4);
     margin: 1em 0;
-
 }
 
 .movie-producent,
@@ -71,10 +70,12 @@
 
 .low {
     background-color: rgb(245, 57, 24);
+    padding: .15em;
 }
 
 .high {
     background-color: rgb(78, 173, 91);
+    padding: .15em;
 }
 
 .movie-overview {

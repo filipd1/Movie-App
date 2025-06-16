@@ -33,15 +33,16 @@ function MoviePage() {
             }
         }
         loadMovieData()
+        window.scrollTo(0,0)
     }, [id])
 
     return (
-        <div className="movie-page-wrapper">
+        <>
             {error && <div className="error-message">{error}</div>}
             {loading ? <div className="loading">Loading...</div> : (
                 <MovieDetails movie={movie} reviews={review} credits={credits} similarMovies={similarMovies}/>
                 )}
-        </div>
+        </>
     )
 
 }

@@ -1,0 +1,59 @@
+.actor-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 1em;
+  padding: 1em 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.actor-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.actor-slider::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.actor-title {
+  font-size: 18px;
+  margin: 1em 0;
+}
+
+.actor-card {
+  max-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.actor-card img {
+  width: 150px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.actor-name,
+.actor-role {
+  text-align: center;
+  font-size: 13px;
+  margin: 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: #000;
+  padding-left: 1em;
+}
+
+.actor-name {
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
+.actor-name:hover {
+  color: rgba(0, 0, 0, .7);
+}

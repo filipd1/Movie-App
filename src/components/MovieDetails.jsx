@@ -1,6 +1,6 @@
 import { useMovieContext } from "../contexts/MovieContext"
 import "../css/MovieDetails.css"
-import ActorCard from "./ActorCard"
+import Cast from "./Cast"
 import Reviews from "./Reviews"
 import SimilarMovies from "./SimilarMovies"
 import { Link } from "react-router-dom"
@@ -37,7 +37,7 @@ function MovieDetails({movie, reviews, credits, similarMovies, person}) {
                     </div>
 
                     <div className="movie-votes">
-                        <p>Vote Average: <span className={`${movie.vote_average >= 6 ? "high" : "low"}`}>{movie.vote_average}</span></p>
+                        <p>Vote Average: <span className={`${movie.vote_average >= 6 ? "high" : "low"}`}>{movie.vote_average.toFixed(1)}</span></p>
                         <p>Vote Count: {movie.vote_count}</p>
                         <p>Popularity: {movie.popularity}</p>
                     </div>
@@ -52,15 +52,16 @@ function MovieDetails({movie, reviews, credits, similarMovies, person}) {
                     {directors && directors.length > 0 && (
                         <div className="movie-director">Director: {directors.map((d, i) => (
                             <Link key={i} to={`/person/${d.id}`}>{d.name}</Link>
-                        ))}
-                    </div>)}
+                            ))}
+                        </div>
+                    )}
 
 
-                    <ActorCard movie={movie} credits={credits} person={person}/>
+                    <Cast movie={movie} credits={credits} person={person}/>
                 </div>
 
                 <div className="movie-container-right">
-                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} onError={(e) => { e.target.src = "/fallback-poster.png" }}/>
+                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
                         <button className={`favorite-btn ${favorite ? "active" : ""}`} onClick={onFavoriteClick}>
                             ♥
                         </button>
