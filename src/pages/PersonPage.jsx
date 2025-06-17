@@ -1,18 +1,24 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { getPersonById } from "../services/api"
+import { getPersonById, getPersonCombinedCredits } from "../services/api"
+import PersonDetails from "../components/PersonDetails"
 
 function PersonPage() {
     const { id } = useParams()
     const [person, setPerson] = useState([])
+    const [personCredits, setPersonCredits] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect(() => {
         const loadPersonData = async () => {
             try {
-                const personData = await getPersonById(id)
+                const [personData, personCreditsData] = await Promise.all([
+                    getPersonById(id),
+                    getPersonCombinedCredits(id)
+                ]) 
                 setPerson(personData)
+                setPersonCredits(personCreditsData)
                 console.log(personData)
             } catch (err) {
                 console.log(err)
@@ -25,12 +31,12 @@ function PersonPage() {
     }, [id])
 
     return (
-        <div className="movie-page-wrapper">
+        <>
             {error && <div className="error-message">{error}</div>}
             {loading ? <div className="loading">Loading...</div> : (
-                <p>{person.name}</p>
+                <PersonDetails person={person} credits={personCredits}/>
                 )}
-        </div>
+        </>
     )
 }
 

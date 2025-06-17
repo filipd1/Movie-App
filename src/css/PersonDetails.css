@@ -1,0 +1,64 @@
+.person-details {
+    padding: 3rem 10rem;
+}
+
+.person-details-top {
+    display: flex;
+    gap: 30px;
+}
+
+.person-img-wrapper {
+    width: 22%;
+}
+
+.person-img-wrapper img {
+    width: 100%;
+    height: 350px;
+    border-radius: 5px;
+}
+
+.person-desc {
+    width: 78%;
+}
+
+.person-desc p {
+    font-size: 14px;
+}
+
+.combined-credits {
+    margin-top: 3em;
+    display: flex;
+    gap: 1em;
+    overflow-x: auto;
+    white-space: nowrap; 
+}
+
+/* .combined-credits::-webkit-scrollbar {
+    height: 6px;
+}
+.combined-credits::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 4px;
+} */
+ 
+.credit-card {
+    flex: 0 0 auto;
+    width: 150px;
+}
+
+.credit-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.credit-card p {
+    font-size: 12px;
+    margin-bottom: 0.3em;
+    text-align: center;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
