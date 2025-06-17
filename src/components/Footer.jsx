@@ -36,11 +36,13 @@ function Footer() {
                     ) : (
                         <>
                             <h4 className="footer-title">Upcoming Movies:</h4>
-                            {upcomingMovies?.slice(0,10).map((movie, i) => (
-                                <Link className="footer-link" key={i} to={`/movie/${movie.id}`}>
-                                    <p>{movie.title}</p>
-                                </Link>
-                            ))}
+                            <div className="footer-movies-container">
+                                {upcomingMovies?.slice(0,10).map((movie, i) => (
+                                    <Link className="footer-link" key={i} to={`/movie/${movie.id}`}>
+                                        <p>{movie.title}</p>
+                                    </Link>
+                                ))}
+                            </div>
                         </>
                     )
                 }
@@ -64,15 +66,16 @@ function Footer() {
                         <img src={cs} alt="cs" />
                     </Link>
                 </div>
+                <div className="footer-container">
+                    <Link className="footer-link" to="/favorites">Favorites</Link>
+                    <Link className="footer-link" to="/">About</Link>
+                    <Link className="footer-link" to="/">Contact</Link>
+                    <Link className="footer-link" to="/">Privacy</Link>
+                    <Link className="footer-link" to="/">Terms</Link>
+                </div>
             </div>
 
-            <div className="footer-container">
-                <Link className="footer-link" to="/favorites">Favorites</Link>
-                <Link className="footer-link" to="/">About</Link>
-                <Link className="footer-link" to="/">Contact</Link>
-                <Link className="footer-link" to="/">Privacy</Link>
-                <Link className="footer-link" to="/">Terms</Link>
-            </div>
+
         </div>
     )
 }

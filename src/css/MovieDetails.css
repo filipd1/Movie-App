@@ -1,10 +1,11 @@
 .movie-details {
     display: flex;
     justify-content: space-between;
-    align-items: start;
-    gap: 20px;
+    align-items: center;
+    gap: 30px;
     padding: 2rem;
     border-radius: 5px;
+    width: 100%;
 }
 
 .movie-title {
@@ -45,17 +46,24 @@
     gap: 1em;
 }
 
+.movie-votes {
+    justify-content: center;
+}
+
+
 .movie-container-right {
     position: relative;
+    width: 30%;
 }
 
 .movie-container-right img {
-    height: 550px;
+    height: 600px;
+    width: 100%;
 }
 
 .movie-container-left {
     color: #fff;
-    padding: 1em;
+    width: 70%;
 }
 
 .movie-subtitle {
@@ -68,14 +76,18 @@
     padding: .2em .6em;
 }
 
+.vote_average {
+    padding: .15em;
+    margin-left: .5em;
+}
+
 .low {
     background-color: rgb(245, 57, 24);
-    padding: .15em;
+    
 }
 
 .high {
     background-color: rgb(78, 173, 91);
-    padding: .15em;
 }
 
 .movie-overview {

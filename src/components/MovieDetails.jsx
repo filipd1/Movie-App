@@ -35,19 +35,8 @@ function MovieDetails({movie, reviews, credits, similarMovies, person}) {
                             <p className="movie-genre" key={i}>{m.name}</p>
                         ))}
                     </div>
-
-                    <div className="movie-votes">
-                        <p>Vote Average: <span className={`${movie.vote_average >= 6 ? "high" : "low"}`}>{movie.vote_average.toFixed(1)}</span></p>
-                        <p>Vote Count: {movie.vote_count}</p>
-                        <p>Popularity: {movie.popularity}</p>
-                    </div>
                     
                     <p className="movie-overview">{movie.overview}</p>
-
-                    <div className="movie-producent">Producent: {movie.production_companies?.map((company, i) => (
-                        <p key={i}>{company.name} {company.origin_country}, </p>
-                        ))}
-                    </div>
 
                     {directors && directors.length > 0 && (
                         <div className="movie-director">Director: {directors.map((d, i) => (
@@ -56,15 +45,29 @@ function MovieDetails({movie, reviews, credits, similarMovies, person}) {
                         </div>
                     )}
 
+                    <div className="movie-producent">Producent: {movie.production_companies?.map((company, i) => (
+                        <p key={i}>{company.name},</p>
+                    ))}
+                    </div>
 
                     <Cast movie={movie} credits={credits} person={person}/>
                 </div>
 
                 <div className="movie-container-right">
                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
-                        <button className={`favorite-btn ${favorite ? "active" : ""}`} onClick={onFavoriteClick}>
+                    
+                    <button className={`favorite-btn ${favorite ? "active" : ""}`} onClick={onFavoriteClick}>
                             ♥
-                        </button>
+                    </button>
+
+                    <div className="movie-votes">
+                        <p>Vote Count: {movie.vote_count}</p>
+                        <p>Vote Average:
+                            <span className={`vote_average ${movie.vote_average >= 6 ? "high" : "low"}`}>
+                                {movie.vote_average.toFixed(1)}
+                            </span>
+                        </p>
+                    </div>
                 </div>
             </div>
 

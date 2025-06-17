@@ -1,5 +1,9 @@
 .similar-movies-container {
     padding: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    width: 100%;
 }
 
 .similar-movies {
@@ -7,4 +11,9 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
     margin-top: 1rem;
+}
+
+.show-more-movies {
+    height: 40px;
+    align-self: center;
 }

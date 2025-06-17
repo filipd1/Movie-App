@@ -1,5 +1,5 @@
 .reviews-container {
-    background-color: #fff;
+    background-color: #ccc;
     color: #000;
     padding: 2rem;
 }
@@ -7,7 +7,7 @@
 
 .movie-review {
     font-size: 12px;
-    background-color: #cccccc;
+    background-color: #fff;
     margin: .6em 0;
     padding: 1em;
     border-radius: 5px; 
@@ -25,4 +25,15 @@
 .review-created {
     font-style: italic;
     font-size: 11px;
+}
+
+.show-more-reviews {
+    background-color: unset;
+    color: #000;
+    padding: 0;
+    border: none;
+}
+
+.show-more-reviews:hover {
+    color: #4b4b4b;
 }

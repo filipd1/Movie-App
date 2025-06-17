@@ -22,7 +22,7 @@ function Cast({ movie, credits }) {
 
                 )}
                
-                {credits.cast?.slice(0, 5).map((actor, i) => (
+                {credits.cast?.map((actor, i) => (
                     <div className="actor-card" key={i}>
                         <img src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} alt={actor.name} />
                         <Link to={`/person/${actor.id}`}>
