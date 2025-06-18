@@ -8,7 +8,7 @@ export const getPopularMovies = async () => {
 }
 
 export const searchMovies = async (query) => {
-    const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
+    const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
     const data = await response.json()
     return data.results
 }
@@ -57,6 +57,12 @@ export const getPersonById = async (id) => {
 
 export const getPersonCombinedCredits = async (id) => {
     const response = await fetch(`${BASE_URL}/person/${id}/combined_credits?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}
+
+export const getTVSeriesById = async (id) => {
+    const response = await fetch(`${BASE_URL}/tv/${id}?api_key=${API_KEY}`)
     const data = await response.json()
     return data
 }

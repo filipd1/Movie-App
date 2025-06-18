@@ -19,7 +19,6 @@ function PersonPage() {
                 ]) 
                 setPerson(personData)
                 setPersonCredits(personCreditsData)
-                console.log(personData)
             } catch (err) {
                 console.log(err)
                 setError("Failed to load details...")

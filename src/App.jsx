@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import { Routes, Route } from 'react-router-dom'
 import { MovieProvider } from './contexts/MovieContext'
 import PersonPage from './pages/PersonPage'
+import TVSeriesPage from './pages/TVSeriesPage'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/favorites" element={<Favorites/>} />
           <Route path="/movie/:id" element={<MoviePage/>} />
+          <Route path="/tv/:id" element={<TVSeriesPage/>} />
           <Route path="/person/:id" element={<PersonPage/>} />
         </Routes>
       </main>

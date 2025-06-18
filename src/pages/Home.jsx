@@ -71,7 +71,7 @@ function Home() {
       <form className="search-form" onSubmit={handleSearch}>
         <input
           type="text"
-          placeholder="Search for movie.."
+          placeholder="Search.."
           className="search-input"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -96,6 +96,7 @@ function Home() {
               <div className="movies-grid">
                 {searchResults.length > 0 ? (
                   searchResults.map(movie => (
+                    (movie.profile_path || movie.poster_path) &&
                       <MovieCard movie={movie} key={movie.id}/>
                   ))
                 ) : (
