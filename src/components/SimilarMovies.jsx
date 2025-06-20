@@ -23,10 +23,15 @@ function SimilarMovies({ movie }) {
                     <MovieCard movie={m} key={i}/>
                 ))
                 )}
-                <button
-                    className="show-more-movies"
-                    onClick={handleLoadMore}>{loadMoreClicked ? ("Hide") : ("Show more")}
-                </button>
+                {movie.results.length > 0 ? (
+                    <button
+                        className="show-more-movies"
+                        onClick={handleLoadMore}>{loadMoreClicked ? ("Hide") : ("Show more")}
+                    </button>
+                    ) : (
+                        <p>No similar movies yet</p>
+                    )
+                }
             </div>
         </div>
     )

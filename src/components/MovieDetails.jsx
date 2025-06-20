@@ -21,6 +21,10 @@ function MovieDetails({ movie, credits, images }) {
 
     return (
         <div className="movie-details">
+            <div className="bg-image">
+                <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />
+            </div>
+
             <div className="movie-poster-wrapper">
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
                 <button className={`favorite-btn ${favorite ? "active" : ""}`} onClick={onFavoriteClick}>
