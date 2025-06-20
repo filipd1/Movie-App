@@ -12,6 +12,10 @@ function Home() {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  const filteredSearchResults = searchResults.sort(
+    (a,b) => b.vote_count - a.vote_count
+  )
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -67,7 +71,7 @@ function Home() {
   }
 
   return (
-    <div className="home">
+    <div className="container">
       <form className="search-form" onSubmit={handleSearch}>
         <input
           type="text"
@@ -95,7 +99,7 @@ function Home() {
               <h2 className="home-title">Search results</h2>
               <div className="movies-grid">
                 {searchResults.length > 0 ? (
-                  searchResults.map(movie => (
+                  filteredSearchResults.map(movie => (
                     (movie.profile_path || movie.poster_path) &&
                       <MovieCard movie={movie} key={movie.id}/>
                   ))

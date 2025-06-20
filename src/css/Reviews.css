@@ -1,16 +1,18 @@
 .reviews-container {
-    background-color: #ccc;
+    background-color: #dfdfdf;
     color: #000;
-    padding: 3rem 5rem;
+    width: 100%;
+    padding: 1em;
+    border-radius: 4px;
+    margin: 3em 0;
 }
-
 
 .movie-review {
     font-size: 12px;
-    background-color: #fff;
+    background-color: #ffffff;
     margin: .6em 0;
     padding: 1em;
-    border-radius: 5px; 
+    border-radius: 4px; 
 }
 
 .review-link {

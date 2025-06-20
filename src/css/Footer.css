@@ -1,10 +1,15 @@
 .footer {
-    background-color: #ccc;
-    color: #000;
+    background-color: var(--bg-nav);
+}
+
+.footer-container {
+    color: #fff;
     padding: 2rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: start;
+    width: 1440px;
+    margin: 0 auto;
 }
 
 .footer-title {
@@ -17,17 +22,15 @@
 
 .footer-link {
     font-size: 13px;
-    color: #000;
+    color: #fff;
     margin-right: .5em;
 }
 
 .footer-link:hover {
     text-decoration: underline;
-    color: #3f3f3f;
 }
 
 .footer-social-link {
-    color: rgba(0, 0, 0, .6);
     padding-right: .8em;
 }
 

@@ -5,12 +5,18 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background: var(--bg-color);
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bg-color: linear-gradient(270deg, #142333 0%, #0C3240 50.48%, #142333 100%);
+  --bg-nav: #131E29;
+  --Rating-Green: #08562B;
+  --Rating-Red: rgb(245, 57, 24);;
 }
 
 * {
@@ -39,7 +45,7 @@ body {
 
 a {
   font-weight: 500;
-  color: #c9c7c7;
+  color: #fff;
   text-decoration: inherit;
 }
 
@@ -69,6 +75,12 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 1em;
 }
 
 @media (prefers-color-scheme: light) {

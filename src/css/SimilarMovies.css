@@ -1,5 +1,4 @@
 .similar-movies-container {
-    padding: 3rem 5rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;

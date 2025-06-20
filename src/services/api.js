@@ -66,3 +66,9 @@ export const getTVSeriesById = async (id) => {
     const data = await response.json()
     return data
 }
+
+export const getMovieImages = async (id) => {
+    const response = await fetch(`${BASE_URL}/movie/${id}/images?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}

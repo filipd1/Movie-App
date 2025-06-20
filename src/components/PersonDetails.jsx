@@ -39,8 +39,11 @@ function PersonDetails({ person, credits }) {
                                     <div key={i} className="credit-card">
                                         <Link to={`/tv/${role.id}`}>
                                         <img
-                                        src={`https://image.tmdb.org/t/p/w500${role.poster_path}`}
-                                        alt={role.title}
+                                            src={role.poster_path ? 
+                                                `https://image.tmdb.org/t/p/w500${role.poster_path}`
+                                                : "/poster_placeholder.png"
+                                                }
+                                            alt={role.title}
                                         />
                                         </Link>
                                         <p>{role.name}</p>
@@ -49,7 +52,10 @@ function PersonDetails({ person, credits }) {
                                     <div key={i} className="credit-card">
                                         <Link to={`/movie/${role.id}`}>
                                             <img
-                                                src={`https://image.tmdb.org/t/p/w500${role.poster_path}`}
+                                                src={role.poster_path ? 
+                                                    `https://image.tmdb.org/t/p/w500${role.poster_path}`
+                                                    : "/poster_placeholder.png"
+                                                    }
                                                 alt={role.title}
                                             />
                                         </Link>
