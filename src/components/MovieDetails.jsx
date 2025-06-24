@@ -10,20 +10,26 @@ import watchLaterIcon from "../assets/eye.svg"
 
 function MovieDetails({ movie, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
-    const {addFavorites, removeFavorites, isFavorite} = useMovieContext()
+    const {addItem, removeItem, isAdded} = useMovieContext()
 
     const mediaType = movie.first_air_date ? "tv" : "movie"
     const directors = credits.crew?.filter(c => c.job === "Director")
 
     function onFavoriteClick(e) {
-    e.preventDefault()
-    if (isFavorite(movie.id, mediaType)) {
-        removeFavorites(movie.id, mediaType)
-    } else {
-        addFavorites({ ...movie, media_type: mediaType })
-    }
+        e.preventDefault()
+        if (isAdded(movie.id, mediaType, "favorites")) 
+            removeItem(movie.id, mediaType, "favorites")
+        else 
+            addItem({ ...movie, media_type: mediaType }, "favorites")
     }
 
+    function onWatchlistClick(e) {
+        e.preventDefault()
+        if (isAdded(movie.id, mediaType, "watchlist")) 
+            removeItem(movie.id, mediaType, "watchlist")
+        else 
+            addItem({ ...movie, media_type: mediaType }, "watchlist")
+    }
 
     return (
         <div className="movie-details">
@@ -77,13 +83,13 @@ function MovieDetails({ movie, credits, images }) {
                 </div>
 
                 <div className="movie-buttons">
-                    <button onClick={onFavoriteClick} className={isFavorite(movie.id, mediaType) ? "btn-clicked" : ""}>
+                    <button onClick={onFavoriteClick} className={isAdded(movie.id, mediaType, "favorites") ? "btn-clicked" : ""}>
                         <img src={favoriteIcon} alt="favorite" />
-                        <span>{isFavorite(movie.id, mediaType) ? "" : "Add to favorites"}</span>
+                        <span>{isAdded(movie.id, mediaType, "favorites") ? "" : "Add to favorites"}</span>
                     </button>
-                    <button>
+                    <button onClick={onWatchlistClick} className={isAdded(movie.id, mediaType, "watchlist") ? "btn-clicked" : ""}>
                         <img src={watchLaterIcon} alt="watch later" />
-                        <span>Add to watchlist</span>
+                        <span>{isAdded(movie.id, mediaType, "watchlist") ? "" : "Add to watchlist"}</span>
                     </button>
                 </div>
 

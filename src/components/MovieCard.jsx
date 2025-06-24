@@ -3,7 +3,7 @@ import { useMovieContext } from "../contexts/MovieContext"
 import { Link } from "react-router-dom"
 
 function MovieCard({movie}) {
-    const {addFavorites, removeFavorites, isFavorite} = useMovieContext()
+    const {addItem, removeItem, isAdded} = useMovieContext()
 
     const mediaType = movie.first_air_date ? "tv" : "movie"
 
@@ -29,12 +29,12 @@ function MovieCard({movie}) {
         ? `/tv/${movie.id}`
         : `/movie/${movie.id}`
 
-    function onFavoriteClick(e) {
+    function onButtonClick(e) {
     e.preventDefault()
-    if (isFavorite(movie.id, mediaType)) {
-        removeFavorites(movie.id, mediaType)
+    if (isAdded(movie.id, mediaType, "favorites")) {
+        removeItem(movie.id, mediaType, "favorites")
     } else {
-        addFavorites({ ...movie, media_type: mediaType })
+        addItem({ ...movie, media_type: mediaType }, "favorites")
     }
     }
 
@@ -50,8 +50,10 @@ function MovieCard({movie}) {
                     alt={title} />
                     <div className="movie-overlay">
                         <button
-                            className={`favorite-btn ${isFavorite(movie.id, mediaType) ? "active" : ""}`}
-                            onClick={onFavoriteClick}>
+                            className={
+                                `favorite-btn ${isAdded(movie.id, mediaType, "favorites") ? "active" : ""}`
+                            }
+                            onClick={onButtonClick}>
                             ♥
                         </button>
                     </div>

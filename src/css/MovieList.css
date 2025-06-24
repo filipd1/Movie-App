@@ -1,15 +1,15 @@
-.favorites-title {
+.movie-list-title {
   font-size: 2.5rem;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: 1em;
 }
 
-.favorites-hr {
+.movie-list-hr {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.favorites-empty {
+.movie-list-empty {
   text-align: center;
   padding: 4rem 2rem;
   background-color: rgba(255, 255, 255, 0.05);
@@ -18,13 +18,13 @@
   max-width: 600px;
 }
 
-.favorites-empty h2 {
+.movie-list-empty h2 {
   margin-bottom: 1rem;
   font-size: 2rem;
   color: #fff;
 }
 
-.favorites-empty p {
+.movie-list-empty p {
   color: rgba(255, 255, 255, 0.5);
   font-size: 1.2rem;
   line-height: 1.6;
