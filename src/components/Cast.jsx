@@ -76,7 +76,14 @@ function Cast({ movie, credits }) {
                         directors.map((d, i) => (
                             <div className="actor-card" key={i}>
                                 <Link to={`/person/${d.id}`}>
-                                    <img src={`https://image.tmdb.org/t/p/w500${d.profile_path}`} alt={d.name} />
+                                    <img
+                                        src={
+                                            d.profile_path
+                                            ? `https://image.tmdb.org/t/p/w500${d.profile_path}`
+                                            : "/person_placeholder.png"
+                                        }
+                                        alt={d.name}
+                                    />
                                 </Link>
                                 <Link to={`/person/${d.id}`}>
                                     <p className="actor-name">{d.name}</p>
@@ -91,7 +98,14 @@ function Cast({ movie, credits }) {
                         actor.profile_path &&
                         <div className="actor-card" key={i}>
                             <Link to={`/person/${actor.id}`}>
-                                <img src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} alt={actor.name} />
+                                <img
+                                    src={
+                                        actor.profile_path
+                                        ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
+                                        : "/person_placeholder.png"
+                                    }
+                                    alt={actor.name}
+                                />
                             </Link>
                             <Link to={`/person/${actor.id}`}>
                                 <p className="actor-name">{actor.name}</p>
