@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom'
 import { MovieProvider } from './contexts/MovieContext'
 import PersonPage from './pages/PersonPage'
 import TVSeriesPage from './pages/TVSeriesPage'
+import Watchlist from './pages/Watchlist'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/movies" element={<Movies/>} />
           <Route path="/tvseries" element={<TVSeries/>} />
           <Route path="/favorites" element={<Favorites/>} />
+          <Route path="/watchlist" element={<Watchlist/>} />
           <Route path="/movie/:id" element={<MoviePage/>} />
           <Route path="/tv/:id" element={<TVSeriesPage/>} />
           <Route path="/person/:id" element={<PersonPage/>} />

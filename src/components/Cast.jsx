@@ -46,7 +46,7 @@ function Cast({ movie, credits }) {
                 ))}
                 <div className="flex mrg-top">
                     <img src={infoIcon} alt="movie-info" />
-                    <p className="movie-info-header"> {movie.title ? "Money" : "Episodes"}</p>
+                    <p className="movie-info-header">Numbers</p>
                 </div>
                 {movie.title ? (
                     <>

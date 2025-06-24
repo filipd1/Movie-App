@@ -12,7 +12,7 @@ function NavBar() {
                     <Link to="/movies" className="nav-link">Movies</Link>
                     <Link to="/tvseries" className="nav-link">TV Series</Link>
                     <Link to="/favorites" className="nav-link">Favorites</Link>
-                    <Link to="/" className="nav-link">Watchlist</Link>
+                    <Link to="/watchlist" className="nav-link">Watchlist</Link>
                 </div>
                 <div className="navbar-account">
                     <img src={searchIcon} alt="search" />
