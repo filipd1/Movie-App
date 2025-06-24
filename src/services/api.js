@@ -49,6 +49,12 @@ export const getSimilarMovies = async (id) => {
     return data
 }
 
+export const getMovieImages = async (id) => {
+    const response = await fetch(`${BASE_URL}/movie/${id}/images?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}
+
 export const getPersonById = async (id) => {
     const response = await fetch(`${BASE_URL}/person/${id}?api_key=${API_KEY}`)
     const data = await response.json()
@@ -61,14 +67,44 @@ export const getPersonCombinedCredits = async (id) => {
     return data
 }
 
+export const getPopularTVSeries = async () => {
+    const response = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data.results
+}
+
+export const getTopTVSeries = async () => {
+    const response = await fetch(`${BASE_URL}/tv/top_rated?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data.results
+}
+
 export const getTVSeriesById = async (id) => {
     const response = await fetch(`${BASE_URL}/tv/${id}?api_key=${API_KEY}`)
     const data = await response.json()
     return data
 }
 
-export const getMovieImages = async (id) => {
-    const response = await fetch(`${BASE_URL}/movie/${id}/images?api_key=${API_KEY}`)
+export const getTVSeriesCredits = async (id) => {
+    const response = await fetch(`${BASE_URL}/tv/${id}/aggregate_credits?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}
+
+export const getTVSeriesImages = async (id) => {
+    const response = await fetch(`${BASE_URL}/tv/${id}/images?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}
+
+export const getTVSeriesReviews = async (id) => {
+    const response = await fetch(`${BASE_URL}/tv/${id}/reviews?api_key=${API_KEY}`)
+    const data = await response.json()
+    return data
+}
+
+export const getSimilarTVSeries = async (id) => {
+    const response = await fetch(`${BASE_URL}/tv/${id}/similar?api_key=${API_KEY}`)
     const data = await response.json()
     return data
 }

@@ -4,32 +4,38 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import actorIcon from "../assets/actor-icon.svg"
 import directorIcon from "../assets/director-icon.svg"
+import favoriteIcon from "../assets/heart.svg"
+import watchLaterIcon from "../assets/eye.svg"
 
 
 function MovieDetails({ movie, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
-
     const {addFavorites, removeFavorites, isFavorite} = useMovieContext()
-    const favorite = isFavorite(movie.id)
+
+    const mediaType = movie.first_air_date ? "tv" : "movie"
     const directors = credits.crew?.filter(c => c.job === "Director")
 
     function onFavoriteClick(e) {
-        e.preventDefault()
-        if (favorite) removeFavorites(movie.id)
-            else addFavorites(movie)
+    e.preventDefault()
+    if (isFavorite(movie.id, mediaType)) {
+        removeFavorites(movie.id, mediaType)
+    } else {
+        addFavorites({ ...movie, media_type: mediaType })
     }
+    }
+
 
     return (
         <div className="movie-details">
-            <div className="bg-image">
-                <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />
-            </div>
+            {movie.backdrop_path &&
+                <div className="bg-image">
+                    <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />
+                </div>
+            }
+
 
             <div className="movie-poster-wrapper">
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
-                <button className={`favorite-btn ${favorite ? "active" : ""}`} onClick={onFavoriteClick}>
-                        ♥
-                </button>
             </div>
 
             <div className="movie-desc">
@@ -38,19 +44,26 @@ function MovieDetails({ movie, credits, images }) {
                     ))}
                 </div>
 
-                {directors && directors.length > 0 && (
+                {movie.title && directors && directors.length > 0 ? (
                     <div className="movie-director">
                         <img src={directorIcon} alt="director-icon" />
                         {directors.map((d, i) => (
                             <Link key={i} to={`/person/${d.id}`}>{d.name}</Link>
                         ))}
                     </div>
+                ) : (
+                    <div className="movie-director">
+                        <img src={directorIcon} alt="director-icon" />
+                        {movie.created_by?.map((c, i) => (
+                            <Link key={i} to={`/person/${c.id}`}>{c.name}</Link>
+                        ))}
+                    </div>
                 )}
 
                 <div className="movie-actors">
                     <img src={actorIcon} alt="actor-icon" />
-                    {credits?.cast.slice(0, 3).map((actor, i) => (
-                        <Link key={i} to={`/person/${actor.id}`}>{actor.name}</Link>
+                        {credits?.cast.slice(0, 3).map((actor, i) => (
+                            <Link key={i} to={`/person/${actor.id}`}>{actor.name}</Link>
                     ))}
                 </div>
                 
@@ -61,6 +74,17 @@ function MovieDetails({ movie, credits, images }) {
                         {movie.vote_average.toFixed(1)}
                     </p>
                     <p>{movie.vote_count} votes</p>
+                </div>
+
+                <div className="movie-buttons">
+                    <button onClick={onFavoriteClick} className={isFavorite(movie.id, mediaType) ? "btn-clicked" : ""}>
+                        <img src={favoriteIcon} alt="favorite" />
+                        <span>{isFavorite(movie.id, mediaType) ? "" : "Add to favorites"}</span>
+                    </button>
+                    <button>
+                        <img src={watchLaterIcon} alt="watch later" />
+                        <span>Add to watchlist</span>
+                    </button>
                 </div>
 
 

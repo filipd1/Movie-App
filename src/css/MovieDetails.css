@@ -96,6 +96,34 @@
     background-color: rgba(0, 0, 0, .1);
 }
 
+.movie-buttons {
+    margin-top: 1em;
+    display: flex;
+    gap: 1em;
+}
+
+.movie-buttons button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: #142434;
+    color: #E0FFF9;
+    border: none;
+    outline: none;
+    width: 200px;
+    transition: all .6s ease;
+}
+
+.movie-buttons button:hover {
+    background: #101d29;
+}
+
+.btn-clicked {
+    background: #92B0B3 !important;
+    width: 50px !important;
+}
+
 .movie-media  {
     width: 25%;
     height: 100%;

@@ -49,6 +49,7 @@ function MoviePage() {
             {loading ? <div className="loading">Loading...</div> : (
                 <div className="container">
                     <div className="movie-title-wrapper"> 
+                        <h5 className="media-type">Movie</h5>
                         <h1 className="movie-title">{movie.title}</h1>
                         <p className="movie-subtitle">{movie.tagline}</p>
 

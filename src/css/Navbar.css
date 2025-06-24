@@ -12,11 +12,6 @@ header {
   margin: 0 auto;
 }
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
 .navbar-links {
   display: flex;
   gap: 2rem;

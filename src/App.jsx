@@ -1,6 +1,8 @@
 import './css/App.css'
 import Favorites from './pages/Favorites'
 import Home from './pages/Home'
+import Movies from './pages/Movies'
+import TVSeries from './pages/TVSeries'
 import MoviePage from './pages/MoviePage'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
@@ -17,6 +19,8 @@ function App() {
       <main className='main-content'>
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/movies" element={<Movies/>} />
+          <Route path="/tvseries" element={<TVSeries/>} />
           <Route path="/favorites" element={<Favorites/>} />
           <Route path="/movie/:id" element={<MoviePage/>} />
           <Route path="/tv/:id" element={<TVSeriesPage/>} />

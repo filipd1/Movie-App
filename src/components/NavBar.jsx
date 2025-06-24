@@ -7,14 +7,12 @@ function NavBar() {
     return (
         <header>
             <nav className="navbar">
-                <div className="navbar-brand">
-                    <Link to="/"><img src="/Logo.png" alt="movie app" /></Link>
-                </div>
+                <Link to="/"><img src="/Logo.png" alt="movie app" /></Link>
                 <div className="navbar-links">
-                    <Link to="/" className="nav-link">Home</Link>
-                    <Link to="/" className="nav-link">Movies</Link>
-                    <Link to="/" className="nav-link">TV Series</Link>
+                    <Link to="/movies" className="nav-link">Movies</Link>
+                    <Link to="/tvseries" className="nav-link">TV Series</Link>
                     <Link to="/favorites" className="nav-link">Favorites</Link>
+                    <Link to="/" className="nav-link">Watchlist</Link>
                 </div>
                 <div className="navbar-account">
                     <img src={searchIcon} alt="search" />

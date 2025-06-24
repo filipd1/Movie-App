@@ -19,3 +19,9 @@
     font-style: italic;
     color: rgba(255, 255, 255, .7);
 }
+
+
+.media-type {
+    text-transform: uppercase;
+    font-size: 12px;
+}

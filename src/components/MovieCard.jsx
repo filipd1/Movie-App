@@ -4,10 +4,11 @@ import { Link } from "react-router-dom"
 
 function MovieCard({movie}) {
     const {addFavorites, removeFavorites, isFavorite} = useMovieContext()
-    const favorite = isFavorite(movie.id)
+
+    const mediaType = movie.first_air_date ? "tv" : "movie"
 
     const isPerson = movie.media_type === "person"
-    const isTV = movie.media_type === "tv"
+    const isTV = movie.media_type === "tv" || movie.name
     const isMovie = movie.media_type === "movie"
 
     const imagePath = isPerson
@@ -29,9 +30,12 @@ function MovieCard({movie}) {
         : `/movie/${movie.id}`
 
     function onFavoriteClick(e) {
-        e.preventDefault()
-        if (favorite) removeFavorites(movie.id)
-            else addFavorites(movie)
+    e.preventDefault()
+    if (isFavorite(movie.id, mediaType)) {
+        removeFavorites(movie.id, mediaType)
+    } else {
+        addFavorites({ ...movie, media_type: mediaType })
+    }
     }
 
     return (
@@ -45,7 +49,9 @@ function MovieCard({movie}) {
                     }
                     alt={title} />
                     <div className="movie-overlay">
-                        <button className={`favorite-btn ${favorite ? "active" : ""}`} onClick={onFavoriteClick}>
+                        <button
+                            className={`favorite-btn ${isFavorite(movie.id, mediaType) ? "active" : ""}`}
+                            onClick={onFavoriteClick}>
                             ♥
                         </button>
                     </div>

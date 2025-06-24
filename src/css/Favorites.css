@@ -1,6 +1,6 @@
 .favorites h2 {
   font-size: 2.5rem;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -16,11 +16,11 @@
 .favorites-empty h2 {
   margin-bottom: 1rem;
   font-size: 2rem;
-  color: #e50914;
+  color: #fff;
 }
 
 .favorites-empty p {
-  color: #999;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 1.2rem;
   line-height: 1.6;
 }
