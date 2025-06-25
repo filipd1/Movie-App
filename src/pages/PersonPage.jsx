@@ -29,6 +29,14 @@ function PersonPage() {
         loadPersonData()
     }, [id])
 
+    useEffect(() => {
+      if (person?.name) {
+         document.title = person.name
+      } else {
+         document.title = "Ładowanie..."
+      }
+    }, [person])
+
     return (
         <div className="container">
             {error && <div className="error-message">{error}</div>}

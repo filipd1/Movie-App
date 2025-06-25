@@ -16,7 +16,8 @@
   --bg-color: linear-gradient(270deg, #142333 0%, #0C3240 50.48%, #142333 100%);
   --bg-nav: #131E29;
   --Rating-Green: #08562B;
-  --Rating-Red: rgb(245, 57, 24);;
+  --Rating-Red: rgb(245, 57, 24);
+  --font-color-main: #E0FFF9;
 }
 
 * {
@@ -34,6 +35,7 @@ body {
   width: 100%;
   min-height: 100vh;
   position: relative;
+  color: var(--font-color-main);
 }
 
 #root {
@@ -45,12 +47,12 @@ body {
 
 a {
   font-weight: 500;
-  color: #fff;
+  color: var(--font-color-main);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #ffffff;
+  color: #fff;
 }
 
 h1 {
@@ -81,6 +83,21 @@ button:focus-visible {
   display: flex;
   align-items: center;
   gap: 1em;
+}
+
+.container {
+  width: 1440px;
+  margin: 0 auto;
+  padding: 3em;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: light) {

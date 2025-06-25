@@ -3,6 +3,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 30px;
+    font-size: 14px;
     padding: 24px;
     border-radius: 16px;
     width: 100%;
@@ -94,6 +95,17 @@
     margin: 1em 0;
     padding: 8px 12px;
     background-color: rgba(0, 0, 0, .1);
+    font-size: 18px;
+}
+
+.movie-rating {
+    margin-top: 1em;
+}
+
+.movie-rating div {
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
 }
 
 .movie-buttons {

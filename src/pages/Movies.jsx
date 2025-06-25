@@ -1,6 +1,6 @@
-import MovieCard from "../components/MovieCard"
 import { useState, useEffect } from "react"
 import { getPopularMovies, getTopMovies } from "../services/api"
+import MovieList from "../components/MovieList"
 
 
 function Movies() {
@@ -27,6 +27,10 @@ function Movies() {
     loadData()
   }, [])
 
+  useEffect(() => {
+        document.title = "Movies"
+  }, [])
+
   return (
     <div className="container">
       {error && <div className="error-message">{error}</div>}
@@ -34,19 +38,8 @@ function Movies() {
         <div className="loading">Loading...</div>
       ) : (
         <>
-              <h2 className="home-title">Now popular movies</h2>
-              <div className="movies-grid">
-                {popularMovies.slice(0, 6).map(movie => (
-                    <MovieCard movie={movie} key={movie.id}/>
-                ))}
-              </div>
-
-              <h2 className="home-title">Top rated movies</h2>
-              <div className="movies-grid">
-                {topMovies.slice(0, 6).map(movie => (
-                    <MovieCard movie={movie} key={movie.id}/>
-                ))}
-              </div>
+          <MovieList  movieList={topMovies} movieListHeader="Top rated movies" movieNumber={6}/>
+          <MovieList  movieList={popularMovies} movieListHeader="Now popular movies" movieNumber={6}/>
         </>
       )}
     </div>

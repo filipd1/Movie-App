@@ -1,12 +1,14 @@
 .cast-container {
   display: flex;
   padding: 3em 0;
+  gap: 20px
 }
 
 .movie-detailed-info {
   width: 23%;
   line-height: 30px;
   font-size: 14px;
+  border-right: 1px solid #92B0B3
 }
 
 .movie-detailed-info img {

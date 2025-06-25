@@ -1,5 +1,6 @@
 import { useMovieContext } from "../contexts/MovieContext"
-import MovieList from "../components/MovieList"
+import AddedMoviesList from "../components/AddedMoviesList"
+import { useEffect } from "react"
 
 function Watchlist() {
 
@@ -9,8 +10,14 @@ function Watchlist() {
         return <div className="loading">Loading watchlist</div>
     }
 
+    useEffect(() => {
+        document.title = "Watchlist"
+    }, [])
+
     return (
-        <MovieList movieList={watchlist} movieListType="Watchlist"/>
+        <div className="container">
+            <AddedMoviesList movieList={watchlist} movieListType="Watchlist"/>
+        </div>
     )
 }
 

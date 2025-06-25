@@ -6,6 +6,9 @@ import actorIcon from "../assets/actor-icon.svg"
 import directorIcon from "../assets/director-icon.svg"
 import favoriteIcon from "../assets/heart.svg"
 import watchLaterIcon from "../assets/eye.svg"
+import starIcon from "../assets/star.svg"
+import starFilledIcon from "../assets/star-filled.svg"
+import ratingIcon from "../assets/star-icon.svg"
 
 
 function MovieDetails({ movie, credits, images }) {
@@ -82,6 +85,23 @@ function MovieDetails({ movie, credits, images }) {
                     <p>{movie.vote_count} votes</p>
                 </div>
 
+                <div className="movie-rating">
+                    <div>
+                        <img src={ratingIcon} alt="rating-star" />
+                        <p>Your rating</p>
+                    </div> 
+                    <img src={starFilledIcon} alt="rating-star" />
+                    <img src={starFilledIcon} alt="rating-star" />
+                    <img src={starFilledIcon} alt="rating-star" />
+                    <img src={starFilledIcon} alt="rating-star" />
+                    <img src={starFilledIcon} alt="rating-star" />
+                    <img src={starFilledIcon} alt="rating-star" />
+                    <img src={starFilledIcon} alt="rating-star" />
+                    <img src={starIcon} alt="rating-star" />
+                    <img src={starIcon} alt="rating-star" />
+                    <img src={starIcon} alt="rating-star" />
+                </div>
+
                 <div className="movie-buttons">
                     <button onClick={onFavoriteClick} className={isAdded(movie.id, mediaType, "favorites") ? "btn-clicked" : ""}>
                         <img src={favoriteIcon} alt="favorite" />
@@ -92,7 +112,6 @@ function MovieDetails({ movie, credits, images }) {
                         <span>{isAdded(movie.id, mediaType, "watchlist") ? "" : "Add to watchlist"}</span>
                     </button>
                 </div>
-
 
             </div>
 

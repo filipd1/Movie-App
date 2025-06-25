@@ -1,6 +1,6 @@
 import { getPopularTVSeries, getTopTVSeries } from "../services/api"
 import { useState, useEffect } from "react"
-import MovieCard from "../components/MovieCard"
+import MovieList from "../components/MovieList"
 
 function TVSeries() {
 
@@ -27,29 +27,21 @@ function TVSeries() {
     loadData()
     }, [])
 
+    useEffect(() => {
+        document.title = "TV Series"
+    }, [])
     
     return (
         <div className="container">
-        {error && <div className="error-message">{error}</div>}
-        {loading ? (
-            <div className="loading">Loading...</div>
-        ) : (
-                <>
-                    <h2 className="home-title">Now popular TV series</h2>
-                    <div className="movies-grid">
-                        {popularTVSeries.slice(0, 6).map(movie => (
-                            <MovieCard movie={movie} key={movie.id}/>
-                        ))}
-                    </div>
-
-                    <h2 className="home-title">Top rated TV series</h2>
-                    <div className="movies-grid">
-                        {topTVSeries.slice(0, 6).map(movie => (
-                            <MovieCard movie={movie} key={movie.id}/>
-                        ))}
-                    </div>
-                </>
-            )}
+            {error && <div className="error-message">{error}</div>}
+            {loading ? (
+                <div className="loading">Loading...</div>
+            ) : (
+                    <>
+                        <MovieList movieList={popularTVSeries} movieListHeader="Now popular series" movieNumber={6}/>
+                        <MovieList movieList={topTVSeries} movieListHeader="Top rated series" movieNumber={6}/>
+                    </>
+                )}
         </div>
     )
 }

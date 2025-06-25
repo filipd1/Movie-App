@@ -1,5 +1,6 @@
-import MovieList from "../components/MovieList"
+import AddedMoviesList from "../components/AddedMoviesList"
 import { useMovieContext } from "../contexts/MovieContext"
+import { useEffect } from "react"
 
 function Favorites() {
     const {favorites} = useMovieContext()
@@ -8,8 +9,15 @@ function Favorites() {
         return <div className="loading">Loading favorites...</div>
     }
 
+    useEffect(() => {
+        document.title = "Favorites"
+    }, [])
+
     return (
-        <MovieList movieList={favorites} movieListType="Favorites"/>
+        <div className="container">
+            <AddedMoviesList movieList={favorites} movieListType="Favorites"/>
+        </div>
+        
     )
     
 }

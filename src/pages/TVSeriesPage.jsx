@@ -43,6 +43,14 @@ function TVSeriesPage() {
       window.scrollTo(0,0)
    }, [id])
 
+   useEffect(() => {
+      if (tv?.name) {
+         document.title = tv.name
+      } else {
+         document.title = "Ładowanie..."
+      }
+   }, [tv])
+
    return (
       <>
          {error && <div className="error-message">{error}</div>}

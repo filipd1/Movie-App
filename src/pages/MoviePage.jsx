@@ -43,6 +43,14 @@ function MoviePage() {
         window.scrollTo(0,0)
     }, [id])
 
+    useEffect(() => {
+      if (movie?.title) {
+         document.title = movie.title
+      } else {
+         document.title = "Ładowanie..."
+      }
+    }, [movie])
+
     return (
         <>
             {error && <div className="error-message">{error}</div>}
@@ -58,7 +66,7 @@ function MoviePage() {
                             <p className="movie-time">{`${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}min`}</p>
                         </div>
                         
-                     </div>
+                        </div>
 
                     <MovieDetails
                         movie={movie}
