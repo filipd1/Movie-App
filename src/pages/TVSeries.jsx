@@ -42,7 +42,7 @@ function TVSeries() {
                         ))}
                     </div>
 
-                    <h1 className="home-title">Top rated TV series</h1>
+                    <h2 className="home-title">Top rated TV series</h2>
                     <div className="movies-grid">
                         {topTVSeries.slice(0, 6).map(movie => (
                             <MovieCard movie={movie} key={movie.id}/>

@@ -82,6 +82,12 @@
   margin-top: 0.5em;
 }
 
-.actor-name:hover {
+.actor-name:hover,
+.view-more:hover {
   color: rgba(255, 255, 255, .7);
+}
+
+.view-more {
+  margin-top: 1em;
+  float: right;
 }

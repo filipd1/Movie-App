@@ -6,7 +6,6 @@ import { getPopularMovies, getTopMovies } from "../services/api"
 function Movies() {
   const [popularMovies, setPopularMovies] = useState([])
   const [topMovies, setTopMovies] = useState([])
-  const [searchResults, setSearchResults] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -42,7 +41,7 @@ function Movies() {
                 ))}
               </div>
 
-              <h1 className="home-title">Top rated movies</h1>
+              <h2 className="home-title">Top rated movies</h2>
               <div className="movies-grid">
                 {topMovies.slice(0, 6).map(movie => (
                     <MovieCard movie={movie} key={movie.id}/>

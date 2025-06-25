@@ -13,7 +13,7 @@ function MovieList({ movieList, movieListType}) {
 
     return (
             <div className="container">
-                <h2 className="movie-list-title" >{movieListType}</h2>
+                <h1 className="movie-list-title" >{movieListType}</h1>
                 {movieList.length > 0 ? (
                     <>
                         {filteredMovies.length > 0 && 

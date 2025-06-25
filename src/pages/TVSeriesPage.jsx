@@ -42,7 +42,7 @@ function TVSeriesPage() {
       loadTVSeriesData()
       window.scrollTo(0,0)
    }, [id])
-   
+
    return (
       <>
          {error && <div className="error-message">{error}</div>}
@@ -54,7 +54,9 @@ function TVSeriesPage() {
                   <p className="movie-subtitle">{tv.tagline}</p>
 
                   <div className="flex">
-                        <p className="movie-time">{tv.first_air_date?.split('-')[0]}</p>
+                        <p className="movie-time">
+                           {`${tv.first_air_date?.split('-')[0]} - ${tv.status === "Ended" ? tv.last_air_date?.split('-')[0] : ""}`}
+                        </p>
                         <p className="movie-time">{tv.number_of_seasons} Seasons</p>
                   </div>
                   

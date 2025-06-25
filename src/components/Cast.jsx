@@ -5,6 +5,7 @@ import infoIcon from "../assets/info.svg"
 function Cast({ movie, credits }) {
 
     const directors = credits.crew?.filter(c => c.job === "Director")
+    const mediaType = movie.title ? "movie" : "tv"
 
     return (
         <div className="cast-container"> 
@@ -94,7 +95,7 @@ function Cast({ movie, credits }) {
 
                     )}
                 
-                    {credits.cast?.map((actor, i) => (
+                    {credits.cast?.slice(0, 10).map((actor, i) => (
                         actor.profile_path &&
                         <div className="actor-card" key={i}>
                             <Link to={`/person/${actor.id}`}>
@@ -121,8 +122,12 @@ function Cast({ movie, credits }) {
                             )}
 
                         </div>
+                        
                     ))}    
                 </div>
+                <Link to={`/${mediaType}/${movie.id}/cast/`} className="view-more">
+                    View full cast & crew
+                </Link>
             </div>
 
         </div>

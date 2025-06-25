@@ -11,6 +11,7 @@ import { MovieProvider } from './contexts/MovieContext'
 import PersonPage from './pages/PersonPage'
 import TVSeriesPage from './pages/TVSeriesPage'
 import Watchlist from './pages/Watchlist'
+import FullCast from './pages/FullCast'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/movie/:id" element={<MoviePage/>} />
           <Route path="/tv/:id" element={<TVSeriesPage/>} />
           <Route path="/person/:id" element={<PersonPage/>} />
+          <Route path="/:mediaTypeURL/:id/cast/" element={<FullCast/>} />
         </Routes>
       </main>
       <Footer/>
