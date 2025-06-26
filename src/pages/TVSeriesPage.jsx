@@ -29,6 +29,7 @@ function TVSeriesPage() {
                ]) 
                setTV(tvData)
                setTVCredits(tvCreditsData)
+               console.log(tvCreditsData)
                setTVImages(tvImagesData)
                setTVReviews(tvReviewsData)
                setSimilarTVShows(tvSimilarData)

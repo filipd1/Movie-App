@@ -38,8 +38,8 @@ function Movies() {
         <div className="loading">Loading...</div>
       ) : (
         <>
-          <MovieList  movieList={topMovies} movieListHeader="Top rated movies" movieNumber={6}/>
           <MovieList  movieList={popularMovies} movieListHeader="Now popular movies" movieNumber={6}/>
+          <MovieList  movieList={topMovies} movieListHeader="Top rated movies" movieNumber={6}/>
         </>
       )}
     </div>

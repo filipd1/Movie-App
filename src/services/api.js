@@ -85,9 +85,9 @@ export const getTVSeriesById = async (id) => {
 }
 
 export const getTVSeriesCredits = async (id) => {
-    const response = await fetch(`${BASE_URL}/tv/${id}/aggregate_credits`)
-    const data = await response.json()
-    return data
+  const response = await fetch(`${BASE_URL}/tv/${id}/credits`);
+  const data = await response.json();
+  return data;
 }
 
 export const getTVSeriesImages = async (id) => {
