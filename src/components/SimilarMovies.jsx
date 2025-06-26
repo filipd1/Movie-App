@@ -2,7 +2,7 @@ import MovieCard from "./MovieCard"
 import "../css/SimilarMovies.css"
 import { useState } from "react"
 
-function SimilarMovies({ movie }) {
+function SimilarMovies({ movie, title }) {
 
     const [loadMoreClicked, setloadMoreClicked] = useState(false)
 
@@ -12,7 +12,7 @@ function SimilarMovies({ movie }) {
 
     return (
         <div className="similar-movies-container">
-            <h2>Smilar movies</h2>
+            <h2>{title}</h2>
             <div className="similar-movies">
                 {loadMoreClicked ? (
                     movie.results?.map((m,i) => (

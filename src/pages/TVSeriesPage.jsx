@@ -78,7 +78,7 @@ function TVSeriesPage() {
                />
                <Cast movie={tv} credits={tvCredts}/>
                <Reviews reviews={tvReviews} />
-               <SimilarMovies movie={similarTVShows}/>
+               <SimilarMovies movie={similarTVShows} title="Similar Shows"/>
             </div>
          )}
       </>

@@ -75,7 +75,7 @@ function MoviePage() {
                     />
                     <Cast movie={movie} credits={credits}/>
                     <Reviews reviews={review} />
-                    <SimilarMovies movie={similarMovies} />
+                    <SimilarMovies movie={similarMovies} title="Similar movies"/>
                 </div>
                 )}
         </>
