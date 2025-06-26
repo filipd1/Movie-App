@@ -1,7 +1,6 @@
 const express = require("express")
 const axios = require("axios")
 const cors = require("cors")
-const path = require("path")
 require("dotenv").config()
 
 const app = express()
@@ -58,16 +57,4 @@ app.get("/api/search", async (req, res) => {
     }
 })
 
-app.use(express.static(path.join(__dirname, "dist")))
-
-app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "index.html"))
-})
-
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
-
-console.log('Starting server...')
-console.log('PORT:', PORT)
-console.log('API_KEY:', API_KEY ? 'set' : 'NOT set')
-console.log("__dirname:", __dirname);
-console.log("DIST path:", path.join(__dirname, "dist", "index.html"));
