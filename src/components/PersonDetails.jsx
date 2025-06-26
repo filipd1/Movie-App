@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 function PersonDetails({ person, credits }) {
 
-    const directedMovies = credits.crew?.filter(c => c.job === "Director" )
+    const directedMovies = credits?.crew.filter(c => c.job === "Director" ) || []
     const uniqueDirectedMovies = Array.from(
         new Map(directedMovies.map(item => [item.id, item])).values()
     )
@@ -34,7 +34,7 @@ function PersonDetails({ person, credits }) {
 
                     <div className="combined-credits">
                         {person.known_for_department === "Directing" ? (
-                            sortedDirectedMovies.map((role, i) => (
+                            sortedDirectedMovies?.map((role, i) => (
                                 role.media_type === "tv" ? (
                                     <div key={i} className="credit-card">
                                         <Link to={`/tv/${role.id}`}>

@@ -39,7 +39,11 @@ function FullCast() {
                     <div className="full-cast-list">
                         {credits.cast?.length > 0 ? (
                             credits.cast.map((p, i) => (
-                            <p key={i}>{p.name}</p>
+                                <p key={i}>
+                                    {p.name}
+                                    {p.roles?.[0]?.character && ` as ${p.roles[0].character}`}
+                                    {p.total_episode_count && ` (${p.total_episode_count} episodes)`}
+                                </p>
                         ))
                             ) : (
                                 <p>No cast data available.</p>
@@ -49,7 +53,10 @@ function FullCast() {
                     <div className="full-cast-list">
                         {credits.crew?.length > 0 ? (
                             credits.crew.map((p, i) => (
-                            <p key={i}>{p.name}</p>
+                            <p key={i}>
+                                {p.name}
+                                {p.jobs?.[0]?.job && ` - ${p.jobs[0].job}`}
+                            </p>
                         ))
                             ) : (
                                 <p>No crew data available.</p>

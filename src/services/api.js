@@ -61,7 +61,7 @@ export const getPersonById = async (id) => {
 }
 
 export const getPersonCombinedCredits = async (id) => {
-    const response = await fetch(`${BASE_URL}/person/${id}/combined_credits`)
+    const response = await fetch(`${BASE_URL}/person/${id}/credits`)
     const data = await response.json()
     return data
 }
