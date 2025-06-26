@@ -1,8 +1,9 @@
 import "../css/MovieCard.css"
 import { useMovieContext } from "../contexts/MovieContext"
 import { Link } from "react-router-dom"
+import watchLaterIcon from "../assets/eye.svg"
 
-function MovieCard({movie}) {
+function MovieCard({movie, pageType}) {
     const {addItem, removeItem, isAdded} = useMovieContext()
 
     const mediaType = movie.first_air_date ? "tv" : "movie"
@@ -29,13 +30,22 @@ function MovieCard({movie}) {
         ? `/tv/${movie.id}`
         : `/movie/${movie.id}`
 
-    function onButtonClick(e) {
-    e.preventDefault()
-    if (isAdded(movie.id, mediaType, "favorites")) {
-        removeItem(movie.id, mediaType, "favorites")
-    } else {
-        addItem({ ...movie, media_type: mediaType }, "favorites")
+    function onFavClick(e) {
+        e.preventDefault()
+        if (isAdded(movie.id, mediaType, "favorites")) {
+            removeItem(movie.id, mediaType, "favorites")
+        } else {
+            addItem({ ...movie, media_type: mediaType }, "favorites")
+        }
     }
+
+    function onWatchlaterClick(e) {
+        e.preventDefault()
+        if (isAdded(movie.id, mediaType, "watchlist")) {
+            removeItem(movie.id, mediaType, "watchlist")
+        } else {
+            addItem({ ...movie, media_type: mediaType }, "watchlist")
+        }
     }
 
     return (
@@ -47,15 +57,26 @@ function MovieCard({movie}) {
                         ? `https://image.tmdb.org/t/p/w500${imagePath}`
                         : "/poster_placeholder.png"
                     }
-                    alt={title} />
+                        alt={title} />
                     <div className="movie-overlay">
-                        <button
-                            className={
-                                `favorite-btn ${isAdded(movie.id, mediaType, "favorites") ? "active" : ""}`
-                            }
-                            onClick={onButtonClick}>
-                            ♥
+                        {pageType === "favorites" ? (
+                            <button
+                                className={
+                                    `favorite-btn ${isAdded(movie.id, mediaType, "favorites") ? "active" : ""}`
+                                }
+                                onClick={onFavClick}>
+                                ♥
+                            </button>
+                        ) : (
+                            <button
+                                className={
+                                    `favorite-btn ${isAdded(movie.id, mediaType, "watchlist") ? "active" : ""}`
+                                }
+                                onClick={onWatchlaterClick}>
+                                <img src={watchLaterIcon} alt="eye icon" />
                         </button>
+                        )}
+
                     </div>
                 </div>
                 <div className="movie-info">

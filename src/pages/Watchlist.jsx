@@ -6,13 +6,13 @@ function Watchlist() {
 
     const {watchlist} = useMovieContext()
 
-    if (watchlist === null) {
-        return <div className="loading">Loading watchlist</div>
-    }
-
     useEffect(() => {
         document.title = "Watchlist"
     }, [])
+
+    if (watchlist === null) {
+        return <div className="loading">Loading watchlist</div>
+    }
 
     return (
         <div className="container">

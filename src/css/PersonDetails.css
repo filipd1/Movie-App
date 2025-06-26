@@ -1,5 +1,5 @@
 .person-details {
-    padding: 3rem 5rem;
+    padding: 3rem 0;
 }
 
 .person-details-top {
@@ -8,17 +8,18 @@
 }
 
 .person-img-wrapper {
-    width: 22%;
+    width: 20%;
 }
 
 .person-img-wrapper img {
     width: 100%;
     height: 350px;
     border-radius: 5px;
+    aspect-ratio: 2/3;
 }
 
 .person-desc {
-    width: 78%;
+    width: 80%;
 }
 
 .person-desc p {

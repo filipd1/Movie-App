@@ -21,6 +21,8 @@
     z-index: -1;
     box-shadow: 0px 4px 20px 0px #13243426;
     overflow: hidden;
+    object-fit: scale-down;
+    
 }
 
 .bg-image img {
@@ -28,6 +30,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 16px;
+    opacity: 25%;
 }
 
 .bg-image::after {
@@ -59,10 +62,6 @@
 
 .movie-director {
     margin: 1em 0;
-}
-
-.movie-media {
-    width: 25%;
 }
 
 .movie-director,
@@ -146,7 +145,7 @@
 
 .movie-media img {
     width: 100%;
-    height: auto;
+    min-height: 100px;
     display: block;
     object-fit: cover;
     border-radius: 8px;

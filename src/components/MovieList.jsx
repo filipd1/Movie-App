@@ -1,7 +1,7 @@
 import MovieCard from "./MovieCard"
 import "../css/MovieList.css"
 
-function MovieList2({ movieList, movieListHeader, movieNumber = null}) {
+function MovieList({ movieList, movieListHeader, movieNumber = null}) {
 
 
     if (movieList === null) {
@@ -12,13 +12,11 @@ function MovieList2({ movieList, movieListHeader, movieNumber = null}) {
         <>
             <h1 className="movie-list-title" >{movieListHeader}</h1>
             {movieList.length > 0 ? (
-                    <>
-                        <div className="movies-grid">
-                            {(movieNumber ? movieList.slice(0, movieNumber) : movieList).map(movie => (
-                                <MovieCard movie={movie} key={movie.id} />
-                            ))}
-                        </div>
-                    </>
+                <div className="movies-grid">
+                    {(movieNumber ? movieList.slice(0, movieNumber) : movieList).map(movie => (
+                        <MovieCard movie={movie} key={movie.id} pageType="favorites"/>
+                    ))}
+                </div>
                 ) : (
                     <div className="movie-list-empty">
                         <h2>No added movies yet</h2>
@@ -30,4 +28,4 @@ function MovieList2({ movieList, movieListHeader, movieNumber = null}) {
     )
 }
 
-export default MovieList2
+export default MovieList

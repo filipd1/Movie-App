@@ -1,7 +1,16 @@
 import MovieCard from "./MovieCard"
+import { useLocation } from "react-router-dom"
 
 function AddedMoviesList({ movieList, movieListType}) {
 
+    const location = useLocation()
+    let pageType
+
+    if (location.pathname.includes("favorites")) {
+        pageType = "favorites"
+    } else if (location.pathname.includes("watchlist")) {
+        pageType = "watchlist"
+    }
 
     if (movieList === null) {
         return <div className="loading">Loading movie list</div>
@@ -21,7 +30,7 @@ function AddedMoviesList({ movieList, movieListType}) {
                                 <hr className="movie-list-hr" />
                                 <div className="movies-grid">
                                     {filteredMovies.map(movie => (
-                                        <MovieCard movie={movie} key={movie.id}/>
+                                        <MovieCard movie={movie} key={movie.id} pageType={pageType}/>
                                     ))}
                                 </div>
                             </>
@@ -32,7 +41,7 @@ function AddedMoviesList({ movieList, movieListType}) {
                                 <hr className="movie-list-hr" />
                                 <div className="movies-grid">
                                     {filteredTVSeries.map(movie => (
-                                        <MovieCard movie={movie} key={movie.id}/>
+                                        <MovieCard movie={movie} key={movie.id} pageType={pageType}/>
                                     ))}
                                 </div>
                             </>
