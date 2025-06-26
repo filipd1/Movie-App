@@ -4,6 +4,9 @@ const cors = require("cors")
 const path = require("path")
 require("dotenv").config()
 
+const { createServer } = require('http');
+const { readFileSync } = require('fs');
+
 const app = express()
 const PORT = process.env.PORT || 5000
 
@@ -60,9 +63,15 @@ app.get("/api/search", async (req, res) => {
 
 app.use(express.static(path.join(__dirname, "dist")))
 
-app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "index.html"))
-})
+app.get("*", (req, res) => {
+    const html = readFileSync(path.join(__dirname, "dist", "index.html"), 'utf-8');
+    res.setHeader('Content-Type', 'text/html');
+    res.send(html);
+});
+
+// app.get("/*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "dist", "index.html"))
+// })
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
