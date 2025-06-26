@@ -4,10 +4,6 @@ const cors = require("cors")
 const path = require("path")
 require("dotenv").config()
 
-console.log('Starting server...')
-console.log('PORT:', PORT)
-console.log('API_KEY:', API_KEY ? 'set' : 'NOT set')
-
 const app = express()
 const PORT = process.env.PORT || 5000
 
@@ -69,3 +65,7 @@ app.get("*", (req, res) => {
 })
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+
+console.log('Starting server...')
+console.log('PORT:', PORT)
+console.log('API_KEY:', API_KEY ? 'set' : 'NOT set')
