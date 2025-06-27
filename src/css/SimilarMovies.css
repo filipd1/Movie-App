@@ -1,18 +1,33 @@
 .similar-movies-container {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    width: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: thin;
+  width: 25%;
+  max-height: 900px;
+  padding: 0 1em;
+}
+
+.similar-movies::-webkit-scrollbar {
+  width: 6px;
+}
+
+.similar-movies::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
 }
 
 .similar-movies {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
-.show-more-movies {
-    height: 40px;
-    align-self: center;
+.similar-movies .movie-card {
+  max-height: 420px;
+}
+
+.similar-movies .movie-card .movie-poster{
+  height: 77%;
+  width: 100%;
 }

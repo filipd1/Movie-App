@@ -1,6 +1,6 @@
 import MovieCard from "../components/MovieCard"
 import { useState, useEffect } from "react"
-import { searchMovies } from "../services/api"
+import { searchMedia } from "../services/api"
 import "../css/Home.css"
 import MovieList from "../components/MovieList"
 import { getPopularMovies, getPopularTVSeries } from "../services/api"
@@ -54,7 +54,7 @@ function Home() {
     setLoading(true)
     setIsSearching(true)
     try {
-      const results = await searchMovies(searchQuery)
+      const results = await searchMedia(searchQuery)
       setSearchResults(results)
       setError(null)
     } catch (err) {

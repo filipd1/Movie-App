@@ -15,26 +15,31 @@ function Cast({ movie, credits }) {
                     <img src={infoIcon} alt="movie-info" />
                     <p className="movie-info-header"> Information</p>
                 </div>
+
                 {movie.title ? (
                     <>
                         <p>Director</p>
-                        {directors && directors.length > 0 && (
+                        {directors && directors.length > 0 ? (
                             directors.map((d, i) => (
                                 <Link to={`/person/${d.id}`} key={i}>
                                     <strong>{d.name} </strong>
                                 </Link>
                             ))
+                        ) : (
+                            <p>N/A</p>
                         )}
                     </>
                 ) : (
                     <>
                         <p>Creator</p>
-                        {movie.created_by && movie.created_by.length > 0 && (
+                        {movie.created_by && movie.created_by.length > 0 ? (
                             movie.created_by.map((c, i) => (
                                 <Link to={`/person/${c.id}`} key={i}>
                                     <strong>{c.name} </strong>
                                 </Link>
                             ))
+                        ) : (
+                            <p>N/A</p>
                         )}
                     </>
                 )}
@@ -66,7 +71,7 @@ function Cast({ movie, credits }) {
                 )}
 
 
-                </div>
+            </div>
 
             <div className="cast-wrapper">
                 <p className="actor-title">

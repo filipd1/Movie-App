@@ -18,7 +18,9 @@ const fetchFromTMDB = async (url, res) => {
         })
         res.json(response.data)
     } catch (error) {
-        res.status(500).json({ error: "Error fetching data from TMDB" })
+        const status = error.response?.status || 500
+        const message = error.response?.data?.status_message || "Error fetching data from TMDB"
+        res.status(status).json({ error: message })
     }
 }
 
@@ -30,6 +32,7 @@ app.get("/api/movie/:id/reviews", (req, res) => fetchFromTMDB(`/movie/${req.para
 app.get("/api/movie/:id/credits", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/credits`, res))
 app.get("/api/movie/:id/similar", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/similar`, res))
 app.get("/api/movie/:id/images", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/images`, res))
+app.get("/api/movie/:id/videos", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/videos`, res))
 
 app.get("/api/tv/popular", (req, res) => fetchFromTMDB("/tv/popular", res))
 app.get("/api/tv/top", (req, res) => fetchFromTMDB("/tv/top_rated", res))
@@ -38,6 +41,7 @@ app.get("/api/tv/:id/reviews", (req, res) => fetchFromTMDB(`/tv/${req.params.id}
 app.get("/api/tv/:id/credits", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/aggregate_credits`, res))
 app.get("/api/tv/:id/similar", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/similar`, res))
 app.get("/api/tv/:id/images", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/images`, res))
+app.get("/api/tv/:id/videos", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/videos`, res))
 
 app.get("/api/person/:id", (req, res) => fetchFromTMDB(`/person/${req.params.id}`, res))
 app.get("/api/person/:id/credits", (req, res) => fetchFromTMDB(`/person/${req.params.id}/combined_credits`, res))

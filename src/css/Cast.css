@@ -20,6 +20,15 @@
   width: 77%;
 }
 
+.actor-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.actor-slider::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
 .movie-info-header {
   font-size: 24px;
 }
@@ -35,15 +44,6 @@
   padding: 1em 0;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
-}
-
-.actor-slider::-webkit-scrollbar {
-  height: 6px;
-}
-
-.actor-slider::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
 }
 
 .actor-title {

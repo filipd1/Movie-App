@@ -1,55 +1,49 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import reviewsIcon from "../assets/review.svg"
 import "../css/Reviews.css"
 
-function Reviews({reviews}) {
+function Reviews({reviews, mediaType}) {
 
-    const [loadMoreClicked, setloadMoreClicked] = useState(false)
 
-    function handleLoadMore() {
-        setloadMoreClicked(prev => !prev)
-    }
+    const sortedReviews = reviews?.results.slice().sort((a, b) => {
+        return new Date(b.created_at) - new Date(a.created_at);
+    });
 
 
     return (
         <div className="reviews-container">
-            <h2>Reviews</h2>
-            {reviews?.results?.length > 0 ? (
-                loadMoreClicked ? (
-                    reviews.results?.map((review, i) => (
+
+            <div className="flex">
+                <img src={reviewsIcon} alt="reviews-icon" />
+                <h2 className="container-title">Reviews</h2>
+            </div>
+            
+            {sortedReviews.length > 0 ? (
+                <div className="reviews-list">
+                    {sortedReviews.map((review, i) => (
                         <div key={i} className="movie-review">
-                            <p className="review-author">{review.author}</p>
+                            <strong>{review.author}</strong>
                             <p className="review-content">
-                                {review.content.slice(0, 200) + "..."}
-                                <Link to={review.url} target="blank" className="review-link"> read more</Link>
+                                {review.content.length > 350 ? (
+                                    <>
+                                        {review.content.slice(0, 350) + "..."}
+                                        <Link to={review.url} target="_blank" className="review-link"> read more</Link>
+                                    </>
+                                    ) : (
+                                        review.content
+                                    )}
                             </p>
                             <p className="review-content review-created">
                                 {review.created_at.replace("T", " ").split(".")[0]}
                             </p>
                         </div>
-                ))
-                ) : (
-                    reviews.results?.slice(0, 3).map((review, i) => (
-                        <div key={i} className="movie-review">
-                            <p className="review-author">{review.author}</p>
-                            <p className="review-content">
-                                {review.content.slice(0, 200) + "..."}
-                                <Link to={review.url} target="blank" className="review-link"> read more</Link>
-                            </p>
-                            <p className="review-content review-created">
-                                {review.created_at.replace("T", " ").split(".")[0]}
-                            </p>
-                        </div>
-                ))
-                )
+                ))}
+                </div>
 
             ) : (
-                <p>No reviews for this movie</p>
-            )}
-
-            {!loadMoreClicked && reviews?.results?.length > 3 && <button className="show-more-reviews" onClick={handleLoadMore}>Show more</button>}
-            
-
+                <p>No reviews for this {mediaType}</p>
+            )}  
+                      
         </div>
     )
 

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getMovieById, getMovieReviews, getMovieCredits, getSimilarMovies, getMovieImages } from "../services/api"
+import { getMovieById, getMovieReviews, getMovieCredits, getSimilarMovies, getMovieImages, getMovieVideos } from "../services/api"
 import MovieDetails from "../components/MovieDetails"
 import Cast from "../components/Cast"
 import Reviews from "../components/Reviews"
 import SimilarMovies from "../components/SimilarMovies"
+import Media from "../components/Media"
 import "../css/MoviePage.css"
 
 function MoviePage() {
@@ -14,24 +15,28 @@ function MoviePage() {
     const [credits, setCredits] = useState([])
     const [images, setImages] = useState([])
     const [similarMovies, setSimilarMovies] = useState([])
+    const [movieVideos, setMovieVideos] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect(() => {
         const loadMovieData = async () => {
             try {
-                const [movieData, reviewData, creditsData, similarMovieData, movieImagesData] = await Promise.all([
+                const [movieData, reviewData, creditsData, similarMovieData, movieImagesData, movieVideosData ] = await Promise.all([
                     getMovieById(id),
                     getMovieReviews(id),
                     getMovieCredits(id),
                     getSimilarMovies(id),
-                    getMovieImages(id)
+                    getMovieImages(id),
+                    getMovieVideos(id)
                 ])
                 setMovie(movieData)
                 setReview(reviewData)
                 setCredits(creditsData)
                 setSimilarMovies(similarMovieData)
                 setImages(movieImagesData)
+                console.log(movieImagesData)
+                setMovieVideos(movieVideosData)
             } catch (err) {
                 console.log(err)
                 setError("Failed to load movie...")
@@ -47,7 +52,7 @@ function MoviePage() {
       if (movie?.title) {
          document.title = movie.title
       } else {
-         document.title = "Ładowanie..."
+         document.title = "Loading..."
       }
     }, [movie])
 
@@ -66,7 +71,7 @@ function MoviePage() {
                             <p className="movie-time">{`${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}min`}</p>
                         </div>
                         
-                        </div>
+                    </div>
 
                     <MovieDetails
                         movie={movie}
@@ -74,8 +79,12 @@ function MoviePage() {
                         images={images}
                     />
                     <Cast movie={movie} credits={credits}/>
-                    <Reviews reviews={review} />
-                    <SimilarMovies movie={similarMovies} title="Similar movies"/>
+                    <div className="movie-media-wrapper">
+                        <Media videos={movieVideos} photos={images}/>
+                        <SimilarMovies movie={similarMovies}/>
+                    </div>
+                    <Reviews reviews={review} mediaType="movie"/>
+
                 </div>
                 )}
         </>

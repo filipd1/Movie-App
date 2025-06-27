@@ -51,69 +51,72 @@ function MovieDetails({ movie, credits, images }) {
                 <div className="movie-genres-wrapper">{movie.genres?.map((m, i) => (
                         <p className="movie-genre" key={i}>{m.name}</p>
                     ))}
-                </div>
-
-                {movie.title && directors && directors.length > 0 ? (
-                    <div className="movie-director">
-                        <img src={directorIcon} alt="director-icon" />
-                        {directors.map((d, i) => (
-                            <Link key={i} to={`/person/${d.id}`}>{d.name}</Link>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="movie-director">
-                        <img src={directorIcon} alt="director-icon" />
-                        {movie.created_by?.map((c, i) => (
-                            <Link key={i} to={`/person/${c.id}`}>{c.name}</Link>
-                        ))}
-                    </div>
-                )}
-
-                <div className="movie-actors">
-                    <img src={actorIcon} alt="actor-icon" />
-                        {credits?.cast.slice(0, 3).map((actor, i) => (
-                            <Link key={i} to={`/person/${actor.id}`}>{actor.name}</Link>
-                    ))}
-                </div>
-                
-                <p className="movie-overview">{movie.overview}</p>
-
-                <div className="movie-votes">
-                    <p className={`vote_average ${movie.vote_average >= 6 ? "high" : "low"}`}>
-                        {movie.vote_average.toFixed(1)}
-                    </p>
-                    <p>{movie.vote_count} votes</p>
-                </div>
-
-                <div className="movie-rating">
-                    <div>
-                        <img src={ratingIcon} alt="rating-star" />
-                        <p>Your rating</p>
-                    </div> 
-                    <img src={starFilledIcon} alt="rating-star" />
-                    <img src={starFilledIcon} alt="rating-star" />
-                    <img src={starFilledIcon} alt="rating-star" />
-                    <img src={starFilledIcon} alt="rating-star" />
-                    <img src={starFilledIcon} alt="rating-star" />
-                    <img src={starFilledIcon} alt="rating-star" />
-                    <img src={starFilledIcon} alt="rating-star" />
-                    <img src={starIcon} alt="rating-star" />
-                    <img src={starIcon} alt="rating-star" />
-                    <img src={starIcon} alt="rating-star" />
-                </div>
-
-                <div className="movie-buttons">
-                    <button onClick={onFavoriteClick} className={isAdded(movie.id, mediaType, "favorites") ? "btn-clicked" : ""}>
-                        <img src={favoriteIcon} alt="favorite" />
-                        <span>{isAdded(movie.id, mediaType, "favorites") ? "" : "Add to favorites"}</span>
-                    </button>
-                    <button onClick={onWatchlistClick} className={isAdded(movie.id, mediaType, "watchlist") ? "btn-clicked" : ""}>
-                        <img src={watchLaterIcon} alt="watch later" />
-                        <span>{isAdded(movie.id, mediaType, "watchlist") ? "" : "Add to watchlist"}</span>
-                    </button>
-                </div>
-
             </div>
+
+            <div className="movie-director">
+                <img src={directorIcon} alt="director-icon" />
+                
+                {movie.title && directors && directors.length > 0 ? (
+                    directors.map((d, i) => (
+                        <Link key={i} to={`/person/${d.id}`}>{d.name}</Link>
+                    ))
+                ) : movie.created_by && movie.created_by.length > 0 ? (
+                    movie.created_by.map((c, i) => (
+                        <Link key={i} to={`/person/${c.id}`}>{c.name}</Link>
+                    ))
+                ) : (
+                    <p>N/A</p>
+                )}
+            </div>
+
+            <div className="movie-actors">
+                <img src={actorIcon} alt="actor-icon" />
+                    {credits?.cast.slice?.(0, 3).map((actor, i) => (
+                        <Link key={i} to={`/person/${actor.id}`}>{actor.name}</Link>
+                    ))}
+            </div>
+                
+            <p className="movie-overview">{movie.overview}</p>
+
+            <div className="movie-votes">
+                <p className={`vote_average ${movie.vote_average >= 6 ? "high" : "low"}`}>
+                    {movie.vote_average != null
+                        ? movie.vote_average.toFixed(1)
+                        : "N/A"
+                    }
+                </p>
+                <p>{movie.vote_count} votes</p>
+            </div>
+
+            <div className="movie-rating">
+                <div>
+                    <img src={ratingIcon} alt="rating-star" />
+                    <p>Your rating</p>
+                </div> 
+                <img src={starFilledIcon} alt="rating-star" />
+                <img src={starFilledIcon} alt="rating-star" />
+                <img src={starFilledIcon} alt="rating-star" />
+                <img src={starFilledIcon} alt="rating-star" />
+                <img src={starFilledIcon} alt="rating-star" />
+                <img src={starFilledIcon} alt="rating-star" />
+                <img src={starFilledIcon} alt="rating-star" />
+                <img src={starIcon} alt="rating-star" />
+                <img src={starIcon} alt="rating-star" />
+                <img src={starIcon} alt="rating-star" />
+            </div>
+
+            <div className="movie-buttons">
+                <button onClick={onFavoriteClick} className={isAdded(movie.id, mediaType, "favorites") ? "btn-clicked" : ""}>
+                    <img src={favoriteIcon} alt="favorite" />
+                    <span>{isAdded(movie.id, mediaType, "favorites") ? "" : "Add to favorites"}</span>
+                </button>
+                <button onClick={onWatchlistClick} className={isAdded(movie.id, mediaType, "watchlist") ? "btn-clicked" : ""}>
+                    <img src={watchLaterIcon} alt="watch later" />
+                    <span>{isAdded(movie.id, mediaType, "watchlist") ? "" : "Add to watchlist"}</span>
+                </button>
+            </div>
+
+        </div>
 
             <div className="movie-media">
                 {images?.backdrops.slice(0, 8).map((image, i) => (
