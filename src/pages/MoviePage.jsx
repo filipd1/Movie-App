@@ -35,7 +35,6 @@ function MoviePage() {
                 setCredits(creditsData)
                 setSimilarMovies(similarMovieData)
                 setImages(movieImagesData)
-                console.log(movieImagesData)
                 setMovieVideos(movieVideosData)
             } catch (err) {
                 console.log(err)

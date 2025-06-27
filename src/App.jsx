@@ -12,6 +12,7 @@ import PersonPage from './pages/PersonPage'
 import TVSeriesPage from './pages/TVSeriesPage'
 import Watchlist from './pages/Watchlist'
 import FullCast from './pages/FullCast'
+import SearchResults from './pages/SearchResults'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <main className='main-content'>
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/search" element={<SearchResults/>} />
           <Route path="/movies" element={<Movies/>} />
           <Route path="/tvseries" element={<TVSeries/>} />
           <Route path="/favorites" element={<Favorites/>} />

@@ -11,9 +11,14 @@ function SimilarMovies({ movie }) {
                 <h2 className="container-title">Similar</h2>
             </div>
             <div className="similar-movies">
-                {movie.results?.map((m,i) => (
-                    <MovieCard movie={m} pageType="favorites" key={i}/>
-                ))}
+                {movie.results.length > 0 ? (
+                    movie.results.map((m,i) => (
+                        <MovieCard movie={m} pageType="favorites" key={i}/>
+                    ))
+                ) : (
+                    <p>Nothing here yet</p>
+                )}
+
             </div>
         </div>
     )

@@ -48,19 +48,24 @@ function Media({ videos, photos }) {
                         ))}
                         <h4 className="media-slider-title">All trailers</h4>
                         <div className="media-slider">
-                            {videos.slice(1).map((video, i) =>
-                                video.site === "YouTube" ? (
-                                    <iframe
-                                        className="media-item"
-                                        key={video.key || i}
-                                        src={`https://www.youtube.com/embed/${video.key}`}
-                                        title={video.name}
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    ></iframe>
+                            {videos.length > 1 ? (
+                                videos.slice(1).map((video, i) =>
+                                    video.site === "YouTube" ? (
+                                        <iframe
+                                            className="media-item"
+                                            key={video.key || i}
+                                            src={`https://www.youtube.com/embed/${video.key}`}
+                                            title={video.name}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
                                 ) : null
+                            )
+                            ) : (
+                                <p>No more videos found</p>
                             )}
+
                         </div>
                     </>
                 )
@@ -79,14 +84,19 @@ function Media({ videos, photos }) {
                     ))}
                     <h4 className="media-slider-title">All images</h4>
                     <div className="media-slider">
-                        {photos.backdrops.slice(1).map((photo, i) => (
-                            <img
-                                key={i}
-                                src={`https://image.tmdb.org/t/p/w500${photo.file_path}`}
-                                alt={`image.title img-${i}`}
-                                className="media-item"
-                            />
-                        ))}
+                        {photos.backdrops.length > 1 ? (
+                            photos.backdrops.slice(1).map((photo, i) => (
+                                <img
+                                    key={i}
+                                    src={`https://image.tmdb.org/t/p/w500${photo.file_path}`}
+                                    alt={`image.title img-${i}`}
+                                    className="media-item"
+                                />
+                        ))
+                        ) : (
+                            <p>No more photos found</p>
+                        )}
+
                     </div>
                 </>
             )}
