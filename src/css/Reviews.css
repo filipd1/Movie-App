@@ -33,14 +33,11 @@
   margin: 1em 0;
 }
 
-.review-link {
+.review-show-more {
   font-style: italic;
-  color: rgb(187, 187, 187);
-}
-
-.review-link:hover,
-.show-more-reviews:hover {
-  color: #fff;
+  background-color: none;
+  border: none;
+  outline: none;
 }
 
 .review-created {

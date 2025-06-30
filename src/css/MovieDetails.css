@@ -33,6 +33,10 @@
     opacity: 25%;
 }
 
+.no-bg-img {
+    background-color: rgba(0, 0, 0, .35);
+}
+
 .bg-image::after {
     content: "";
     position: absolute;

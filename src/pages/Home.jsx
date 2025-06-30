@@ -1,6 +1,4 @@
-import MovieCard from "../components/MovieCard"
 import { useState, useEffect } from "react"
-import { searchMedia } from "../services/api"
 import "../css/Home.css"
 import MovieList from "../components/MovieList"
 import { getPopularMovies, getPopularTVSeries } from "../services/api"
@@ -63,8 +61,8 @@ function Home() {
         <div className="loading">Loading...</div>
       ) : (
         <>
-          <MovieList movieList={popularMovies} movieListHeader="Tranding movies" movieNumber={6}/>
-          <MovieList movieList={popularTVSeries} movieListHeader="Tranding series" movieNumber={6}/>
+          <MovieList movieList={popularMovies} movieListHeader="Trending movies" movieNumber={6}/>
+          <MovieList movieList={popularTVSeries} movieListHeader="Trending series" movieNumber={6}/>
         </>
       )}
     </div>

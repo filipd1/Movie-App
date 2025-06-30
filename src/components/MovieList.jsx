@@ -19,8 +19,7 @@ function MovieList({ movieList, movieListHeader, movieNumber = null}) {
                 </div>
                 ) : (
                     <div className="movie-list-empty">
-                        <h2>No added movies yet</h2>
-                        <p>Start adding your favorite movies or TV shows</p>
+                        <h2>No movies found</h2>
                     </div>
                 )}
                 

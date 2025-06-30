@@ -36,15 +36,18 @@ function MovieDetails({ movie, credits, images }) {
 
     return (
         <div className="movie-details">
-            {movie.backdrop_path &&
-                <div className="bg-image">
-                    <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />
-                </div>
-            }
-
-
+        
+            <div className={`bg-image ${movie.backdrop_path ? "" : "no-bg-img"}`}>
+                {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />}
+            </div>
+            
             <div className="movie-poster-wrapper">
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
+                <img
+                    src={movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : "/poster_placeholder.png"}
+                    alt={movie.title}
+                />
             </div>
 
             <div className="movie-desc">

@@ -24,13 +24,15 @@ function PersonDetails({ person, credits }) {
             <div className="person-details-top">
                 <div className="person-img-wrapper">
                     <img
-                        src={`https://image.tmdb.org/t/p/w500${person.profile_path}`}
+                        src={person.profile_path
+                            ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
+                            : "/person_placeholder.png"}
                         alt={person.name}
                     />
                 </div>
                 <div className="person-desc">
                     <h2>{person.name}</h2>
-                    <p>{person.biography}</p>
+                    <p>{person.biography ? (person.biography) : ("No biography found")}</p>
 
                     <div className="combined-credits">
                         {person.known_for_department === "Directing" ? (

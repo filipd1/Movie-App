@@ -1,0 +1,25 @@
+.cast-card {
+    margin-top: 1em;
+    display: flex;
+    align-items: start;
+    gap: 2em;
+    background-color: rgba(0, 0, 0, .3);
+    width: 40%;
+    max-height: 180px;
+    border-radius: 8px;
+}
+
+.cast-card-info {
+    margin-top: 1em;
+}
+
+.cast-card img {
+    max-width: 120px;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.full-cast-hr {
+    margin-top: 1em;
+    opacity: .2;
+}

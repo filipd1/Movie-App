@@ -10,7 +10,11 @@ function FullCast() {
     const [credits, setCredits] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [active, setActive] = useState("cast")
 
+    const uniqueCrew = credits.crew
+        ? [...new Map(credits.crew.map(member => [member.id, member])).values()]
+        : [];
 
     useEffect(() => {
         const loadCredits = async () => {
@@ -19,6 +23,7 @@ function FullCast() {
                     ? await getMovieCredits(id)
                     : await getTVSeriesCredits(id)
                 setCredits(credits)
+                console.log(credits)
             } catch (err) {
                 console.log(err)
                 setError("Failed to load credits...")
@@ -31,41 +36,91 @@ function FullCast() {
 
     return (
         <div className="container">
-            <h1>Full credits</h1>
+            <h1 className="container-title">Full credits</h1>
             {error && <div className="error-message">{error}</div>}
             {loading ? <div className="loading">Loading...</div> : (
                 <>
-                    <h2>Cast</h2>
-                    <div className="full-cast-list">
+                    <div className="flex">
+                        <button
+                            className={`media-switch-button ${active === "cast" ? "active-media-type" : ""}`}
+                            onClick={() => setActive("cast")}
+                        >
+                            Cast
+                        </button>
+                        <button
+                            className={`media-switch-button ${active === "crew" ? "active-media-type" : ""}`}
+                            onClick={() => setActive("crew")}
+                        >
+                            Crew
+                        </button>
+                    </div>
+                    <hr className="full-cast-hr"/>
+
+                    {active === "cast" ? (   
+                        <div className="full-cast-list">
                         {credits.cast?.length > 0 ? (
                             credits.cast.map((p, i) => (
-                                <p key={i}>
-                                    {p.name}
-                                    {p.roles?.[0]?.character && ` as ${p.roles[0].character}`}
-                                    {p.total_episode_count && ` (${p.total_episode_count} episodes)`}
-                                </p>
+                                <div key={i} className="cast-card">
+                                    <Link to={`/person/${p.id}`}>
+                                        <img
+                                            src={
+                                                p.profile_path
+                                                ? `https://image.tmdb.org/t/p/w500${p.profile_path}`
+                                                : "/person_placeholder.png"
+                                            }
+                                            alt={p.name}
+                                        />
+                                    </Link>
+                                    <div className="cast-card-info">
+                                        <Link to={`/person/${p.id}`}>{p.name}</Link>
+                                        {mediaTypeURL === "movie" ? (
+                                            <p>{p.character}</p>
+                                        ) : (
+                                            <p>
+                                                {p.roles?.[0]?.character && `${p.roles[0].character}`}
+                                                {p.total_episode_count && ` (${p.total_episode_count} episodes)`}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
                         ))
                             ) : (
                                 <p>No cast data available.</p>
                             )}
-                    </div>
-                    <h2>Crew</h2>
-                    <div className="full-cast-list">
-                        {credits.crew?.length > 0 ? (
-                            credits.crew.map((p, i) => (
-                            <p key={i}>
-                                {p.name}
-                                {p.jobs?.[0]?.job && ` - ${p.jobs[0].job}`}
-                            </p>
-                        ))
-                            ) : (
-                                <p>No crew data available.</p>
-                        )}
-                    </div>
-                </>
+                        </div>
+                    ) : (
+                        <div className="full-cast-list">
+                            {uniqueCrew.length > 0 ? (
+                                uniqueCrew.map((p, i) => (
+                                    <div key={i} className="cast-card">
+                                    <Link to={`/person/${p.id}`}>
+                                        <img
+                                            src={
+                                                p.profile_path
+                                                ? `https://image.tmdb.org/t/p/w500${p.profile_path}`
+                                                : "/person_placeholder.png"
+                                            }
+                                            alt={p.name}
+                                        />
+                                    </Link>
+                                    <div className="cast-card-info">
+                                        <Link to={`/person/${p.id}`}>{p.name}</Link>
+                                        {mediaTypeURL === "movie" ? (
+                                            <p>{p.known_for_department}</p>
+                                        ) : (
+                                            <p>{p.jobs?.[0]?.job && `${p.jobs[0].job}`}</p>
+                                        )}
+                                    </div>
+                                </div>
+                            ))
+                                ) : (
+                                    <p>No crew data available.</p>
+                            )}
+                        </div>
+                    )}
+                    </>
             )}
         </div>
-
     )
 }
 

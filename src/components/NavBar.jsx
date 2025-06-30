@@ -46,16 +46,19 @@ function NavBar() {
                     <Link to="/watchlist" className="nav-link">Watchlist</Link>
                 </div>
                 <div className="navbar-account">
-                    {showSearchForm && 
-                        <form className="search-form navbar-search-form" onSubmit={handleSubmit} ref={searchRef}>
-                            <input
-                                type="text"
-                                placeholder="Search.."
-                                className="search-input navbar-search-input"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                            />
-                        </form>}
+                    
+                        <form
+                            className={`search-form navbar-search-form ${showSearchForm ? "show" : ""}`}
+                            onSubmit={handleSubmit}
+                            ref={searchRef}>
+                                <input
+                                    type="text"
+                                    placeholder="Search.."
+                                    className="search-input navbar-search-input"
+                                    value={query}
+                                    onChange={(e) => setQuery(e.target.value)}
+                                />
+                        </form>
                     <button className="navbar-search-button" onClick={() => setShowSearchForm(prev => !prev)}>
                         <img src={searchIcon} alt="search" />
                     </button>
