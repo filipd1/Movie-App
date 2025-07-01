@@ -114,6 +114,18 @@ export const getPersonCombinedCredits = async (id) => {
     return data
 }
 
+export const getTopMoviesMultiPages = async (pages = 5) => {
+    const response = await fetch(`${BASE_URL}/movie/top/multi?pages=${pages}`)
+    const data = await response.json()
+    return data.results
+}
+
+export const getTopTVSeriesMultiPages = async (pages = 5) => {
+    const response = await fetch(`${BASE_URL}/tv/top/multi?pages=${pages}`)
+    const data = await response.json()
+    return data.results
+}
+
 export const searchMedia = async (query) => {
     const response = await fetch(`${BASE_URL}/search?query=${encodeURIComponent(query)}`);
     const data = await response.json();

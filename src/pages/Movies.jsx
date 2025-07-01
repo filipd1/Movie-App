@@ -39,7 +39,7 @@ function Movies() {
       ) : (
         <>
           <MovieList  movieList={popularMovies} movieListHeader="Now popular movies" movieNumber={6}/>
-          <MovieList  movieList={topMovies} movieListHeader="Top rated movies" movieNumber={6}/>
+          <MovieList  movieList={topMovies} movieListHeader="Top rated movies" movieNumber={6} URLto="/top-movies"/>
         </>
       )}
     </div>

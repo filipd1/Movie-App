@@ -24,6 +24,28 @@ const fetchFromTMDB = async (url, res) => {
     }
 }
 
+const fetchMultiplePagesFromTMDB = async (endpoint, totalPages, res) => {
+    try {
+        const allResults = []
+
+        for (let page = 1; page <= totalPages; page++) {
+            const response = await axios.get(`${BASE_URL}${endpoint}`, {
+                params: {
+                    api_key: API_KEY,
+                    page: page
+                }
+            })
+            allResults.push(...response.data.results)
+        }
+
+        res.json({ results: allResults })
+    } catch (error) {
+        const status = error.response?.status || 500
+        const message = error.response?.data?.status_message || "Error fetching multiple pages from TMDB"
+        res.status(status).json({ error: message })
+    }
+}
+
 app.get("/api/movie/popular", (req, res) => fetchFromTMDB("/movie/popular", res))
 app.get("/api/movie/top", (req, res) => fetchFromTMDB("/movie/top_rated", res))
 app.get("/api/movie/upcoming", (req, res) => fetchFromTMDB("/movie/upcoming", res))
@@ -45,6 +67,16 @@ app.get("/api/tv/:id/videos", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/
 
 app.get("/api/person/:id", (req, res) => fetchFromTMDB(`/person/${req.params.id}`, res))
 app.get("/api/person/:id/credits", (req, res) => fetchFromTMDB(`/person/${req.params.id}/combined_credits`, res))
+
+app.get("/api/movie/top/multi", (req, res) => {
+    const pages = parseInt(req.query.pages) || 1
+    fetchMultiplePagesFromTMDB("/movie/top_rated", pages, res)
+})
+
+app.get("/api/tv/top/multi", (req, res) => {
+    const pages = parseInt(req.query.pages) || 1
+    fetchMultiplePagesFromTMDB("/tv/top_rated", pages, res)
+})
 
 app.get("/api/search", async (req, res) => {
     const query = req.query.query

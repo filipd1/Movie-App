@@ -39,7 +39,7 @@ function TVSeries() {
             ) : (
                     <>
                         <MovieList movieList={popularTVSeries} movieListHeader="Now popular series" movieNumber={6}/>
-                        <MovieList movieList={topTVSeries} movieListHeader="Top rated series" movieNumber={6}/>
+                        <MovieList movieList={topTVSeries} movieListHeader="Top rated series" movieNumber={6} URLto="/top-tvseries"/>
                     </>
                 )}
         </div>

@@ -1,7 +1,8 @@
 import MovieCard from "./MovieCard"
+import { Link } from "react-router-dom"
 import "../css/MovieList.css"
 
-function MovieList({ movieList, movieListHeader, movieNumber = null}) {
+function MovieList({ movieList, movieListHeader, movieNumber = null, URLto}) {
 
 
     if (movieList === null) {
@@ -10,7 +11,7 @@ function MovieList({ movieList, movieListHeader, movieNumber = null}) {
 
     return (
         <>
-            <h1 className="movie-list-title" >{movieListHeader}</h1>
+            <Link to={URLto}><h2 className="movie-list-title" >{movieListHeader}</h2></Link>
             {movieList.length > 0 ? (
                 <div className="movies-grid">
                     {(movieNumber ? movieList.slice(0, movieNumber) : movieList).map(movie => (

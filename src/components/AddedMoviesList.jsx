@@ -26,7 +26,7 @@ function AddedMoviesList({ movieList, movieListType}) {
                     <>
                         {filteredMovies.length > 0 && 
                             <>
-                                <h3>Movies</h3>
+                                <h3>{`${filteredMovies.length} ${filteredMovies.length > 1 ? "Movies" : "Movie"}`}</h3>
                                 <hr className="movie-list-hr" />
                                 <div className="movies-grid">
                                     {filteredMovies.map(movie => (
@@ -37,7 +37,7 @@ function AddedMoviesList({ movieList, movieListType}) {
                         }
                         {filteredTVSeries.length > 0 && 
                             <>
-                                <h3>TV Series</h3>
+                                <h3>{filteredTVSeries.length} TV Series</h3>
                                 <hr className="movie-list-hr" />
                                 <div className="movies-grid">
                                     {filteredTVSeries.map(movie => (

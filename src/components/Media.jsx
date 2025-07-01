@@ -1,10 +1,10 @@
-import { useState } from "react";
-import trailerIcon from "../assets/trailer.svg";
-import "../css/Media.css";
+import { useState } from "react"
+import trailerIcon from "../assets/trailer.svg"
+import "../css/Media.css"
 
 function Media({ videos, photos }) {
-    const [active, setActive] = useState("videos");
-
+    const [active, setActive] = useState("videos")
+  
     return (
         <div className="media-container">
             <div className="flex">

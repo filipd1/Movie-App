@@ -54,7 +54,7 @@ function MovieDetails({ movie, credits, images }) {
                 <div className="movie-genres-wrapper">{movie.genres?.map((m, i) => (
                         <p className="movie-genre" key={i}>{m.name}</p>
                     ))}
-            </div>
+                </div>
 
             <div className="movie-director">
                 <img src={directorIcon} alt="director-icon" />

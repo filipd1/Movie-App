@@ -1,0 +1,20 @@
+.movie-chart-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1em;
+    margin-top: 2em;
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 8px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.movie-chart-item img {
+    width: 200px;
+    height: 300px;
+    border-radius: 8px;
+}
+
+.chart-item-desc {
+    padding: 1em;
+}

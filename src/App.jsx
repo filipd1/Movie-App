@@ -13,6 +13,8 @@ import TVSeriesPage from './pages/TVSeriesPage'
 import Watchlist from './pages/Watchlist'
 import FullCast from './pages/FullCast'
 import SearchResults from './pages/SearchResults'
+import TopRatedMovies from './pages/TopRatedMovies'
+import TopRatedTVSeries from './pages/TopRatedTVSeries'
 
 function App() {
 
@@ -24,7 +26,9 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/search" element={<SearchResults/>} />
           <Route path="/movies" element={<Movies/>} />
+          <Route path="/top-movies" element={<TopRatedMovies/>} />
           <Route path="/tvseries" element={<TVSeries/>} />
+          <Route path="/top-tvseries" element={<TopRatedTVSeries/>} />
           <Route path="/favorites" element={<Favorites/>} />
           <Route path="/watchlist" element={<Watchlist/>} />
           <Route path="/movie/:id" element={<MoviePage/>} />
