@@ -23,3 +23,9 @@
     margin-top: 1em;
     opacity: .2;
 }
+
+@media (max-width: 768px) {
+    .cast-card {
+        width: 100%;
+    }
+}

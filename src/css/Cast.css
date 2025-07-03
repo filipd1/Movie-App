@@ -93,3 +93,20 @@
   margin-top: 1em;
   float: right;
 }
+
+@media (max-width: 768px) {
+
+  .cast-container {
+    display: block;
+  }
+
+  .movie-detailed-info {
+    width: 100%;
+    border: none;
+  }
+
+  .cast-wrapper {
+    width: 100%;
+    margin-top: 3em;
+  }
+}

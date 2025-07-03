@@ -22,10 +22,20 @@ header {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.2s;
+  position: relative;
 }
 
 .nav-link:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-active::after {
+  content: "";
+  height: 2px;
+  background-color: aqua;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .navbar-account {
@@ -83,20 +93,66 @@ header {
   max-width: 120px;
 }
 
+.mobile-menu-icon {
+  width: 35px;
+  height: 35px;
+}
+
+.mobile-menu-button {
+  display: none;
+  background-color: unset;
+  border: none;
+  outline: none;
+}
+
+.mobile-menu-button:focus {
+  border: none;
+  outline: none;
+}
+
+.mobile-menu {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
+    width: unset;
   }
 
-  .navbar-brand {
-    font-size: 1.2rem;
-  }
-
+  .navbar-account,
   .navbar-links {
-    gap: 1rem;
+    display: none;
   }
 
-  .nav-link {
-    padding: 0.5rem;
+  .mobile-menu-button {
+    display: block;
+    z-index: 3;
+  }
+
+  .mobile-menu {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 66%;
+    height: 100vh;
+    background-color: rgb(39, 45, 59);
+    z-index: 2;
+    padding: 2em;
+    box-shadow: 4px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    margin-top: 3em;
+    float: right;
+  }
+
+  .mobile-menu-link {
+    padding: 1em 0;
+    display: block;
   }
 }

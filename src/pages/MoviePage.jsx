@@ -66,7 +66,7 @@ function MoviePage() {
                         <p className="movie-subtitle">{movie.tagline}</p>
 
                         <div className="flex">
-                            <p className="movie-time">{movie.release_date?.split('-')[0]}</p>
+                            <p className="movie-time" title={movie.release_date}>{movie.release_date?.split('-')[0]}</p>
                             <p className="movie-time">{`${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}min`}</p>
                         </div>
                         

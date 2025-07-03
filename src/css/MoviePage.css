@@ -32,3 +32,9 @@
     gap: 1em;
     padding: 3em 0;
 }
+
+@media (max-width: 768px) {
+    .movie-media-wrapper {
+        display: block;
+    }
+}

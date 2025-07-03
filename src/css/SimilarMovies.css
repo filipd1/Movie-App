@@ -31,3 +31,19 @@
   height: 77%;
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .similar-movies-container {
+    width: 100%;
+    max-height: unset;
+  }
+
+  .similar-movies .movie-card {
+    max-height: unset;
+  }
+
+  .similar-movies .movie-card .movie-poster{
+    height: 77%;
+    width: 100%;
+  }
+}

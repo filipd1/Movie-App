@@ -38,7 +38,7 @@
 }
 
 
-@media (max-width: 639px) {
+@media (max-width: 768px) {
   .home {
     padding: 1rem 0;
   }

@@ -42,13 +42,13 @@ function FullCast() {
                 <>
                     <div className="flex">
                         <button
-                            className={`media-switch-button ${active === "cast" ? "active-media-type" : ""}`}
+                            className={`media-switch-button ${active === "cast" ? "active" : ""}`}
                             onClick={() => setActive("cast")}
                         >
                             Cast
                         </button>
                         <button
-                            className={`media-switch-button ${active === "crew" ? "active-media-type" : ""}`}
+                            className={`media-switch-button ${active === "crew" ? "active" : ""}`}
                             onClick={() => setActive("crew")}
                         >
                             Crew

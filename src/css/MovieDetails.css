@@ -22,7 +22,6 @@
     box-shadow: 0px 4px 20px 0px #13243426;
     overflow: hidden;
     object-fit: scale-down;
-    
 }
 
 .bg-image img {
@@ -184,4 +183,33 @@
   font-size: 3rem;
   cursor: pointer;
   z-index: 10000;
+}
+
+
+@media (max-width: 768px) {
+
+    .movie-poster-wrapper {
+        height: 100%;
+        width: 100%;
+    }
+
+    .movie-poster-wrapper {
+        height: 600px;
+        width: 400px;
+    }
+
+    .movie-details {
+        gap: 20px;
+        height: 100%;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .movie-desc {
+        width: 100%;
+    }
+
+    .movie-media {
+        display: none;
+    }
 }

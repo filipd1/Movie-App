@@ -14,13 +14,13 @@ function Media({ videos, photos }) {
 
             <div className="flex">
                 <button
-                    className={`media-switch-button ${active === "videos" ? "active-media-type" : ""}`}
+                    className={`media-switch-button ${active === "videos" ? "active" : ""}`}
                     onClick={() => setActive("videos")}
                 >
                     Trailers
                 </button>
                 <button
-                    className={`media-switch-button ${active === "photos" ? "active-media-type" : ""}`}
+                    className={`media-switch-button ${active === "photos" ? "active" : ""}`}
                     onClick={() => setActive("photos")}
                 >
                     Photos
@@ -29,7 +29,7 @@ function Media({ videos, photos }) {
 
             {active === "videos" ? (
                 !videos || videos.length === 0 ? (
-                    <p>No videos found</p>
+                    <p className="media-empty">No videos found</p>
                 ) : (
                     <>
                         {videos.slice(0, 1).map((video) => (
@@ -63,14 +63,14 @@ function Media({ videos, photos }) {
                                 ) : null
                             )
                             ) : (
-                                <p>No more videos found</p>
+                                <p className="media-empty">No more videos found</p>
                             )}
 
                         </div>
                     </>
                 )
             ) : !photos || !photos.backdrops || photos.backdrops.length === 0 ? (
-                <p>No photos found</p>
+                <p className="media-empty">No photos found</p>
             ) : (
                 <>
                     {photos.backdrops.slice(0, 1).map((photo, i) => (
@@ -94,7 +94,7 @@ function Media({ videos, photos }) {
                                 />
                         ))
                         ) : (
-                            <p>No more photos found</p>
+                            <p className="media-empty">No more photos found</p>
                         )}
 
                     </div>

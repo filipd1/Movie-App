@@ -37,3 +37,17 @@
 .footer-social-link img{
     width: 22px;
 }
+
+@media (max-width: 768px) {
+    
+    .footer-container {
+        width: unset;
+        display: block;
+    }
+
+    .footer-movies-container,
+    .footer-title  {
+        display: none;
+    }
+}
+
