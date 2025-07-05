@@ -78,7 +78,7 @@ header {
   border-radius: 8px;
   pointer-events: none;
   opacity: 0;
-  transition: transform .7s ease, opacity .5s ease;
+  transition: transform .6s ease, opacity .2s ease;
 }
 
 .navbar-search-form.show {
@@ -93,21 +93,57 @@ header {
   max-width: 120px;
 }
 
+.button-nav {
+  background-color: rgb(19, 16, 34);
+}
+
 .mobile-menu-icon {
   width: 35px;
   height: 35px;
 }
 
+.mobile-menu-button,
+.dropdown-menu-button {
+  background-color: unset;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
 .mobile-menu-button {
   display: none;
-  background-color: unset;
+}
+
+.mobile-menu-button:focus,
+.dropdown-menu-button:focus {
   border: none;
   outline: none;
 }
 
-.mobile-menu-button:focus {
-  border: none;
-  outline: none;
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  background-color: var(--font-color-main);
+  padding: 1em 2em;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 180px;
+}
+
+.dropdown-menu-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu-link {
+  padding-top: 1em;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  color: black;
+}
+
+.dropdown-menu-link:hover {
+  color: rgb(43, 42, 42);
 }
 
 .mobile-menu {

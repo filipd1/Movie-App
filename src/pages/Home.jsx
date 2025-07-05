@@ -53,7 +53,7 @@ function Home() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit" className="search-button">Search</button>
+        <button type="submit" className="button-main">Search</button>
       </form>
 
       {error && <div className="error-message">{error}</div>}

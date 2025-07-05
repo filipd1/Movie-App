@@ -3,7 +3,9 @@ const axios = require("axios")
 const cors = require("cors")
 const connectDB = require("./connect")
 const User = require("./models/User")
-const bcrypt = require("bcrypt") 
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const auth = require("./middlewares/auth")
 require("dotenv").config()
 connectDB()
 
@@ -124,13 +126,13 @@ app.post("/api/register", async (req,res) => {
 
 app.post("/api/login", async (req,res) => {
     try {
-        const { email, password} = req.body
+        const { username, password} = req.body
 
-        if (!email || !password) {
-            return res.status(400).json({ message: "Email and password are required" })
+        if (!username || !password) {
+            return res.status(400).json({ message: "Username and password are required" })
         }
 
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ username })
         if (!user) {
             return res.status(400).json({ message: "User not found" })
         }
@@ -140,11 +142,27 @@ app.post("/api/login", async (req,res) => {
             return res.status(401).json({ message: "Invalid password" })
         }
 
-        res.status(200).json({ message: "Login successful", user: { id: user._id, username: user.username} })
+        const token = jwt.sign(
+            { id: user._id, username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: "2h" }
+        )
+
+        res.status(200).json({ message: "Login successful", token, user: { id: user._id, username: user.username} })
     } catch (err) {
         console.log(err)
         res.status(500).json({ message: "Server error" })
     }
 })
+
+app.get("/api/profile", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("-password")
+        res.json(user)
+    } catch (err) {
+        res.status(500).json({ message: "Server error" })
+    }
+})
+
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

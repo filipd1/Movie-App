@@ -1,18 +1,25 @@
 import { Link, NavLink, useNavigate } from "react-router-dom"
-import "../css/Navbar.css"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
+import { AuthContext } from "../contexts/AuthContext"
 import searchIcon from "../assets/search.svg"
 import dropdownIcon from "../assets/dropdown.svg"
 import menuIcon from "../assets/menu.svg"
 import exitIcon from "../assets/exit.svg"
+import "../css/Navbar.css"
 
 function NavBar() {
     const [query, setQuery] = useState("")
     const [showSearchForm, setShowSearchForm] = useState(false)
     const [showMobileMenu, setShowMobileMenu] = useState(false)
+    const [showDropdownMenu, setShowDropdownMenu] = useState(false)
+
+    const {userLoggedIn, user, logout} = useContext(AuthContext)
+
     const searchRef = useRef(null)
     const mobileMenuRef = useRef(null)
     const menuButtonRef = useRef(null)
+    const dropdownMenuRef = useRef(null)
+    const dropdownMenuButtonRef = useRef(null)
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
@@ -22,6 +29,15 @@ function NavBar() {
             setQuery("")
             setShowSearchForm(false)
         }
+    }
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        logout()
+
+        setShowDropdownMenu(false)
+        setShowMobileMenu(false)
+        setShowSearchForm(false)
     }
 
     useEffect(() => {
@@ -40,13 +56,21 @@ function NavBar() {
                 !menuButtonRef.current.contains(e.target)
             )
                 setShowMobileMenu(false)
+            if (
+                showDropdownMenu &&
+                dropdownMenuRef.current &&
+                !dropdownMenuRef.current.contains(e.target) &&
+                dropdownMenuButtonRef.current &&
+                !dropdownMenuButtonRef.current.contains(e.target)
+            )
+                setShowDropdownMenu(false)
         }
 
         document.addEventListener("mousedown", handleClickOutsideForm)
         return () => {
             document.removeEventListener("mousedown", handleClickOutsideForm)
         }
-    }, [showSearchForm, showMobileMenu])
+    }, [showSearchForm, showMobileMenu, showDropdownMenu])
 
     return (
         <header>
@@ -59,25 +83,46 @@ function NavBar() {
                     <NavLink to="/watchlist" className="nav-link">Watchlist</NavLink>
                 </div>
                 <div className="navbar-account">
-                    
-                        <form
-                            className={`search-form navbar-search-form ${showSearchForm ? "show" : ""}`}
-                            onSubmit={handleSubmit}
-                            ref={searchRef}>
-                                <input
-                                    type="text"
-                                    placeholder="Search.."
-                                    className="search-input navbar-search-input"
-                                    value={query}
-                                    onChange={(e) => setQuery(e.target.value)}
-                                />
-                        </form>
+                    <form
+                        className={`search-form navbar-search-form ${showSearchForm ? "show" : ""}`}
+                        onSubmit={handleSubmit}
+                        ref={searchRef}>
+                            <input
+                                type="text"
+                                placeholder="Search.."
+                                className="search-input navbar-search-input"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                            />
+                    </form>
                     <button className="navbar-search-button" onClick={() => setShowSearchForm(prev => !prev)}>
                         <img src={searchIcon} alt="search" />
                     </button>
-                    <img className="navbar-avatar" src="/Profile_photo.png" alt="avatar" />
-                    <p className="navbar-name">Henryk</p>
-                    <img src={dropdownIcon} alt="dropdown" />
+
+                    {userLoggedIn ? (
+                        <>
+                            <img className="navbar-avatar" src="/Profile_photo.png" alt="avatar" />
+                            <p className="navbar-name">{user?.username}</p>
+                            <button onClick={() => setShowDropdownMenu(prev => !prev)} className="dropdown-menu-button" ref={dropdownMenuButtonRef}>
+                                <img src={dropdownIcon} alt="dropdown" />
+                            </button>
+                        </>
+                    ) : (
+                    <Link to="/login" className="button-main button-nav">Login</Link>
+                    )}
+
+                    {showDropdownMenu && 
+                        <div className="dropdown-menu" ref={dropdownMenuRef}>
+                            <div className="dropdown-menu-links">
+                                <Link to="/movies" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
+                                <Link to="/tvseries" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
+                                <Link to="/favorites" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Favorites</Link>
+                                <Link to="/watchlist" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Watchlist</Link>
+                                <Link to="/profile" className="dropdown-menu-link" onClick={() => setShowDropdownMenu(false)}>Account</Link>
+                                <Link to="/" className="dropdown-menu-link" onClick={handleLogout}>Logout</Link>
+                            </div>
+                        </div>
+                    }
                 </div>
 
                 <button onClick={() => setShowMobileMenu(prev => !prev)} className="mobile-menu-button" ref={menuButtonRef}>
@@ -92,6 +137,7 @@ function NavBar() {
                             <Link to="/favorites" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Favorites</Link>
                             <Link to="/watchlist" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Watchlist</Link>
                             <Link to="/" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Account</Link>
+                            <Link to="/" className="mobile-menu-link" onClick={handleLogout}>Logout</Link>
                         </div>
                     </div>
                 }
