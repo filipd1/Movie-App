@@ -86,11 +86,14 @@
 
 .low {
     background: var(--Rating-Red)
-    
 }
 
 .high {
     background: var(--Rating-Green);
+}
+
+.mid {
+    background: var(--Rating-Yellow);
 }
 
 .movie-overview {

@@ -82,7 +82,7 @@ function MovieDetails({ movie, credits, images }) {
             <p className="movie-overview">{movie.overview}</p>
 
             <div className="movie-votes">
-                <p className={`vote_average ${movie.vote_average >= 6 ? "high" : "low"}`}>
+                <p className={`vote_average ${movie.vote_average >= 6.5 ? "high" : (movie.vote_average < 4 ? "low" : "mid")}`}>
                     {movie.vote_average != null
                         ? movie.vote_average.toFixed(1)
                         : "N/A"
