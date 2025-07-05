@@ -1,12 +1,17 @@
 const express = require("express")
 const axios = require("axios")
 const cors = require("cors")
+const connectDB = require("./connect")
+const User = require("./models/User")
+const bcrypt = require("bcrypt") 
 require("dotenv").config()
+connectDB()
 
 const app = express()
 const PORT = process.env.PORT || 5000
 
 app.use(cors())
+app.use(express.json())
 
 const API_KEY = process.env.TMDB_API_KEY
 const BASE_URL = "https://api.themoviedb.org/3"
@@ -90,6 +95,55 @@ app.get("/api/search", async (req, res) => {
         res.json(response.data)
     } catch (err) {
         res.status(500).json({ error: "Search failed" })
+    }
+})
+
+app.post("/api/register", async (req,res) => {
+    try {
+        const {username, email, password} = req.body
+
+        if (!username || !email || !password) {
+            return res.status(400).json({ message: "All fields are required" })
+        }
+
+        const existingUser = await User.findOne({ email })
+        if (existingUser) {
+            return res.status(400).json({ message: "User with this email already exists" })
+        }
+
+        const newUser = new User({ username, email, password })
+        await newUser.save()
+
+        res.status(201).json({ message: "User successfully registered" })
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ message: "Server error" })
+    }
+})
+
+app.post("/api/login", async (req,res) => {
+    try {
+        const { email, password} = req.body
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" })
+        }
+
+        const user = await User.findOne({ email })
+        if (!user) {
+            return res.status(400).json({ message: "User not found" })
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid password" })
+        }
+
+        res.status(200).json({ message: "Login successful", user: { id: user._id, username: user.username} })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ message: "Server error" })
     }
 })
 
