@@ -14,7 +14,6 @@ function TopRatedMovies() {
             const moviesData = await getTopMoviesMultiPages()
             setMovies(moviesData)
             setError(null)
-            console.log(moviesData)
         } catch (err) {
             console.log(err)
             setError("Failed to load movies...")

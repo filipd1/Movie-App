@@ -101,8 +101,8 @@ function NavBar() {
 
                     {userLoggedIn ? (
                         <>
-                            <img className="navbar-avatar" src="/Profile_photo.png" alt="avatar" />
-                            <p className="navbar-name">{user?.username}</p>
+                            <Link to={`/users/${user.username}`}><img className="navbar-avatar" src="https://avatar.iran.liara.run/public/boy" alt="avatar" /></Link>
+                            <Link to={`/users/${user.username}`}><p className="navbar-name">{user?.username}</p></Link>
                             <button onClick={() => setShowDropdownMenu(prev => !prev)} className="dropdown-menu-button" ref={dropdownMenuButtonRef}>
                                 <img src={dropdownIcon} alt="dropdown" />
                             </button>

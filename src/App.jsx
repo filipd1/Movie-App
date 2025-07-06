@@ -18,6 +18,7 @@ import TopRatedMovies from './pages/TopRatedMovies'
 import TopRatedTVSeries from './pages/TopRatedTVSeries'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import UserProfile from './pages/UserProfile'
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/:mediaTypeURL/:id/cast" element={<FullCast/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/users/:username" element={<UserProfile/>} />
           </Routes>
         </main>
         <Footer/>

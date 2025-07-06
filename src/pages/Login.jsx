@@ -28,7 +28,7 @@ function Login() {
             const res = await axios.post("http://localhost:5000/api/login", formData)
             setSuccess(res.data.message)
             login(res.data.token, res.data.user)
-            setTimeout(() => navigate("/"), 1000)
+            navigate("/")
         } catch (err) {
             console.log("Login error:", err)
             setError(err.response?.data?.message || "Something went wrong")
@@ -37,29 +37,32 @@ function Login() {
 
     return (
         <div className="container">
-            <h2 className="container-title">Login</h2>
-            <form className="register-form" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <button type="submit">Login</button>
-                <Link to="/register">register</Link>
-            </form>
-            {success && <p style={{ color: "green" }}>{success}</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            <div className="form-wrapper">
+                <form className="register-form" onSubmit={handleSubmit}>
+                    <h2 className="container-title">Login</h2>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    <button type="submit">Login</button>
+                    <p>Dont have an account?<Link to="/register"> register</Link></p>
+                    
+                </form>
+                {success && <p style={{ color: "green" }}>{success}</p>}
+                {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
         </div>
     )
 }
