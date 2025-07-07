@@ -1,7 +1,7 @@
 import { useMovieContext } from "../contexts/MovieContext"
 import "../css/MovieDetails.css"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import actorIcon from "../assets/actor-icon.svg"
 import directorIcon from "../assets/director-icon.svg"
 import favoriteIcon from "../assets/heart.svg"
@@ -18,20 +18,41 @@ function MovieDetails({ movie, credits, images }) {
     const mediaType = movie.first_air_date ? "tv" : "movie"
     const directors = credits.crew?.filter(c => c.job === "Director")
 
-    function onFavoriteClick(e) {
-        e.preventDefault()
-        if (isAdded(movie.id, mediaType, "favorites")) 
-            removeItem(movie.id, mediaType, "favorites")
-        else 
-            addItem({ ...movie, media_type: mediaType }, "favorites")
+    const {
+        favorites,
+        watchlist,
+        addToFavorites,
+        removeFromFavorites,
+        addToWatchlist,
+        removeFromWatchlist
+    } = useMovieContext()
+
+    const [isInFavorites, setIsInFavorites] = useState(false)
+    const [isInWatchlist, setIsInWatchlist] = useState(false)
+
+    useEffect(() => {
+        if (favorites) {
+            setIsInFavorites(favorites.some(fav => fav.id === movie.id))
+        }
+        if (watchlist) {
+            setIsInWatchlist(watchlist.some(watch => watch.id === movie.id))
+        }
+    }, [favorites, watchlist, movie.id])
+
+    const handleFavorites = () => {
+        if (isInFavorites) {
+            removeFromFavorites(movie.id, mediaType)
+        } else {
+            addToFavorites(movie.id, mediaType)
+        }
     }
 
-    function onWatchlistClick(e) {
-        e.preventDefault()
-        if (isAdded(movie.id, mediaType, "watchlist")) 
-            removeItem(movie.id, mediaType, "watchlist")
-        else 
-            addItem({ ...movie, media_type: mediaType }, "watchlist")
+    const handleWatchlist = () => {
+        if (isInWatchlist) {
+            removeFromWatchlist(movie.id, mediaType)
+        } else {
+            addToWatchlist(movie.id, mediaType)
+        }
     }
 
     return (
@@ -109,13 +130,13 @@ function MovieDetails({ movie, credits, images }) {
             </div>
 
             <div className="movie-buttons">
-                <button onClick={onFavoriteClick} className={isAdded(movie.id, mediaType, "favorites") ? "btn-clicked" : ""}>
+                <button onClick={handleFavorites} className={isInFavorites ? "btn-clicked" : ""}>
                     <img src={favoriteIcon} alt="favorite" />
-                    <span>{isAdded(movie.id, mediaType, "favorites") ? "" : "Add to favorites"}</span>
+                    <span>{isInFavorites ? "" : "Add to favorites"}</span>
                 </button>
-                <button onClick={onWatchlistClick} className={isAdded(movie.id, mediaType, "watchlist") ? "btn-clicked" : ""}>
+                <button onClick={handleWatchlist} className={isInWatchlist ? "btn-clicked" : ""}>
                     <img src={watchLaterIcon} alt="watch later" />
-                    <span>{isAdded(movie.id, mediaType, "watchlist") ? "" : "Add to watchlist"}</span>
+                    <span>{isInWatchlist ? "" : "Add to watchlist"}</span>
                 </button>
             </div>
 

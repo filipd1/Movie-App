@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import axios from "axios"
 import "../css/Register.css"
@@ -13,6 +13,10 @@ function Register() {
     const [success, setSuccess] = useState()
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        document.title = "Register"
+    }, [])
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value})

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { AuthContext } from "../contexts/AuthContext"
 import axios from "axios"
@@ -15,6 +15,10 @@ function Login() {
     const [success, setSuccess] = useState()
     const navigate = useNavigate()
 
+    useEffect(() => {
+        document.title = "Login"
+    }, [])
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value})
     }
@@ -29,6 +33,7 @@ function Login() {
             setSuccess(res.data.message)
             login(res.data.token, res.data.user)
             navigate("/")
+            window.location.reload()
         } catch (err) {
             console.log("Login error:", err)
             setError(err.response?.data?.message || "Something went wrong")

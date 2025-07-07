@@ -166,5 +166,107 @@ app.get("/api/users/:username", async (req, res) => {
     }
 })
 
+app.post("/api/users/:username/favorites", auth, async (req, res) => {
+  try {
+    const { id, media_type } = req.body
+    if (!id || !media_type) {
+      return res.status(400).json({ message: "id and media_type are required" })
+    }
+
+    const user = await User.findOne({ username: req.params.username })
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    await User.updateOne(
+      { username: req.params.username },
+      { $addToSet: { favorites: { id, media_type } } }
+    )
+
+    const updatedUser = await User.findOne({ username: req.params.username })
+    res.json({ favorites: updatedUser.favorites })
+  } catch (err) {
+    console.error("Error adding favorite:", err)
+    res.status(500).json({ message: "Server error" })
+  }
+})
+
+
+app.delete("/api/users/:username/favorites/:media_type/:id", auth, async (req, res) => {
+  try {
+    const { username, media_type, id } = req.params
+
+    const user = await User.findOne({ username })
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    user.favorites = user.favorites.filter(fav => !(fav.id == id && fav.media_type === media_type))
+    await user.save()
+
+    res.json({ favorites: user.favorites })
+  } catch (err) {
+      console.error(err)
+      res.status(500).json({ message: "Server error", error: err.message })
+    }
+})
+
+app.get("/api/users/:username/favorites", auth, async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username })
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    res.json({ favorites: user.favorites })
+  } catch (err) {
+    res.status(500).json({ message: "Server error" })
+  }
+})
+
+
+app.post("/api/users/:username/watchlist", auth, async (req, res) => {
+  try {
+    const { id, media_type } = req.body
+    if (!id || !media_type) {
+      return res.status(400).json({ message: "id and media_type are required" })
+    }
+
+    const user = await User.findOne({ username: req.params.username })
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    const exists = user.watchlist.some(item => item.id === id && item.media_type === media_type)
+    if (!exists) {
+      user.watchlist.push({ id, media_type })
+      await user.save()
+    }
+
+    res.json({ watchlist: user.watchlist })
+  } catch (err) {
+    res.status(500).json({ message: "Server error" })
+  }
+})
+
+app.delete("/api/users/:username/watchlist/:media_type/:id", auth, async (req, res) => {
+  try {
+    const { username, media_type, id } = req.params
+
+    const user = await User.findOne({ username })
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    user.watchlist = user.watchlist.filter(fav => !(fav.id == id && fav.media_type === media_type))
+    await user.save()
+
+    res.json({ watchlist: user.watchlist })
+  } catch (err) {
+      console.error(err)
+      res.status(500).json({ message: "Server error", error: err.message })
+    }
+})
+
+app.get("/api/users/:username/watchlist", auth, async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username })
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    res.json({ watchlist: user.watchlist })
+  } catch (err) {
+    res.status(500).json({ message: "Server error" })
+  }
+})
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

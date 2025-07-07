@@ -12,10 +12,10 @@ function AddedMoviesList({ movieList, movieListType}) {
         pageType = "watchlist"
     }
 
-    if (movieList === null) {
-        return <div className="loading">Loading movie list</div>
+    if (!movieList) {
+    return <div className="loading">Loading movie list</div>
     }
-
+    
     const filteredTVSeries = movieList.filter(f => f.media_type === "tv")
     const filteredMovies = movieList.filter(f => f.media_type === "movie")
 

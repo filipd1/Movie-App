@@ -1,8 +1,16 @@
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "http://localhost:5000/api"
+});
+
+
 const BASE_URL = "http://localhost:5000/api";
+//const BASE_URL = "/api";
 
 export const getPopularMovies = async () => {
-    const response = await fetch(`${BASE_URL}/movie/popular`);
-    const data = await response.json();
+    const response = await fetch(`${BASE_URL}/movie/popular`)
+    const data = await response.json()
     return data.results
 };
 
@@ -13,8 +21,8 @@ export const getTopMovies = async () => {
 }
 
 export const getMovieById = async (id) => {
-    const response = await fetch(`${BASE_URL}/movie/${id}`);
-    const data = await response.json();
+    const response = await fetch(`${BASE_URL}/movie/${id}`)
+    const data = await response.json()
     return data
 };
 
@@ -73,8 +81,8 @@ export const getTVSeriesById = async (id) => {
 }
 
 export const getTVSeriesCredits = async (id) => {
-  const response = await fetch(`${BASE_URL}/tv/${id}/credits`);
-  const data = await response.json();
+  const response = await fetch(`${BASE_URL}/tv/${id}/credits`)
+  const data = await response.json()
   return data;
 }
 
@@ -127,7 +135,9 @@ export const getTopTVSeriesMultiPages = async (pages = 5) => {
 }
 
 export const searchMedia = async (query) => {
-    const response = await fetch(`${BASE_URL}/search?query=${encodeURIComponent(query)}`);
-    const data = await response.json();
+    const response = await fetch(`${BASE_URL}/search?query=${encodeURIComponent(query)}`)
+    const data = await response.json()
     return data.results
 }
+
+export default api

@@ -34,6 +34,7 @@ function NavBar() {
     const handleLogout = (e) => {
         e.preventDefault()
         logout()
+        window.location.reload()
 
         setShowDropdownMenu(false)
         setShowMobileMenu(false)

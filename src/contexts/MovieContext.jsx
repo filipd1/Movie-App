@@ -1,62 +1,94 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import axios from "axios";
+import { AuthContext } from "./AuthContext"
+import api from "../services/api"
 
 const MovieContext = createContext()
 
 export const useMovieContext = () => useContext(MovieContext)
 
-export const MovieProvider = ({children}) => {
+export const MovieProvider = ({ children }) => {
 
-    const [favorites, setFavorites] = useState(null)
-    const [watchlist, setWatchlist] = useState(null)
+    const [favorites, setFavorites] = useState([])
+    const [watchlist, setWatchlist] = useState([])
 
-    useEffect(() => {
-        const storedFavs = localStorage.getItem("favorites")
-        const storedWatchlist = localStorage.getItem("watchlist")
-        if (storedFavs) setFavorites(JSON.parse(storedFavs))
-            else setFavorites([])
-        if (storedWatchlist) setWatchlist(JSON.parse(storedWatchlist))
-            else setWatchlist([])
-    }, [])
+    const { user } = useContext(AuthContext)
+    const token = localStorage.getItem("token")
+    const username = user?.username
 
-    useEffect(() => {
-        if (favorites !== null) localStorage.setItem("favorites", JSON.stringify(favorites))
-    }, [favorites])
-
-    useEffect(() => {
-        if (watchlist !== null) localStorage.setItem("watchlist", JSON.stringify(watchlist))
-    }, [watchlist])
-
-    const addItem = (item, listType) => {
-        if (listType === "favorites")
-            setFavorites(prev => [...prev, item])
-        else if (listType === "watchlist")
-            setWatchlist(prev => [...prev, item])
+    const authHeader = {
+        headers: { Authorization: `Bearer ${token}` }
     }
 
-    const removeItem = (id, mediaType, listType) => {
-        if (listType === "favorites")
-            setFavorites(prev =>
-                prev.filter(item => !(item.id === id && item.media_type === mediaType))
+    useEffect(() => {
+        if (username && token) {
+            api.get(`/users/${username}`, authHeader)
+                .then(res => setFavorites(res.data.favorites))
+                .catch(err => console.log("Fav err", err))
+
+            api.get(`/users/${username}/watchlist`, authHeader)
+                .then(res => setWatchlist(res.data.watchlist))
+                .catch(err => console.log("Watchlist err", err))
+        }
+    }, [username, token])
+
+    const addToFavorites = async (id, media_type) => {
+        try {
+            const res = await api.post(
+                `/users/${username}/favorites`,
+                { id, media_type },
+                authHeader
             )
-        else if (listType === "watchlist")
-            setWatchlist(prev =>
-                prev.filter(item => !(item.id === id && item.media_type === mediaType))
-            )
+            setFavorites(res.data.favorites)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
-    const isAdded = (id, mediaType, listType) => {
-        const list = listType === "favorites" ? favorites : watchlist
-        return list?.some(
-            item => item.id === id && item.media_type === mediaType
+    const removeFromFavorites = async (id, media_type) => {
+        try {
+            const res = await api.delete(
+                `/users/${username}/favorites/${media_type}/${id}`,
+                authHeader
+            )
+            setFavorites(res.data.favorites)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const addToWatchlist = async (id, media_type) => {
+        try {
+        const res = await api.post(
+            `/users/${username}/watchlist`,
+            { id, media_type },
+            authHeader
         )
+        setWatchlist(res.data.watchlist)
+        } catch (err) {
+        console.error(err)
+        }
+    }
+
+    const removeFromWatchlist = async (id, media_type) => {
+        try {
+        const res = await api.delete(
+            `/users/${username}/watchlist/${media_type}/${id}`,
+            authHeader
+        )
+        setWatchlist(res.data.watchlist)
+        } catch (err) {
+        console.error(err)
+        }
     }
 
     const value = {
         favorites,
         watchlist,
-        addItem,
-        removeItem,
-        isAdded
+        addToFavorites,
+        removeFromFavorites,
+        addToWatchlist,
+        removeFromWatchlist
     }
 
     return <MovieContext.Provider value={value}>

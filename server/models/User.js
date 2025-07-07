@@ -22,21 +22,37 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-    }
-})
+    },
+    favorites: [
+        {
+            id: { type: Number, required: true },
+            media_type: { type: String, enum: ["movie", "tv"], required: true }
+        }
+    ],
+    watchlist: [
+        {
+            id: { type: Number, required: true },
+            media_type: { type: String, enum: ["movie", "tv"], required: true }
+        }
+    ],
+}, { timestamps: true })
 
 userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) 
+    if (!this.isModified("password")) {
         return next()
+    }
 
     try {
         const salt = await bcrypt.genSalt(10)
-        this.password = await bcrypt.hash(this.password, salt)
+        const hashed = await bcrypt.hash(this.password, salt)
+        this.password = hashed
         next()
     } catch (err) {
+        console.error("Error hashing password:", err)
         next(err)
     }
 })
+
 
 const User = mongoose.model("User", userSchema)
 module.exports = User
