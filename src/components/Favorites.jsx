@@ -4,23 +4,19 @@ import { getMovieById, getTVSeriesById } from "../services/api"
 import { useEffect, useState } from "react"
 
 function Favorites() {
-    const { watchlist } = useMovieContext()
-    const [watchlistDetails, setWatchlistDetails] = useState([])
+    const { favorites } = useMovieContext()
+    const [favoritesDetails, setFavoritesDetails] = useState([])
 
     useEffect(() => {
-        document.title = "Watchlist"
-    }, [])
-
-    useEffect(() => {
-        if (!watchlist || watchlist.length === 0) {
-            setWatchlistDetails([])
+        if (!favorites || favorites.length === 0) {
+            setFavoritesDetails([])
             return
         }
 
-        async function fetchWatchlistDetails() {
+        async function fetchFavoritesDetails() {
             try {
                 const results = await Promise.all(
-                    watchlist.map(async (fav) => {
+                    favorites.map(async (fav) => {
                         const { id, media_type } = fav
 
                         if (media_type === "movie") {
@@ -34,21 +30,21 @@ function Favorites() {
                     })
                 )
 
-                setWatchlistDetails(results.filter(Boolean))
+                setFavoritesDetails(results.filter(Boolean))
             } catch (err) {
-                console.error("Error fetching watchlist details:", err)
-                setWatchlistDetails([])
+                console.error("Error fetching favorites details:", err)
+                setFavoritesDetails([])
             }
         }
 
-        fetchWatchlistDetails()
-    }, [watchlist])
+        fetchFavoritesDetails()
+    }, [favorites])
 
     return (
-        <div className="container">
-            {!watchlist && <div className="loading">Loading watchlist...</div>}
-            <AddedMoviesList movieList={watchlistDetails} movieListType="Watchlist" />
-        </div>
+        <>
+            {!favorites && <div className="loading">Loading favorites...</div>}
+            <AddedMoviesList movieList={favoritesDetails} pageType="favorites" />
+        </>
     )
 }
 

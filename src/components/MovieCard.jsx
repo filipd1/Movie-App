@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
 import { useEffect, useState, useContext } from "react"
 import watchLaterIcon from "../assets/eye.svg"
+import Toast from "./Toast"
 
 function MovieCard({movie, pageType}) {
     const {
@@ -19,6 +20,7 @@ function MovieCard({movie, pageType}) {
 
     const [isInFavorites, setIsInFavorites] = useState(false)
     const [isInWatchlist, setIsInWatchlist] = useState(false)
+    const [toastVisible, setToastVisible] = useState(false)
 
     const mediaType = movie.first_air_date ? "tv" : "movie"
 
@@ -58,6 +60,10 @@ function MovieCard({movie, pageType}) {
             removeFromFavorites(movie.id, mediaType)
         } else {
             addToFavorites(movie.id, mediaType)
+            setToastVisible(true)
+            setTimeout(() => {
+                setToastVisible(false)
+            }, 2000)
         }
     }
 
@@ -66,6 +72,10 @@ function MovieCard({movie, pageType}) {
             removeFromWatchlist(movie.id, mediaType)
         } else {
             addToWatchlist(movie.id, mediaType)
+            setToastVisible(true)
+            setTimeout(() => {
+                setToastVisible(false)
+            }, 2000)
         }
     }
 
@@ -116,6 +126,7 @@ function MovieCard({movie, pageType}) {
                     <p>{year}</p>
                 </div>
             </div>
+            <Toast message="Added!" visible={toastVisible} />
         </Link> 
     )
 

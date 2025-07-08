@@ -80,8 +80,6 @@ function NavBar() {
                 <div className="navbar-links">
                     <NavLink to="/movies" className="nav-link ">Movies</NavLink>
                     <NavLink to="/tvseries" className="nav-link">TV Series</NavLink>
-                    <NavLink to="/favorites" className="nav-link">Favorites</NavLink>
-                    <NavLink to="/watchlist" className="nav-link">Watchlist</NavLink>
                 </div>
                 <div className="navbar-account">
                     <form
@@ -117,9 +115,7 @@ function NavBar() {
                             <div className="dropdown-menu-links">
                                 <Link to="/movies" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
                                 <Link to="/tvseries" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
-                                <Link to="/favorites" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Favorites</Link>
-                                <Link to="/watchlist" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Watchlist</Link>
-                                <Link to="/profile" className="dropdown-menu-link" onClick={() => setShowDropdownMenu(false)}>Account</Link>
+                                <Link to={`/users/${user.username}`} className="dropdown-menu-link" onClick={() => setShowDropdownMenu(false)}>Account</Link>
                                 <Link to="/" className="dropdown-menu-link" onClick={handleLogout}>Logout</Link>
                             </div>
                         </div>
@@ -135,8 +131,6 @@ function NavBar() {
                         <div className="mobile-menu-links">
                             <Link to="/movies" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
                             <Link to="/tvseries" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
-                            <Link to="/favorites" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Favorites</Link>
-                            <Link to="/watchlist" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Watchlist</Link>
                             <Link to="/" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Account</Link>
                             <Link to="/" className="mobile-menu-link" onClick={handleLogout}>Logout</Link>
                         </div>
