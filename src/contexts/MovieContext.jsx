@@ -1,5 +1,4 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import axios from "axios";
 import { AuthContext } from "./AuthContext"
 import api from "../services/api"
 
@@ -13,31 +12,35 @@ export const MovieProvider = ({ children }) => {
     const [watchlist, setWatchlist] = useState([])
 
     const { user } = useContext(AuthContext)
-    const token = localStorage.getItem("token")
+    //const token = localStorage.getItem("token")
     const username = user?.username
 
-    const authHeader = {
-        headers: { Authorization: `Bearer ${token}` }
-    }
+    const getAuthHeader = () => {
+        const token = localStorage.getItem("token");
+        return {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+    };
 
     useEffect(() => {
-        if (username && token) {
-            api.get(`/users/${username}`, authHeader)
-                .then(res => setFavorites(res.data.favorites))
-                .catch(err => console.log("Fav err", err))
-
-            api.get(`/users/${username}/watchlist`, authHeader)
-                .then(res => setWatchlist(res.data.watchlist))
-                .catch(err => console.log("Watchlist err", err))
+        if (username) {
+            api.get(`/users/${username}`, getAuthHeader())
+                .then(res => {
+                    setFavorites(res.data.favorites)
+                    setWatchlist(res.data.watchlist)
+                })
+                .catch(err => console.log("User data fetch error", err))
         }
-    }, [username, token])
+    }, [username])
 
     const addToFavorites = async (id, media_type) => {
         try {
             const res = await api.post(
                 `/users/${username}/favorites`,
                 { id, media_type },
-                authHeader
+                getAuthHeader()
             )
             setFavorites(res.data.favorites)
         } catch (err) {
@@ -49,7 +52,7 @@ export const MovieProvider = ({ children }) => {
         try {
             const res = await api.delete(
                 `/users/${username}/favorites/${media_type}/${id}`,
-                authHeader
+                getAuthHeader()
             )
             setFavorites(res.data.favorites)
         } catch (err) {
@@ -62,11 +65,11 @@ export const MovieProvider = ({ children }) => {
         const res = await api.post(
             `/users/${username}/watchlist`,
             { id, media_type },
-            authHeader
+            getAuthHeader()
         )
         setWatchlist(res.data.watchlist)
         } catch (err) {
-        console.error(err)
+            console.log(err)
         }
     }
 
@@ -74,11 +77,11 @@ export const MovieProvider = ({ children }) => {
         try {
         const res = await api.delete(
             `/users/${username}/watchlist/${media_type}/${id}`,
-            authHeader
+            getAuthHeader()
         )
         setWatchlist(res.data.watchlist)
         } catch (err) {
-        console.error(err)
+            console.log(err)
         }
     }
 
@@ -91,7 +94,9 @@ export const MovieProvider = ({ children }) => {
         removeFromWatchlist
     }
 
-    return <MovieContext.Provider value={value}>
-        {children}
-    </MovieContext.Provider>
+    return (
+        <MovieContext.Provider value={value}>
+            {children}
+        </MovieContext.Provider>
+    )
 }

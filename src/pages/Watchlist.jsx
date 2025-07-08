@@ -36,7 +36,7 @@ function Favorites() {
 
                 setWatchlistDetails(results.filter(Boolean))
             } catch (err) {
-                console.error("Error fetching favorites details:", err)
+                console.error("Error fetching watchlist details:", err)
                 setWatchlistDetails([])
             }
         }

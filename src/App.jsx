@@ -21,7 +21,7 @@ import Login from './pages/Login'
 import UserProfile from './pages/UserProfile'
 
 function App() {
-
+  
   return (
     <AuthProvider>
       <MovieProvider>

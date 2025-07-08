@@ -79,7 +79,7 @@ function MoviePage() {
                     />
                     <Cast movie={movie} credits={credits}/>
                     <div className="movie-media-wrapper">
-                        {/* <Media videos={movieVideos} photos={images}/> */}
+                        <Media videos={movieVideos} photos={images}/>
                         <SimilarMovies movie={similarMovies}/>
                     </div>
                     <Reviews reviews={review} mediaType="movie"/>

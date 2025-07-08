@@ -76,94 +76,94 @@ app.get("/api/person/:id", (req, res) => fetchFromTMDB(`/person/${req.params.id}
 app.get("/api/person/:id/credits", (req, res) => fetchFromTMDB(`/person/${req.params.id}/combined_credits`, res))
 
 app.get("/api/movie/top/multi", (req, res) => {
-    const pages = parseInt(req.query.pages) || 1
-    fetchMultiplePagesFromTMDB("/movie/top_rated", pages, res)
+  const pages = parseInt(req.query.pages) || 1
+  fetchMultiplePagesFromTMDB("/movie/top_rated", pages, res)
 })
 
 app.get("/api/tv/top/multi", (req, res) => {
-    const pages = parseInt(req.query.pages) || 1
-    fetchMultiplePagesFromTMDB("/tv/top_rated", pages, res)
+  const pages = parseInt(req.query.pages) || 1
+  fetchMultiplePagesFromTMDB("/tv/top_rated", pages, res)
 })
 
 app.get("/api/search", async (req, res) => {
-    const query = req.query.query
-    try {
-        const response = await axios.get(`${BASE_URL}/search/multi`, {
-            params: {
-                api_key: API_KEY,
-                query
-            }
-        })
-        res.json(response.data)
-    } catch (err) {
-        res.status(500).json({ error: "Search failed" })
-    }
+  const query = req.query.query
+  try {
+      const response = await axios.get(`${BASE_URL}/search/multi`, {
+          params: {
+              api_key: API_KEY,
+              query
+          }
+      })
+      res.json(response.data)
+  } catch (err) {
+      res.status(500).json({ error: "Search failed" })
+  }
 })
 
 app.post("/api/register", async (req,res) => {
-    try {
-        const {username, email, password} = req.body
+  try {
+      const {username, email, password} = req.body
 
-        if (!username || !email || !password) {
-            return res.status(400).json({ message: "All fields are required" })
-        }
+      if (!username || !email || !password) {
+          return res.status(400).json({ message: "All fields are required" })
+      }
 
-        const existingUser = await User.findOne({ email })
-        if (existingUser) {
-            return res.status(400).json({ message: "User with this email already exists" })
-        }
+      const existingUser = await User.findOne({ email })
+      if (existingUser) {
+          return res.status(400).json({ message: "User with this email already exists" })
+      }
 
-        const newUser = new User({ username, email, password })
-        await newUser.save()
+      const newUser = new User({ username, email, password })
+      await newUser.save()
 
-        res.status(201).json({ message: "User successfully registered" })
+      res.status(201).json({ message: "User successfully registered" })
 
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({ message: "Server error" })
-    }
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: "Server error" })
+  }
 })
 
 app.post("/api/login", async (req,res) => {
-    try {
-        const { username, password} = req.body
+  try {
+      const { username, password} = req.body
 
-        if (!username || !password) {
-            return res.status(400).json({ message: "Username and password are required" })
-        }
+      if (!username || !password) {
+          return res.status(400).json({ message: "Username and password are required" })
+      }
 
-        const user = await User.findOne({ username })
-        if (!user) {
-            return res.status(400).json({ message: "User not found" })
-        }
+      const user = await User.findOne({ username })
+      if (!user) {
+          return res.status(400).json({ message: "User not found" })
+      }
 
-        const isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) {
-            return res.status(401).json({ message: "Invalid password" })
-        }
+      const isMatch = await bcrypt.compare(password, user.password)
+      if (!isMatch) {
+          return res.status(401).json({ message: "Invalid password" })
+      }
 
-        const token = jwt.sign(
-            { id: user._id, username: user.username },
-            process.env.JWT_SECRET,
-            { expiresIn: "2h" }
-        )
+      const token = jwt.sign(
+          { id: user._id, username: user.username },
+          process.env.JWT_SECRET,
+          { expiresIn: "24h" }
+      )
 
-        res.status(200).json({ message: "Login successful", token, user: { id: user._id, username: user.username} })
-    } catch (err) {
-        console.log(err)
-        res.status(500).json({ message: "Server error" })
-    }
+      res.status(200).json({ message: "Login successful", token, user: { id: user._id, username: user.username} })
+  } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: "Server error" })
+  }
 })
 
 app.get("/api/users/:username", async (req, res) => {
-    try {
-        const user = await User.findOne({ username: req.params.username }).select("-password")
-        if (!user) return res.status(404).json({ message: "User not found" })
+  try {
+      const user = await User.findOne({ username: req.params.username }).select("-password")
+      if (!user) return res.status(404).json({ message: "User not found" })
 
-        res.json(user)
-    } catch (err) {
-        res.status(500).json({ message: "Server error" })
-    }
+      res.json(user)
+  } catch (err) {
+      res.status(500).json({ message: "Server error" })
+  }
 })
 
 app.post("/api/users/:username/favorites", auth, async (req, res) => {
@@ -174,9 +174,11 @@ app.post("/api/users/:username/favorites", auth, async (req, res) => {
     }
 
     const user = await User.findOne({ username: req.params.username })
-    if (!user) return res.status(404).json({ message: "User not found" })
+    if (!user) {
+      return res.status(404).json({ message: "User not found" })
+    }
 
-    await User.updateOne(
+    const result = await User.updateOne(
       { username: req.params.username },
       { $addToSet: { favorites: { id, media_type } } }
     )
@@ -185,10 +187,9 @@ app.post("/api/users/:username/favorites", auth, async (req, res) => {
     res.json({ favorites: updatedUser.favorites })
   } catch (err) {
     console.error("Error adding favorite:", err)
-    res.status(500).json({ message: "Server error" })
+    res.status(500).json({ message: "Server error", error: err.message })
   }
 })
-
 
 app.delete("/api/users/:username/favorites/:media_type/:id", auth, async (req, res) => {
   try {
@@ -217,7 +218,6 @@ app.get("/api/users/:username/favorites", auth, async (req, res) => {
     res.status(500).json({ message: "Server error" })
   }
 })
-
 
 app.post("/api/users/:username/watchlist", auth, async (req, res) => {
   try {
