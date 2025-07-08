@@ -60,11 +60,11 @@ function MovieCard({movie, pageType}) {
             removeFromFavorites(movie.id, mediaType)
         } else {
             addToFavorites(movie.id, mediaType)
-            setToastVisible(true)
-            setTimeout(() => {
-                setToastVisible(false)
-            }, 2000)
         }
+        setToastVisible(true)
+        setTimeout(() => {
+            setToastVisible(false)
+        }, 2000)
     }
 
     const handleWatchlist = () => {
@@ -72,10 +72,6 @@ function MovieCard({movie, pageType}) {
             removeFromWatchlist(movie.id, mediaType)
         } else {
             addToWatchlist(movie.id, mediaType)
-            setToastVisible(true)
-            setTimeout(() => {
-                setToastVisible(false)
-            }, 2000)
         }
     }
 
@@ -126,7 +122,7 @@ function MovieCard({movie, pageType}) {
                     <p>{year}</p>
                 </div>
             </div>
-            <Toast message="Added!" visible={toastVisible} />
+            <Toast message={!isInFavorites ? "Removed!" : "Added!"} visible={toastVisible} />
         </Link> 
     )
 

@@ -16,6 +16,12 @@ const UserProfile = () => {
     axios.get(`/api/users/${username}`)
       .then(res => setUser(res.data))
       .catch(err => console.log(err))
+
+    if (username) {
+      document.title = username + "'s Profile"
+    } else {
+      document.title = "Ładowanie..."
+    }
   }, [username])
 
   if (!user) return <div>Loading...</div>
