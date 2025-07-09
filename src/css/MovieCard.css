@@ -101,9 +101,25 @@
 }
 
 .user-rating {
-  color: #ffd700;
-  font-size: 0.9rem;
-  margin-top: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: black;
+  font-weight: bold;
+  padding: 8px 10px;
+  font-size: 20px;
+  z-index: 1;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
+
+.user-rating::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 8px 10px 0 0;
+  border-color: black transparent transparent transparent;
 }
 
 .movie-card .active::after {

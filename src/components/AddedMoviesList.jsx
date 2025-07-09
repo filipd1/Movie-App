@@ -40,7 +40,7 @@ function AddedMoviesList({ movieList, pageType}) {
                 ) : (
                     <div className="movie-list-empty">
                         <h2>No added movies yet</h2>
-                        <p>Start adding your favorite movies or TV shows</p>
+                        <p>Start adding movies or TV shows</p>
                     </div>
                 )}
         </>

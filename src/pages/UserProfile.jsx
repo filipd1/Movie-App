@@ -4,6 +4,7 @@ import axios from "axios"
 import "../css/UserProfile.css"
 import Favorites from "../components/Favorites.jsx"
 import Watchlist from "../components/Watchlist.jsx"
+import Ratings from "../components/Ratings.jsx"
 import { useMovieContext } from "../contexts/MovieContext"
 
 const UserProfile = () => {
@@ -12,7 +13,7 @@ const UserProfile = () => {
   const [votesShown, setVotesShown] = useState(true)
   const [favoritesShown, setfavoritesShown] = useState(false)
   const [watchlistShown, setwatchlistShown] = useState(false)
-  const { favorites, watchlist } = useMovieContext();
+  const { favorites, watchlist, ratings } = useMovieContext();
 
   useEffect(() => {
     axios.get(`/api/users/${username}`)
@@ -51,7 +52,7 @@ const UserProfile = () => {
               setwatchlistShown(false)
             }}
           >
-            Votes
+            Ratings ({ratings.length})
           </button>
 
           <button
@@ -78,10 +79,7 @@ const UserProfile = () => {
         </div>
       </div>
 
-      {votesShown &&
-       <div className="user-votes">Votes</div>
-      }
-
+      {votesShown && <Ratings/>}
       {watchlistShown && <Watchlist/>}
       {favoritesShown && <Favorites/>}
       

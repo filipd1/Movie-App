@@ -1,5 +1,6 @@
 .user-profile {
     background-color: rgba(0, 0, 0, .2);
+    border-radius: 8px;
 }
 
 .user-info-wrapepr {
@@ -7,7 +8,6 @@
     align-items: center;
     gap: 2em;
     padding: 1em;
-    border-radius: 8px;
 }
 
 .user-info-wrapepr img {

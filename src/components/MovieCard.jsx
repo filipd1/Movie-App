@@ -10,6 +10,7 @@ function MovieCard({movie, pageType}) {
     const {
         favorites,
         watchlist,
+        ratings,
         addToFavorites,
         removeFromFavorites,
         addToWatchlist,
@@ -45,6 +46,11 @@ function MovieCard({movie, pageType}) {
         : isTV
         ? `/tv/${movie.id}`
         : `/movie/${movie.id}`
+
+    const userCurrentRatingObj = ratings.find(
+        (item) => item.id === movie.id && item.media_type === mediaType
+    )
+    const userCurrentRating = userCurrentRatingObj?.rating
 
     useEffect(() => {
         if (favorites) {
@@ -101,22 +107,31 @@ function MovieCard({movie, pageType}) {
                                     ♥
                                 </button>
                         ) : (
-                            <button
-                                className={
-                                    `favorite-btn ${isInWatchlist ? "active" : ""}`
-                                }
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    e.stopPropagation()
-                                    handleWatchlist()
-                                }}
-                            >
-                                <img src={watchLaterIcon} alt="eye icon" />
-                        </button>
+                            pageType === "watchlist" && (
+                                <button
+                                    className={
+                                        `favorite-btn ${isInWatchlist ? "active" : ""}`
+                                    }
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        e.stopPropagation()
+                                        handleWatchlist()
+                                    }}
+                                >
+                                    <img src={watchLaterIcon} alt="eye icon" />
+                                </button>
+                            )
                         )}
 
                     </div>
                 </div>
+                {userCurrentRating &&
+                    <p
+                        className={`user-rating ${userCurrentRating >= 6.5 ?
+                        "high" : 
+                        (userCurrentRating < 4 ? "low" : "mid")}`}>{userCurrentRating}
+                    </p>
+                }
                 <div className="movie-info">
                     <h3>{title}</h3>
                     <p>{year}</p>

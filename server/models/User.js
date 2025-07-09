@@ -35,6 +35,13 @@ const userSchema = new mongoose.Schema({
             media_type: { type: String, enum: ["movie", "tv"], required: true }
         }
     ],
+    ratings: [
+        {
+            id: { type: Number, required: true },
+            media_type: { type: String, enum: ["movie", "tv"], required: true },
+            rating: { type: Number, required: true }
+        }
+    ],
 }, { timestamps: true })
 
 userSchema.pre("save", async function (next) {

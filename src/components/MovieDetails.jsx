@@ -13,29 +13,38 @@ import ratingIcon from "../assets/star-icon.svg"
 
 function MovieDetails({ movie, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
+    const [isInFavorites, setIsInFavorites] = useState(false)
+    const [isInWatchlist, setIsInWatchlist] = useState(false)
+    const [hoverRating, setHoverRating] = useState(null);
+    const [userRating, setUserRating] = useState(null);
     const mediaType = movie.first_air_date ? "tv" : "movie"
     const directors = credits.crew?.filter(c => c.job === "Director")
 
     const {
         favorites,
         watchlist,
+        ratings,
         addToFavorites,
         removeFromFavorites,
         addToWatchlist,
-        removeFromWatchlist
+        removeFromWatchlist,
+        rateMovie
     } = useMovieContext()
 
-    const [isInFavorites, setIsInFavorites] = useState(false)
-    const [isInWatchlist, setIsInWatchlist] = useState(false)
+    const userCurrentRatingObj = ratings.find(
+        (item) => item.id === movie.id && item.media_type === mediaType
+    )
+    const userCurrentRating = userCurrentRatingObj?.rating
 
     useEffect(() => {
-        if (favorites) {
-            setIsInFavorites(favorites.some(fav => fav.id === movie.id))
-        }
-        if (watchlist) {
-            setIsInWatchlist(watchlist.some(watch => watch.id === movie.id))
-        }
+        setIsInFavorites(favorites?.some(fav => fav.id === movie.id) || false)
+        setIsInWatchlist(watchlist?.some(w => w.id === movie.id) || false)
     }, [favorites, watchlist, movie.id])
+
+
+    useEffect(() => {
+        setUserRating(userCurrentRating)
+    }, [userCurrentRating])
 
     const handleFavorites = () => {
         if (isInFavorites) {
@@ -51,6 +60,12 @@ function MovieDetails({ movie, credits, images }) {
         } else {
             addToWatchlist(movie.id, mediaType)
         }
+    }
+
+    const handleRate = (value) => {
+        setUserRating(value)
+        rateMovie(movie.id, mediaType, value)
+        if (isInWatchlist) removeFromWatchlist(movie.id, mediaType)
     }
 
     return (
@@ -101,7 +116,7 @@ function MovieDetails({ movie, credits, images }) {
             <p className="movie-overview">{movie.overview}</p>
 
             <div className="movie-votes">
-                <p className={`vote_average ${movie.vote_average >= 6.5 ? "high" : (movie.vote_average < 4 ? "low" : "mid")}`}>
+                <p className={`vote-average ${movie.vote_average >= 6.5 ? "high" : (movie.vote_average < 4 ? "low" : "mid")}`}>
                     {movie.vote_average != null
                         ? movie.vote_average.toFixed(1)
                         : "N/A"
@@ -113,18 +128,23 @@ function MovieDetails({ movie, credits, images }) {
             <div className="movie-rating">
                 <div>
                     <img src={ratingIcon} alt="rating-star" />
-                    <p>Your rating</p>
-                </div> 
-                <img src={starFilledIcon} alt="rating-star" />
-                <img src={starFilledIcon} alt="rating-star" />
-                <img src={starFilledIcon} alt="rating-star" />
-                <img src={starFilledIcon} alt="rating-star" />
-                <img src={starFilledIcon} alt="rating-star" />
-                <img src={starFilledIcon} alt="rating-star" />
-                <img src={starFilledIcon} alt="rating-star" />
-                <img src={starIcon} alt="rating-star" />
-                <img src={starIcon} alt="rating-star" />
-                <img src={starIcon} alt="rating-star" />
+                    <p>Your rating: {userCurrentRating ? `${userCurrentRating}/10` : "none"}</p>
+                </div>
+                {Array(10).fill().map((_, index) => {
+                    const starValue = index +1
+                    const isFilled = hoverRating >= starValue || userRating >= starValue
+                    return (
+                        <img
+                            key={index}
+                            src={isFilled ? starFilledIcon : starIcon}
+                            alt="rating-star"
+                            onMouseEnter={() => setHoverRating(starValue)}
+                            onMouseLeave={() => setHoverRating(null)}
+                            onClick={() => handleRate(starValue)}
+                            className="rating-star"
+                        />
+                    )
+                })}
             </div>
 
             <div className="movie-buttons">

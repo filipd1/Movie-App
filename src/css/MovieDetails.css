@@ -78,7 +78,7 @@
 }
 
 .movie-genre,
-.vote_average {
+.vote-average {
     background-color: rgba(0, 0, 0, .1);
     padding: .4em .7em;
     border-radius: 4px;
@@ -111,6 +111,16 @@
     margin-bottom: 7px;
     display: flex;
     align-items: center;
+}
+
+.rating-star {
+  width: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.rating-star:hover {
+  transform: scale(1.2);
 }
 
 .movie-buttons {

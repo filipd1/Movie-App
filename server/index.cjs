@@ -269,4 +269,41 @@ app.get("/api/users/:username/watchlist", auth, async (req, res) => {
   }
 })
 
+app.post("/api/users/:username/ratings", auth, async (req, res) => {
+  try {
+    const { id, media_type, rating } = req.body
+    if (!id || !media_type || typeof rating !== "number") {
+      return res.status(400).json({ message: "id, media_type and rating are required" })
+    }
+
+    const user = await User.findOne({ username: req.params.username })
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    const existingIndex = user.ratings.findIndex(item => item.id === id && item.media_type === media_type)
+    if (existingIndex >= 0) {
+      user.ratings[existingIndex].rating = rating
+    } else {
+      user.ratings.push({ id, media_type, rating })
+    }
+
+    await user.save()
+    res.json({ ratings: user.ratings })
+  } catch (err) {
+    console.error("POST ratings error", err)
+    res.status(500).json({ message: "Server error" })
+  }
+})
+
+app.get("/api/users/:username/ratings", auth, async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username }).select("ratings")
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    res.json({ ratings: user.ratings })
+  } catch (err) {
+    console.error("GET ratings error", err)
+    res.status(500).json({ message: "Server error" })
+  }
+})
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

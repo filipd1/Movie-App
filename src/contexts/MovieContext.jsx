@@ -10,6 +10,7 @@ export const MovieProvider = ({ children }) => {
 
     const [favorites, setFavorites] = useState([])
     const [watchlist, setWatchlist] = useState([])
+    const [ratings, setRatings] = useState([])
 
     const { user } = useContext(AuthContext)
     const username = user?.username
@@ -29,6 +30,7 @@ export const MovieProvider = ({ children }) => {
                 .then(res => {
                     setFavorites(res.data.favorites)
                     setWatchlist(res.data.watchlist)
+                    setRatings(res.data.ratings)
                 })
                 .catch(err => console.log("User data fetch error", err))
         }
@@ -61,12 +63,12 @@ export const MovieProvider = ({ children }) => {
 
     const addToWatchlist = async (id, media_type) => {
         try {
-        const res = await api.post(
-            `/users/${username}/watchlist`,
-            { id, media_type },
-            getAuthHeader()
-        )
-        setWatchlist(res.data.watchlist)
+            const res = await api.post(
+                `/users/${username}/watchlist`,
+                { id, media_type },
+                getAuthHeader()
+            )
+            setWatchlist(res.data.watchlist)
         } catch (err) {
             console.log(err)
         }
@@ -74,11 +76,24 @@ export const MovieProvider = ({ children }) => {
 
     const removeFromWatchlist = async (id, media_type) => {
         try {
-        const res = await api.delete(
-            `/users/${username}/watchlist/${media_type}/${id}`,
-            getAuthHeader()
-        )
-        setWatchlist(res.data.watchlist)
+            const res = await api.delete(
+                `/users/${username}/watchlist/${media_type}/${id}`,
+                getAuthHeader()
+            )
+            setWatchlist(res.data.watchlist)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const rateMovie = async (id, media_type, rating) => {
+        try {
+            const res = await api.post(
+                `/users/${username}/ratings`,
+                { id, media_type, rating },
+                getAuthHeader()
+            )
+            setRatings(res.data.ratings)
         } catch (err) {
             console.log(err)
         }
@@ -87,10 +102,12 @@ export const MovieProvider = ({ children }) => {
     const value = {
         favorites,
         watchlist,
+        ratings,
         addToFavorites,
         removeFromFavorites,
         addToWatchlist,
-        removeFromWatchlist
+        removeFromWatchlist,
+        rateMovie
     }
 
     return (
