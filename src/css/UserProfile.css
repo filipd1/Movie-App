@@ -1,8 +1,11 @@
+.user-profile {
+    background-color: rgba(0, 0, 0, .2);
+}
+
 .user-info-wrapepr {
     display: flex;
     align-items: center;
     gap: 2em;
-    background-color: rgba(0, 0, 0, .2);
     padding: 1em;
     border-radius: 8px;
 }
@@ -20,6 +23,8 @@
 
 .user-button {
     background-color: unset;
+    border-radius: 0;
+    border: none;
 }
 
 .user-button:hover,
@@ -31,4 +36,10 @@
 .user-button-active {
     color: #000;
     background-color: var(--font-color-main);
+}
+
+.user-hr {
+    width: 30%;
+    opacity: .2;
+    margin-left: 1em;
 }

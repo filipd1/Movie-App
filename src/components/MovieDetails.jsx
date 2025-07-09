@@ -13,8 +13,6 @@ import ratingIcon from "../assets/star-icon.svg"
 
 function MovieDetails({ movie, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
-    const {addItem, removeItem, isAdded} = useMovieContext()
-
     const mediaType = movie.first_air_date ? "tv" : "movie"
     const directors = credits.crew?.filter(c => c.job === "Director")
 

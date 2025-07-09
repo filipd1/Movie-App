@@ -3,7 +3,7 @@ import { useMovieContext } from "../contexts/MovieContext"
 import { getMovieById, getTVSeriesById } from "../services/api"
 import { useEffect, useState } from "react"
 
-function Favorites() {
+function Watchlist() {
     const { watchlist } = useMovieContext()
     const [watchlistDetails, setWatchlistDetails] = useState([])
 
@@ -29,8 +29,8 @@ function Favorites() {
                         return null
                     })
                 )
-
-                setWatchlistDetails(results.filter(Boolean))
+                const filtered = results.filter(Boolean)
+                setWatchlistDetails(filtered)
             } catch (err) {
                 console.error("Error fetching watchlist details:", err)
                 setWatchlistDetails([])
@@ -48,4 +48,4 @@ function Favorites() {
     )
 }
 
-export default Favorites
+export default Watchlist

@@ -12,7 +12,6 @@ export const MovieProvider = ({ children }) => {
     const [watchlist, setWatchlist] = useState([])
 
     const { user } = useContext(AuthContext)
-    //const token = localStorage.getItem("token")
     const username = user?.username
 
     const getAuthHeader = () => {

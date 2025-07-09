@@ -30,7 +30,8 @@ function Favorites() {
                     })
                 )
 
-                setFavoritesDetails(results.filter(Boolean))
+                const filtered = results.filter(Boolean)
+                setFavoritesDetails(filtered)
             } catch (err) {
                 console.error("Error fetching favorites details:", err)
                 setFavoritesDetails([])
