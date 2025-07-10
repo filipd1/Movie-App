@@ -38,7 +38,7 @@ function MovieChart( { movies } ) {
                             
 
                             <div className="movie-votes">
-                                <p className={`vote_average ${m.vote_average >= 6 ? "high" : "low"}`}>
+                                <p className={`vote-average ${m.vote_average >= 6 ? "high" : "low"}`}>
                                     {m.vote_average != null
                                         ? m.vote_average.toFixed(1)
                                         : "N/A"

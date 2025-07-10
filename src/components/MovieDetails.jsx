@@ -28,7 +28,8 @@ function MovieDetails({ movie, credits, images }) {
         removeFromFavorites,
         addToWatchlist,
         removeFromWatchlist,
-        rateMovie
+        rateMovie,
+        removeRating
     } = useMovieContext()
 
     const userCurrentRatingObj = ratings.find(
@@ -65,7 +66,8 @@ function MovieDetails({ movie, credits, images }) {
     const handleRate = (value) => {
         setUserRating(value)
         rateMovie(movie.id, mediaType, value)
-        if (isInWatchlist) removeFromWatchlist(movie.id, mediaType)
+        if (value === userRating)
+            removeRating(movie.id, mediaType)
     }
 
     return (

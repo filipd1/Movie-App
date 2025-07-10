@@ -99,6 +99,18 @@ export const MovieProvider = ({ children }) => {
         }
     }
 
+    const removeRating = async (id, media_type) => {
+        try {
+            const res = await api.delete(
+                `/users/${username}/ratings/${media_type}/${id}`,
+                getAuthHeader()
+            )
+            setRatings(res.data.ratings)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     const value = {
         favorites,
         watchlist,
@@ -107,7 +119,8 @@ export const MovieProvider = ({ children }) => {
         removeFromFavorites,
         addToWatchlist,
         removeFromWatchlist,
-        rateMovie
+        rateMovie,
+        removeRating
     }
 
     return (

@@ -248,7 +248,7 @@ app.delete("/api/users/:username/watchlist/:media_type/:id", auth, async (req, r
     const user = await User.findOne({ username })
     if (!user) return res.status(404).json({ message: "User not found" })
 
-    user.watchlist = user.watchlist.filter(fav => !(fav.id == id && fav.media_type === media_type))
+    user.watchlist = user.watchlist.filter(item => !(item.id == id && item.media_type === media_type))
     await user.save()
 
     res.json({ watchlist: user.watchlist })
@@ -292,6 +292,23 @@ app.post("/api/users/:username/ratings", auth, async (req, res) => {
     console.error("POST ratings error", err)
     res.status(500).json({ message: "Server error" })
   }
+})
+
+app.delete("/api/users/:username/ratings/:media_type/:id", auth, async (req, res) => {
+  try {
+    const { username, media_type, id } = req.params
+
+    const user = await User.findOne({ username })
+    if (!user) return res.status(404).json({ message: "User not found" })
+
+    user.ratings = user.ratings.filter(rating => !(rating.id == id && rating.media_type === media_type))
+    await user.save()
+
+    res.json({ ratings: user.ratings })
+  } catch (err) {
+      console.error(err)
+      res.status(500).json({ message: "Server error", error: err.message })
+    }
 })
 
 app.get("/api/users/:username/ratings", auth, async (req, res) => {
