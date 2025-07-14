@@ -7,7 +7,8 @@ function Register() {
     const [formData, setFormData] = useState({
         username: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
     const [error, setError] = useState()
     const [success, setSuccess] = useState()
@@ -27,8 +28,18 @@ function Register() {
         setError("")
         setSuccess("")
 
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match")
+            return
+        }
+
         try {
-            const res = await axios.post("http://localhost:5000/api/register", formData)
+            const { username, email, password } = formData
+            const res = await axios.post("http://localhost:5000/api/register", {
+                username,
+                email,
+                password
+            })
             setSuccess(res.data.message)
             setTimeout(() => navigate("/login"), 1000)
         } catch (err) {
@@ -63,6 +74,14 @@ function Register() {
                         name="password"
                         placeholder="Password"
                         value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirm password"
+                        value={formData.confirmPassword}
                         onChange={handleChange}
                         required
                     />

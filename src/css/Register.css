@@ -2,7 +2,7 @@
     margin: 0 auto;
     background-color: var(--bg-nav);
     width: 18%;
-    height: 450px;
+    max-height: 500px;
     border-radius: 8px;
     position: absolute;
     top: 50%;
