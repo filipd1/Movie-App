@@ -1,6 +1,6 @@
 import { getPopularTVSeries, getTopTVSeries } from "../services/api"
 import { useState, useEffect } from "react"
-import MovieList from "../components/MovieList"
+import MediaList from "../components/MediaList"
 
 function TVSeries() {
 
@@ -38,8 +38,8 @@ function TVSeries() {
                 <div className="loading">Loading...</div>
             ) : (
                     <>
-                        <MovieList movieList={popularTVSeries} movieListHeader="Now popular series" movieNumber={6}/>
-                        <MovieList movieList={topTVSeries} movieListHeader="Top rated series" movieNumber={6} URLto="/top-tvseries"/>
+                        <MediaList mediaList={popularTVSeries} mediaListHeader="Now popular series" mediaNumber={6} URLto="/popular-tvseries"/>
+                        <MediaList mediaList={topTVSeries} mediaListHeader="Top rated series" mediaNumber={6} URLto="/top-tvseries"/>
                     </>
                 )}
         </div>

@@ -2,11 +2,11 @@ import { createContext, useState, useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContext"
 import api from "../services/api"
 
-const MovieContext = createContext()
+const MediaContext = createContext()
 
-export const useMovieContext = () => useContext(MovieContext)
+export const useMediaContext = () => useContext(MediaContext)
 
-export const MovieProvider = ({ children }) => {
+export const MediaProvider = ({ children }) => {
 
     const [favorites, setFavorites] = useState([])
     const [watchlist, setWatchlist] = useState([])
@@ -124,8 +124,8 @@ export const MovieProvider = ({ children }) => {
     }
 
     return (
-        <MovieContext.Provider value={value}>
+        <MediaContext.Provider value={value}>
             {children}
-        </MovieContext.Provider>
+        </MediaContext.Provider>
     )
 }

@@ -1,10 +1,10 @@
-import AddedMoviesList from "../components/AddedMoviesList"
-import { useMovieContext } from "../contexts/MovieContext"
+import AddedMediaList from "../components/AddedMediaList"
+import { useMediaContext } from "../contexts/MediaContext"
 import { getMovieById, getTVSeriesById } from "../services/api"
 import { useEffect, useState } from "react"
 
 function Favorites() {
-    const { favorites } = useMovieContext()
+    const { favorites } = useMediaContext()
     const [favoritesDetails, setFavoritesDetails] = useState([])
 
     useEffect(() => {
@@ -44,7 +44,7 @@ function Favorites() {
     return (
         <>
             {!favorites && <div className="loading">Loading favorites...</div>}
-            <AddedMoviesList movieList={favoritesDetails} pageType="favorites" />
+            <AddedMediaList mediaList={favoritesDetails} pageType="favorites" />
         </>
     )
 }

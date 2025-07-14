@@ -1,6 +1,6 @@
 import './css/App.css'
 import { Routes, Route } from 'react-router-dom'
-import { MovieProvider } from './contexts/MovieContext'
+import { MediaProvider } from './contexts/MediaContext'
 import { AuthProvider } from './contexts/AuthContext'
 import Home from './pages/Home'
 import Movies from './pages/Movies'
@@ -17,12 +17,14 @@ import TopRatedTVSeries from './pages/TopRatedTVSeries'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import UserProfile from './pages/UserProfile'
+import PopularMovies from './pages/PopularMovies'
+import PopularTVSeries from './pages/PopularTVSeries'
 
 function App() {
   
   return (
     <AuthProvider>
-      <MovieProvider>
+      <MediaProvider>
         <NavBar/>
         <main className='main-content'>
           <Routes>
@@ -30,8 +32,10 @@ function App() {
             <Route path="/search" element={<SearchResults/>} />
             <Route path="/movies" element={<Movies/>} />
             <Route path="/top-movies" element={<TopRatedMovies/>} />
+            <Route path="/popular-movies" element={<PopularMovies/>} />
             <Route path="/tvseries" element={<TVSeries/>} />
             <Route path="/top-tvseries" element={<TopRatedTVSeries/>} />
+            <Route path="/popular-tvseries" element={<PopularTVSeries/>} />
             <Route path="/movie/:id" element={<MoviePage/>} />
             <Route path="/tv/:id" element={<TVSeriesPage/>} />
             <Route path="/person/:id" element={<PersonPage/>} />
@@ -42,7 +46,7 @@ function App() {
           </Routes>
         </main>
         <Footer/>
-      </MovieProvider>
+      </MediaProvider>
     </AuthProvider>
   )
 }

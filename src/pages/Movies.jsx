@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { getPopularMovies, getTopMovies } from "../services/api"
-import MovieList from "../components/MovieList"
+import MediaList from "../components/MediaList"
 
 
 function Movies() {
@@ -38,8 +38,8 @@ function Movies() {
         <div className="loading">Loading...</div>
       ) : (
         <>
-          <MovieList  movieList={popularMovies} movieListHeader="Now popular movies" movieNumber={6}/>
-          <MovieList  movieList={topMovies} movieListHeader="Top rated movies" movieNumber={6} URLto="/top-movies"/>
+          <MediaList mediaList={popularMovies} mediaListHeader="Now popular movies" mediaNumber={6} URLto="/popular-movies"/>
+          <MediaList mediaList={topMovies} mediaListHeader="Top rated movies" mediaNumber={6} URLto="/top-movies"/>
         </>
       )}
     </div>

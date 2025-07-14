@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { searchMedia } from "../services/api"
-import MovieCard from "../components/MovieCard"
+import MediaCard from "../components/MediaCard"
 
 function SearchResults() {
 
@@ -96,7 +96,7 @@ function SearchResults() {
                 {searchResults.length > 0 ? (
                   filteredSearchResults.map(movie => (
                     (movie.profile_path || movie.poster_path) &&
-                      <MovieCard movie={movie} key={movie.id} pageType="favorites"/>
+                      <MediaCard movie={movie} key={movie.id} pageType="favorites"/>
                   ))
                 ) : (
                   <p>No matching movies</p>

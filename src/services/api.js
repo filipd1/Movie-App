@@ -128,8 +128,20 @@ export const getTopMoviesMultiPages = async (pages = 5) => {
     return data.results
 }
 
+export const getPopularMoviesMultiPages = async (pages = 3) => {
+    const response = await fetch(`${BASE_URL}/movie/popular/multi?pages=${pages}`)
+    const data = await response.json()
+    return data.results
+}
+
 export const getTopTVSeriesMultiPages = async (pages = 5) => {
     const response = await fetch(`${BASE_URL}/tv/top/multi?pages=${pages}`)
+    const data = await response.json()
+    return data.results
+}
+
+export const getPopularTVSeriesMultiPages = async (pages = 3) => {
+    const response = await fetch(`${BASE_URL}/tv/popular/multi?pages=${pages}`)
     const data = await response.json()
     return data.results
 }

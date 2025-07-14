@@ -80,9 +80,19 @@ app.get("/api/movie/top/multi", (req, res) => {
   fetchMultiplePagesFromTMDB("/movie/top_rated", pages, res)
 })
 
+app.get("/api/movie/popular/multi", (req, res) => {
+  const pages = parseInt(req.query.pages) || 1
+  fetchMultiplePagesFromTMDB("/movie/popular", pages, res)
+})
+
 app.get("/api/tv/top/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
   fetchMultiplePagesFromTMDB("/tv/top_rated", pages, res)
+})
+
+app.get("/api/tv/popular/multi", (req, res) => {
+  const pages = parseInt(req.query.pages) || 1
+  fetchMultiplePagesFromTMDB("/tv/popular", pages, res)
 })
 
 app.get("/api/search", async (req, res) => {

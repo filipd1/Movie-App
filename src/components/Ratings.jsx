@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { getMovieById, getTVSeriesById } from "../services/api"
-import { useMovieContext } from "../contexts/MovieContext"
-import AddedMoviesList from "./AddedMoviesList"
+import { useMediaContext } from "../contexts/MediaContext"
+import AddedMediaList from "./AddedMediaList"
 
 function Ratings() {
 
-    const { ratings } = useMovieContext()
+    const { ratings } = useMediaContext()
     const [ratingsDetails, setRatingsDetails] = useState([])
 
     useEffect(() => {
@@ -44,7 +44,7 @@ function Ratings() {
     return (
         <>
             {!ratings && <div className="loading">Loading ratings...</div>}
-            <AddedMoviesList movieList={ratingsDetails} pageType="ratings" />
+            <AddedMediaList mediaList={ratingsDetails} pageType="ratings" />
         </>
     )
 }

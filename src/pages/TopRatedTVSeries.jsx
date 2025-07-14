@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { getTopTVSeriesMultiPages } from "../services/api"
-import MovieChart from "../components/MovieChart"
+import MediaChart from "../components/MediaChart"
 
 function TopRatedMovies() {
 
@@ -32,7 +32,7 @@ function TopRatedMovies() {
       {loading ? (
         <div className="loading">Loading...</div>
       ) : (
-        <MovieChart movies={tv}/>
+        <MediaChart movies={tv}/>
       )}
     </div>
     )

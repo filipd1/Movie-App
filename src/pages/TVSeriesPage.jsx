@@ -1,11 +1,11 @@
 import { getTVSeriesById, getTVSeriesCredits, getTVSeriesImages, getTVSeriesReviews, getSimilarTVSeries, getTVSeriesVideos} from "../services/api"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import MovieDetails from "../components/MovieDetails"
+import MediaDetails from "../components/MediaDetails"
 import Cast from "../components/Cast"
 import Reviews from "../components/Reviews"
-import SimilarMovies from "../components/SimilarMovies"
-import Media from "../components/Media"
+import Similar from "../components/Similar"
+import Gallery from "../components/Gallery"
 
 function TVSeriesPage() {
 
@@ -74,15 +74,15 @@ function TVSeriesPage() {
                   
                </div>
 
-               <MovieDetails
-                  movie={tv}
+               <MediaDetails
+                  media={tv}
                   credits={tvCredts}
                   images={tvImages}
                />
                <Cast movie={tv} credits={tvCredts}/>
                   <div className="movie-media-wrapper">
-                        <Media videos={tvVideos} photos={tvImages}/>
-                        <SimilarMovies movie={similarTVShows}/>
+                        <Gallery videos={tvVideos} photos={tvImages}/>
+                        <Similar movie={similarTVShows}/>
                   </div>
                <Reviews reviews={tvReviews} mediaType="tv show"/>
             </div>

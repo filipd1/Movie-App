@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import "../css/Home.css"
-import MovieList from "../components/MovieList"
+import MediaList from "../components/MediaList"
 import { getPopularMovies, getPopularTVSeries } from "../services/api"
 import { useNavigate } from "react-router-dom"
 
@@ -61,8 +61,8 @@ function Home() {
         <div className="loading">Loading...</div>
       ) : (
         <>
-          <MovieList movieList={popularMovies} movieListHeader="Trending movies" movieNumber={6}/>
-          <MovieList movieList={popularTVSeries} movieListHeader="Trending series" movieNumber={6}/>
+          <MediaList mediaList={popularMovies} mediaListHeader="Trending movies" mediaNumber={6} URLto="/popular-movies"/>
+          <MediaList mediaList={popularTVSeries} mediaListHeader="Trending series" mediaNumber={6} URLto="/popular-tvseries"/>
         </>
       )}
     </div>

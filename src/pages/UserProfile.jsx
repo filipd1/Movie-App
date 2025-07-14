@@ -5,7 +5,7 @@ import "../css/UserProfile.css"
 import Favorites from "../components/Favorites.jsx"
 import Watchlist from "../components/Watchlist.jsx"
 import Ratings from "../components/Ratings.jsx"
-import { useMovieContext } from "../contexts/MovieContext"
+import { useMediaContext } from "../contexts/MediaContext"
 
 const UserProfile = () => {
   const { username } = useParams()
@@ -13,7 +13,7 @@ const UserProfile = () => {
   const [votesShown, setVotesShown] = useState(true)
   const [favoritesShown, setfavoritesShown] = useState(false)
   const [watchlistShown, setwatchlistShown] = useState(false)
-  const { favorites, watchlist, ratings } = useMovieContext();
+  const { favorites, watchlist, ratings } = useMediaContext();
 
   useEffect(() => {
     axios.get(`/api/users/${username}`)

@@ -1,10 +1,10 @@
-import AddedMoviesList from "../components/AddedMoviesList"
-import { useMovieContext } from "../contexts/MovieContext"
+import AddedMediaList from "../components/AddedMediaList"
+import { useMediaContext } from "../contexts/MediaContext"
 import { getMovieById, getTVSeriesById } from "../services/api"
 import { useEffect, useState } from "react"
 
 function Watchlist() {
-    const { watchlist } = useMovieContext()
+    const { watchlist } = useMediaContext()
     const [watchlistDetails, setWatchlistDetails] = useState([])
 
     useEffect(() => {
@@ -43,7 +43,7 @@ function Watchlist() {
     return (
         <>
             {!watchlist && <div className="loading">Loading watchlist...</div>}
-            <AddedMoviesList movieList={watchlistDetails} pageType="watchlist" />
+            <AddedMediaList mediaList={watchlistDetails} pageType="watchlist" />
         </>
     )
 }

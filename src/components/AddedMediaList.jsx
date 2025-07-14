@@ -1,17 +1,17 @@
-import MovieCard from "./MovieCard"
+import MediaCard from "./MediaCard"
 
-function AddedMoviesList({ movieList, pageType}) {
+function AddedMediaList({ mediaList, pageType}) {
 
-    if (!movieList) {
+    if (!mediaList) {
     return <div className="loading">Loading movie list</div>
     }
     
-    const filteredTVSeries = movieList.filter(f => f.media_type === "tv")
-    const filteredMovies = movieList.filter(f => f.media_type === "movie")
+    const filteredTVSeries = mediaList.filter(f => f.media_type === "tv")
+    const filteredMovies = mediaList.filter(f => f.media_type === "movie")
 
     return (
         <>
-            {movieList.length > 0 ? (
+            {mediaList.length > 0 ? (
                 <>
                     {filteredMovies.length > 0 && 
                         <>
@@ -19,7 +19,7 @@ function AddedMoviesList({ movieList, pageType}) {
                             <hr className="movie-list-hr" />
                             <div className="movies-grid">
                                 {filteredMovies.map(movie => (
-                                    <MovieCard movie={movie} key={movie.id} pageType={pageType}/>
+                                    <MediaCard movie={movie} key={movie.id} pageType={pageType}/>
                                 ))}
                             </div>
                         </>
@@ -30,7 +30,7 @@ function AddedMoviesList({ movieList, pageType}) {
                             <hr className="movie-list-hr" />
                             <div className="movies-grid">
                                 {filteredTVSeries.map(movie => (
-                                    <MovieCard movie={movie} key={movie.id} pageType={pageType}/>
+                                    <MediaCard movie={movie} key={movie.id} pageType={pageType}/>
                                 ))}
                             </div>
                         </>
@@ -47,4 +47,4 @@ function AddedMoviesList({ movieList, pageType}) {
     )
 }
 
-export default AddedMoviesList
+export default AddedMediaList

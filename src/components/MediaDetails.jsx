@@ -1,5 +1,5 @@
-import { useMovieContext } from "../contexts/MovieContext"
-import "../css/MovieDetails.css"
+import { useMediaContext } from "../contexts/MediaContext"
+import "../css/MediaDetails.css"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import actorIcon from "../assets/actor-icon.svg"
@@ -11,7 +11,7 @@ import starFilledIcon from "../assets/star-filled.svg"
 import ratingIcon from "../assets/star-icon.svg"
 
 
-function MovieDetails({ movie, credits, images }) {
+function MediaDetails({ movie, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
     const [isInFavorites, setIsInFavorites] = useState(false)
     const [isInWatchlist, setIsInWatchlist] = useState(false)
@@ -30,7 +30,7 @@ function MovieDetails({ movie, credits, images }) {
         removeFromWatchlist,
         rateMovie,
         removeRating
-    } = useMovieContext()
+    } = useMediaContext()
 
     const userCurrentRatingObj = ratings.find(
         (item) => item.id === movie.id && item.media_type === mediaType
@@ -64,10 +64,13 @@ function MovieDetails({ movie, credits, images }) {
     }
 
     const handleRate = (value) => {
-        setUserRating(value)
-        rateMovie(movie.id, mediaType, value)
-        if (value === userRating)
+        if (userRating === value) {
+            setUserRating(null)
             removeRating(movie.id, mediaType)
+        } else {
+            setUserRating(value)
+            rateMovie(movie.id, mediaType, value)
+        }
     }
 
     return (
@@ -186,4 +189,4 @@ function MovieDetails({ movie, credits, images }) {
     )
 }
 
-export default MovieDetails
+export default MediaDetails

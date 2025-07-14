@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getMovieById, getMovieReviews, getMovieCredits, getSimilarMovies, getMovieImages, getMovieVideos } from "../services/api"
-import MovieDetails from "../components/MovieDetails"
+import MediaDetails from "../components/MediaDetails"
 import Cast from "../components/Cast"
 import Reviews from "../components/Reviews"
-import SimilarMovies from "../components/SimilarMovies"
-import Media from "../components/Media"
-import "../css/MoviePage.css"
+import Similar from "../components/Similar"
+import Gallery from "../components/Gallery"
+import "../css/MediaPage.css"
 
 function MoviePage() {
     const { id } = useParams()
@@ -72,15 +72,15 @@ function MoviePage() {
                         
                     </div>
 
-                    <MovieDetails
+                    <MediaDetails
                         movie={movie}
                         credits={credits}
                         images={images}
                     />
                     <Cast movie={movie} credits={credits}/>
                     <div className="movie-media-wrapper">
-                        <Media videos={movieVideos} photos={images}/>
-                        <SimilarMovies movie={similarMovies}/>
+                        <Gallery videos={movieVideos} photos={images}/>
+                        <Similar movie={similarMovies}/>
                     </div>
                     <Reviews reviews={review} mediaType="movie"/>
 

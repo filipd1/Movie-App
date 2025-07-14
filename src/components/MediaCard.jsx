@@ -1,12 +1,12 @@
-import "../css/MovieCard.css"
-import { useMovieContext } from "../contexts/MovieContext"
+import "../css/MediaCard.css"
+import { useMediaContext } from "../contexts/MediaContext"
 import { AuthContext } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
 import { useEffect, useState, useContext } from "react"
 import watchLaterIcon from "../assets/eye.svg"
 import Toast from "./Toast"
 
-function MovieCard({movie, pageType}) {
+function MediaCard({movie, pageType}) {
     const {
         favorites,
         watchlist,
@@ -15,7 +15,7 @@ function MovieCard({movie, pageType}) {
         removeFromFavorites,
         addToWatchlist,
         removeFromWatchlist
-    } = useMovieContext()
+    } = useMediaContext()
 
     const {userLoggedIn} = useContext(AuthContext)
 
@@ -143,4 +143,4 @@ function MovieCard({movie, pageType}) {
 
 }
 
-export default MovieCard
+export default MediaCard

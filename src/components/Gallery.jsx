@@ -1,8 +1,8 @@
 import { useState } from "react"
 import trailerIcon from "../assets/trailer.svg"
-import "../css/Media.css"
+import "../css/Gallery.css"
 
-function Media({ videos, photos }) {
+function Gallery({ videos, photos }) {
     const [active, setActive] = useState("videos")
   
     return (
@@ -104,4 +104,4 @@ function Media({ videos, photos }) {
     );
 }
 
-export default Media;
+export default Gallery

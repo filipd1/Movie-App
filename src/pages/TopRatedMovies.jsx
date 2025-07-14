@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 import { getTopMoviesMultiPages } from "../services/api"
-import MovieChart from "../components/MovieChart"
+import MediaChart from "../components/MediaChart"
 
 function TopRatedMovies() {
 
     const [movies, setMovies] = useState([])
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(false)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -13,7 +13,7 @@ function TopRatedMovies() {
         try {
             const moviesData = await getTopMoviesMultiPages()
             setMovies(moviesData)
-            setError(null)
+            setError(false)
         } catch (err) {
             console.log(err)
             setError("Failed to load movies...")
@@ -32,7 +32,7 @@ function TopRatedMovies() {
       {loading ? (
         <div className="loading">Loading...</div>
       ) : (
-        <MovieChart movies={movies}/>
+        <MediaChart movies={movies} header="Top rated movies of all time"/>
       )}
     </div>
     )

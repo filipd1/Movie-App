@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
-import "../css/MovieChart.css"
+import "../css/MediaChart.css"
 
-function MovieChart( { movies } ) {
+function MediaChart( { movies, header } ) {
 
     return (
         <div className="movie-chart">
-            <h1 className="container-title">Top rated {movies[0].title ? "Movies" : "TV Series"} of all time</h1>
+            <h1 className="container-title">{header}</h1>
             {movies?.map((m, i) => (
                 <div className="movie-chart-item" key={i}>
                     <Link to={m.title ? `/movie/${m.id}` : `/tv/${m.id}`}>
@@ -54,4 +54,4 @@ function MovieChart( { movies } ) {
     )
 }
 
-export default MovieChart
+export default MediaChart

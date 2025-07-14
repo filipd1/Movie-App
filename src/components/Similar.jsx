@@ -1,8 +1,8 @@
-import MovieCard from "./MovieCard"
+import MediaCard from "./MediaCard"
 import similarIcon from "../assets/similar.svg"
-import "../css/SimilarMovies.css"
+import "../css/Similar.css"
 
-function SimilarMovies({ movie }) {
+function Similar({ movie }) {
 
     return (
         <div className="similar-movies-container">
@@ -13,7 +13,7 @@ function SimilarMovies({ movie }) {
             <div className="similar-movies">
                 {movie.results.length > 0 ? (
                     movie.results.map((m,i) => (
-                        <MovieCard movie={m} pageType="favorites" key={i}/>
+                        <MediaCard movie={m} pageType="favorites" key={i}/>
                     ))
                 ) : (
                     <p>Nothing here yet</p>
@@ -24,4 +24,4 @@ function SimilarMovies({ movie }) {
     )
 }
 
-export default SimilarMovies
+export default Similar
