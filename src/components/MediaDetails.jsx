@@ -11,13 +11,14 @@ import starFilledIcon from "../assets/star-filled.svg"
 import ratingIcon from "../assets/star-icon.svg"
 
 
-function MediaDetails({ movie, credits, images }) {
+function MediaDetails({ media, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
     const [isInFavorites, setIsInFavorites] = useState(false)
     const [isInWatchlist, setIsInWatchlist] = useState(false)
-    const [hoverRating, setHoverRating] = useState(null);
-    const [userRating, setUserRating] = useState(null);
-    const mediaType = movie.first_air_date ? "tv" : "movie"
+    const [hoverRating, setHoverRating] = useState(null)
+    const [userRating, setUserRating] = useState(null)
+
+    const mediaType = media?.first_air_date ? "tv" : "movie"
     const directors = credits.crew?.filter(c => c.job === "Director")
 
     const {
@@ -28,19 +29,19 @@ function MediaDetails({ movie, credits, images }) {
         removeFromFavorites,
         addToWatchlist,
         removeFromWatchlist,
-        rateMovie,
+        rateMedia,
         removeRating
     } = useMediaContext()
 
     const userCurrentRatingObj = ratings.find(
-        (item) => item.id === movie.id && item.media_type === mediaType
+        (item) => item.id === media.id && item.media_type === mediaType
     )
     const userCurrentRating = userCurrentRatingObj?.rating
 
     useEffect(() => {
-        setIsInFavorites(favorites?.some(fav => fav.id === movie.id) || false)
-        setIsInWatchlist(watchlist?.some(w => w.id === movie.id) || false)
-    }, [favorites, watchlist, movie.id])
+        setIsInFavorites(favorites?.some(fav => fav.id === media.id) || false)
+        setIsInWatchlist(watchlist?.some(w => w.id === media.id) || false)
+    }, [favorites, watchlist, media.id])
 
 
     useEffect(() => {
@@ -49,48 +50,48 @@ function MediaDetails({ movie, credits, images }) {
 
     const handleFavorites = () => {
         if (isInFavorites) {
-            removeFromFavorites(movie.id, mediaType)
+            removeFromFavorites(media.id, mediaType)
         } else {
-            addToFavorites(movie.id, mediaType)
+            addToFavorites(media.id, mediaType)
         }
     }
 
     const handleWatchlist = () => {
         if (isInWatchlist) {
-            removeFromWatchlist(movie.id, mediaType)
+            removeFromWatchlist(media.id, mediaType)
         } else {
-            addToWatchlist(movie.id, mediaType)
+            addToWatchlist(media.id, mediaType)
         }
     }
 
     const handleRate = (value) => {
         if (userRating === value) {
             setUserRating(null)
-            removeRating(movie.id, mediaType)
+            removeRating(media.id, mediaType)
         } else {
             setUserRating(value)
-            rateMovie(movie.id, mediaType, value)
+            rateMedia(media.id, mediaType, value)
         }
     }
 
     return (
         <div className="movie-details">
         
-            <div className={`bg-image ${movie.backdrop_path ? "" : "no-bg-img"}`}>
-                {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />}
+            <div className={`bg-image ${media.backdrop_path ? "" : "no-bg-img"}`}>
+                {media.backdrop_path && <img src={`https://image.tmdb.org/t/p/w500${media.backdrop_path}`} alt={media.title} />}
             </div>
             
             <div className="movie-poster-wrapper">
                 <img
-                    src={movie.poster_path
-                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    src={media.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${media.poster_path}`
                         : "/poster_placeholder.png"}
-                    alt={movie.title}
+                    alt={media.title}
                 />
             </div>
 
             <div className="movie-desc">
-                <div className="movie-genres-wrapper">{movie.genres?.map((m, i) => (
+                <div className="movie-genres-wrapper">{media.genres?.map((m, i) => (
                         <p className="movie-genre" key={i}>{m.name}</p>
                     ))}
                 </div>
@@ -98,12 +99,12 @@ function MediaDetails({ movie, credits, images }) {
             <div className="movie-director">
                 <img src={directorIcon} alt="director-icon" />
                 
-                {movie.title && directors && directors.length > 0 ? (
+                {media.title && directors && directors.length > 0 ? (
                     directors.map((d, i) => (
                         <Link key={i} to={`/person/${d.id}`}>{d.name}</Link>
                     ))
-                ) : movie.created_by && movie.created_by.length > 0 ? (
-                    movie.created_by.map((c, i) => (
+                ) : media.created_by && media.created_by.length > 0 ? (
+                    media.created_by.map((c, i) => (
                         <Link key={i} to={`/person/${c.id}`}>{c.name}</Link>
                     ))
                 ) : (
@@ -118,16 +119,16 @@ function MediaDetails({ movie, credits, images }) {
                     ))}
             </div>
                 
-            <p className="movie-overview">{movie.overview}</p>
+            <p className="movie-overview">{media.overview}</p>
 
             <div className="movie-votes">
-                <p className={`vote-average ${movie.vote_average >= 6.5 ? "high" : (movie.vote_average < 4 ? "low" : "mid")}`}>
-                    {movie.vote_average != null
-                        ? movie.vote_average.toFixed(1)
+                <p className={`vote-average ${media.vote_average >= 6.5 ? "high" : (media.vote_average < 4 ? "low" : "mid")}`}>
+                    {media.vote_average != null
+                        ? media.vote_average.toFixed(1)
                         : "N/A"
                     }
                 </p>
-                <p>{movie.vote_count} votes</p>
+                <p>{media.vote_count} votes</p>
             </div>
 
             <div className="movie-rating">

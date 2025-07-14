@@ -86,7 +86,7 @@ export const MediaProvider = ({ children }) => {
         }
     }
 
-    const rateMovie = async (id, media_type, rating) => {
+    const rateMedia = async (id, media_type, rating) => {
         try {
             const res = await api.post(
                 `/users/${username}/ratings`,
@@ -119,7 +119,7 @@ export const MediaProvider = ({ children }) => {
         removeFromFavorites,
         addToWatchlist,
         removeFromWatchlist,
-        rateMovie,
+        rateMedia,
         removeRating
     }
 

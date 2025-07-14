@@ -73,7 +73,7 @@ function MoviePage() {
                     </div>
 
                     <MediaDetails
-                        movie={movie}
+                        media={movie}
                         credits={credits}
                         images={images}
                     />
