@@ -15,6 +15,10 @@ function MediaDetails({ media, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
     const [isInFavorites, setIsInFavorites] = useState(false)
     const [isInWatchlist, setIsInWatchlist] = useState(false)
+    const [isFavoritesClicked, setIsFavoritesClicked] = useState(false)
+    const [isWatchlistClicked, setIsWatchlistClicked] = useState(false)
+    const [isFavoritesUnclicked, setIsFavoritesUnclicked] = useState(false)
+    const [isWatchlistUnclicked, setIsWatchlistUnclicked] = useState(false)
     const [hoverRating, setHoverRating] = useState(null)
     const [userRating, setUserRating] = useState(null)
 
@@ -51,8 +55,12 @@ function MediaDetails({ media, credits, images }) {
     const handleFavorites = () => {
         if (isInFavorites) {
             removeFromFavorites(media.id, mediaType)
+            setIsFavoritesUnclicked(true)
+            setTimeout(() => setIsFavoritesUnclicked(false), 400)
         } else {
             addToFavorites(media.id, mediaType)
+            setIsFavoritesClicked(true)
+            setTimeout(() => setIsFavoritesClicked(false), 400)
         }
     }
 
@@ -62,6 +70,8 @@ function MediaDetails({ media, credits, images }) {
         } else {
             addToWatchlist(media.id, mediaType)
         }
+        setIsWatchlistClicked(true)
+        setTimeout(() => setIsWatchlistClicked(false), 400)
     }
 
     const handleRate = (value) => {
@@ -154,11 +164,21 @@ function MediaDetails({ media, credits, images }) {
             </div>
 
             <div className="movie-buttons">
-                <button onClick={handleFavorites} className={isInFavorites ? "btn-clicked" : ""}>
+                <button onClick={handleFavorites}
+                    className={`
+                        ${isFavoritesClicked ? "btn-anim" : ""}
+                        ${isFavoritesUnclicked ? "btn-anim-back" : ""}
+                        ${isInFavorites ? "btn-clicked" : ""}
+                    `}>
                     <img src={favoriteIcon} alt="favorite" />
-                    <span>{isInFavorites ? "" : "Add to favorites"}</span>
+                    <span className={isInFavorites ? "hide-text" : ""}>Add to favorites</span>
                 </button>
-                <button onClick={handleWatchlist} className={isInWatchlist ? "btn-clicked" : ""}>
+                <button onClick={handleWatchlist}
+                    className={`
+                        ${isWatchlistClicked ? "btn-anim" : ""}
+                        ${isWatchlistUnclicked ? "btn-anim-back" : ""}
+                        ${isInWatchlist ? "btn-clicked" : ""}
+                        `}>
                     <img src={watchLaterIcon} alt="watch later" />
                     <span>{isInWatchlist ? "" : "Add to watchlist"}</span>
                 </button>

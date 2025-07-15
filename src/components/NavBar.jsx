@@ -106,7 +106,7 @@ function NavBar() {
                             </button>
                         </>
                     ) : (
-                    <Link to="/login" className="button-main button-nav">Login</Link>
+                        <Link to="/login" className="button-main button-nav">Login</Link>
                     )}
 
                     {showDropdownMenu && 
@@ -125,16 +125,14 @@ function NavBar() {
                     <img src={showMobileMenu ? exitIcon : menuIcon} className="mobile-menu-icon" alt="mobile-menu" />
                 </button>
                 
-                {showMobileMenu && 
-                    <div className="mobile-menu" ref={mobileMenuRef}>
-                        <div className="mobile-menu-links">
-                            <Link to="/movies" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
-                            <Link to="/tvseries" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
-                            <Link to="/" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Account</Link>
-                            <Link to="/" className="mobile-menu-link" onClick={handleLogout}>Logout</Link>
-                        </div>
+                <div className={`mobile-menu ${showMobileMenu ? "mobile-menu-active" : ""}`} ref={mobileMenuRef}>
+                    <div className="mobile-menu-links">
+                        <Link to="/movies" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
+                        <Link to="/tvseries" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
+                        <Link to="/" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Account</Link>
+                        <Link to="/" className="mobile-menu-link" onClick={handleLogout}>Logout</Link>
                     </div>
-                }
+                </div>
 
             </nav>
         </header>

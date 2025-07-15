@@ -139,16 +139,31 @@
     border: none;
     outline: none;
     width: 200px;
-    transition: all .6s ease;
 }
 
 .movie-buttons button:hover {
     background: #101d29;
 }
 
-.btn-clicked {
-    background: #92B0B3 !important;
-    width: 50px !important;
+.movie-buttons .btn-clicked {
+    background: #92B0B3;
+    width: 50px;
+}
+
+.movie-buttons .btn-anim {
+    animation: shrinkAndPulse 0.4s ease forwards;
+}
+
+.movie-buttons .btn-anim-back {
+    animation: expandBack 0.4s ease forwards;
+}
+
+.hide-text {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .movie-media  {
@@ -198,7 +213,6 @@
   z-index: 10000;
 }
 
-
 @media (max-width: 768px) {
 
     .movie-poster-wrapper {
@@ -224,5 +238,39 @@
 
     .movie-media {
         display: none;
+    }
+}
+
+@keyframes shrinkAndPulse {
+    0% {
+        transform: scale(1);
+        width: 200px;
+        background-color: #142434;
+    }
+    50% {
+        transform: scale(1.1);
+        background-color: #325161;
+    }
+    100% {
+        transform: scale(1);
+        width: 50px;
+        background-color: #92B0B3;
+    }
+}
+
+@keyframes expandBack {
+    0% {
+        transform: scale(1);
+        width: 50px;
+        background-color: #92B0B3;
+    }
+    50% {
+        transform: scale(1.1);
+        background-color: #325161;
+    }
+    100% {
+        transform: scale(1);
+        width: 200px;
+        background-color: #142434;
     }
 }
