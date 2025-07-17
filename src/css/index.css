@@ -97,6 +97,10 @@ button:focus-visible {
   font-weight: 300;
 }
 
+.component-empty {
+  margin-top: 1em;
+}
+
 .movies-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

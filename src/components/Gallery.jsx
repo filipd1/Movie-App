@@ -29,7 +29,7 @@ function Gallery({ videos, photos }) {
 
             {active === "videos" ? (
                 !videos || videos.length === 0 ? (
-                    <p className="media-empty">No videos found</p>
+                    <p className="component-empty">No videos found</p>
                 ) : (
                     <>
                         {videos.slice(0, 1).map((video) => (
@@ -63,14 +63,14 @@ function Gallery({ videos, photos }) {
                                 ) : null
                             )
                             ) : (
-                                <p className="media-empty">No more videos found</p>
+                                <p className="component-empty">No more videos found</p>
                             )}
 
                         </div>
                     </>
                 )
             ) : !photos || !photos.backdrops || photos.backdrops.length === 0 ? (
-                <p className="media-empty">No photos found</p>
+                <p className="component-empty">No photos found</p>
             ) : (
                 <>
                     {photos.backdrops.slice(0, 1).map((photo, i) => (
@@ -94,7 +94,7 @@ function Gallery({ videos, photos }) {
                                 />
                         ))
                         ) : (
-                            <p className="media-empty">No more photos found</p>
+                            <p className="component-empty">No more photos found</p>
                         )}
 
                     </div>

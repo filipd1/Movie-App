@@ -333,4 +333,14 @@ app.get("/api/users/:username/ratings", auth, async (req, res) => {
   }
 })
 
+app.get("/api/ratings/all", async (req, res) => {
+  try {
+    const usersRatings = await User.find({}, "username ratings")
+    res.json( { usersRatings } )
+  } catch (err) {
+    console.error("Could not get ratings", err)
+    res.status(500).json({ message: "Server error" })
+  }
+})
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

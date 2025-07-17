@@ -152,4 +152,10 @@ export const searchMedia = async (query) => {
     return data.results
 }
 
+export const getUserRatings = async () => {
+    const response = await fetch(`${BASE_URL}/ratings/all`)
+    const data = await response.json()
+    return data.usersRatings
+}
+
 export default api

@@ -1,0 +1,21 @@
+.user-ratings {
+    margin-top: 1em;
+}
+
+.user-ratings div {
+    display: flex;
+    align-items: center;
+}
+
+.rating-stars-wrapper {
+    gap: 1em;
+}
+
+.star-icon {
+    width: 30px;
+    opacity: .6;
+}
+
+.user-ratings-star {
+    width: 18px;
+}

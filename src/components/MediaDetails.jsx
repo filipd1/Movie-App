@@ -178,7 +178,7 @@ function MediaDetails({ media, credits, images }) {
                         ${isWatchlistClicked ? "btn-anim" : ""}
                         ${isWatchlistUnclicked ? "btn-anim-back" : ""}
                         ${isInWatchlist ? "btn-clicked" : ""}
-                        `}>
+                    `}>
                     <img src={watchLaterIcon} alt="watch later" />
                     <span>{isInWatchlist ? "" : "Add to watchlist"}</span>
                 </button>

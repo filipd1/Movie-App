@@ -53,10 +53,6 @@
     border-radius: 8px;
 }
 
-.media-empty {
-    margin-top: 1em;
-}
-
 @media (max-width: 768px) {
     .media-container {
         width: 100%;

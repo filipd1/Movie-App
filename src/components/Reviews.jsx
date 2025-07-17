@@ -47,7 +47,7 @@ function Reviews({ reviews, mediaType }) {
                     ))}
                 </div>
             ) : (
-                <p>No reviews for this {mediaType}</p>
+                <p className="component-empty">No reviews for this {mediaType === "movie" ? "movie" : "TV series"}</p>
             )}
         </div>
     );

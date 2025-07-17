@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getMovieById, getMovieReviews, getMovieCredits, getSimilarMovies, getMovieImages, getMovieVideos } from "../services/api"
+import { getMovieById, getMovieReviews, getMovieCredits, getSimilarMovies, getMovieImages, getMovieVideos, getUserRatings } from "../services/api"
 import MediaDetails from "../components/MediaDetails"
 import Cast from "../components/Cast"
 import Reviews from "../components/Reviews"
 import Similar from "../components/Similar"
 import Gallery from "../components/Gallery"
+import UserRatings from "../components/UserRatings"
 import "../css/MediaPage.css"
 
 function MoviePage() {
@@ -16,19 +17,21 @@ function MoviePage() {
     const [images, setImages] = useState([])
     const [similarMovies, setSimilarMovies] = useState([])
     const [movieVideos, setMovieVideos] = useState([])
+    const [userRatings, setUserRatings] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect(() => {
         const loadMovieData = async () => {
             try {
-                const [movieData, reviewData, creditsData, similarMovieData, movieImagesData, movieVideosData ] = await Promise.all([
+                const [movieData, reviewData, creditsData, similarMovieData, movieImagesData, movieVideosData, ratingsData ] = await Promise.all([
                     getMovieById(id),
                     getMovieReviews(id),
                     getMovieCredits(id),
                     getSimilarMovies(id),
                     getMovieImages(id),
-                    getMovieVideos(id)
+                    getMovieVideos(id),
+                    getUserRatings()
                 ])
                 setMovie(movieData)
                 setReview(reviewData)
@@ -36,6 +39,8 @@ function MoviePage() {
                 setSimilarMovies(similarMovieData)
                 setImages(movieImagesData)
                 setMovieVideos(movieVideosData)
+                setUserRatings(ratingsData)
+                console.log(ratingsData)
             } catch (err) {
                 console.log(err)
                 setError("Failed to load movie...")
@@ -83,7 +88,7 @@ function MoviePage() {
                         <Similar movie={similarMovies}/>
                     </div>
                     <Reviews reviews={review} mediaType="movie"/>
-
+                    <UserRatings ratings={userRatings}/>
                 </div>
                 )}
         </>
