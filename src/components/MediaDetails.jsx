@@ -1,7 +1,8 @@
-import { useMediaContext } from "../contexts/MediaContext"
+import { MediaContext } from "../contexts/MediaContext"
+import { AuthContext } from "../contexts/AuthContext"
 import "../css/MediaDetails.css"
-import { Link } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useState, useEffect, useContext } from "react"
 import actorIcon from "../assets/actor-icon.svg"
 import directorIcon from "../assets/director-icon.svg"
 import favoriteIcon from "../assets/heart.svg"
@@ -9,7 +10,6 @@ import watchLaterIcon from "../assets/eye.svg"
 import starIcon from "../assets/star.svg"
 import starFilledIcon from "../assets/star-filled.svg"
 import ratingIcon from "../assets/star-icon.svg"
-
 
 function MediaDetails({ media, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
@@ -35,7 +35,10 @@ function MediaDetails({ media, credits, images }) {
         removeFromWatchlist,
         rateMedia,
         removeRating
-    } = useMediaContext()
+    } = useContext(MediaContext)
+
+    const { userLoggedIn } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const userCurrentRatingObj = ratings.find(
         (item) => item.id === media.id && item.media_type === mediaType
@@ -53,6 +56,7 @@ function MediaDetails({ media, credits, images }) {
     }, [userCurrentRating])
 
     const handleFavorites = () => {
+        if (!userLoggedIn) navigate("/login")
         if (isInFavorites) {
             removeFromFavorites(media.id, mediaType)
             setIsFavoritesUnclicked(true)
@@ -65,16 +69,20 @@ function MediaDetails({ media, credits, images }) {
     }
 
     const handleWatchlist = () => {
+        if (!userLoggedIn) navigate("/login")
         if (isInWatchlist) {
             removeFromWatchlist(media.id, mediaType)
+            setIsWatchlistUnclicked(true)
+            setTimeout(() => setIsWatchlistUnclicked(false), 400)
         } else {
             addToWatchlist(media.id, mediaType)
+            setIsWatchlistClicked(true)
+            setTimeout(() => setIsWatchlistClicked(false), 400)
         }
-        setIsWatchlistClicked(true)
-        setTimeout(() => setIsWatchlistClicked(false), 400)
     }
 
     const handleRate = (value) => {
+        if (!userLoggedIn) navigate("/login")
         if (userRating === value) {
             setUserRating(null)
             removeRating(media.id, mediaType)
@@ -144,7 +152,7 @@ function MediaDetails({ media, credits, images }) {
             <div className="movie-rating">
                 <div>
                     <img src={ratingIcon} alt="rating-star" />
-                    <p>Your rating: {userCurrentRating ? `${userCurrentRating}/10` : "none"}</p>
+                    <p>{userCurrentRating ? `Your rating:  ${userCurrentRating}/10` : `Rate this ${mediaType === "movie" ? "movie" : "TV series"}:`}</p>
                 </div>
                 {Array(10).fill().map((_, index) => {
                     const starValue = index +1

@@ -42,7 +42,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1rem;
+  align-items: center;
+  padding: 1em;
 }
 
 .movie-card:hover .movie-overlay {
@@ -62,6 +63,25 @@
 
 .overlay-rating p {
   text-align: center;
+}
+
+.overlay-genres-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5em;
+}
+
+.overlay-genre {
+  font-size: 11px;
+  background-color: #1a1a1a;
+  color: var(--font-color-main);
+  border-radius: 4px;
+  padding: .5em;
+  text-align: center;
+  width: fit-content;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .favorite-btn {

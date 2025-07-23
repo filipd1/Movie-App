@@ -11,7 +11,7 @@ function MediaList({ mediaList, mediaListHeader, mediaNumber = null, URLto}) {
 
     return (
         <>
-            <Link to={URLto}><h2 className="movie-list-title" >{mediaListHeader}</h2></Link>
+            <h2 className="movie-list-title" ><Link to={URLto}>{mediaListHeader}</Link></h2>
             {mediaList.length > 0 ? (
                 <div className="movies-grid">
                     {(mediaNumber ? mediaList.slice(0, mediaNumber) : mediaList).map(movie => (

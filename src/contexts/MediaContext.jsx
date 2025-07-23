@@ -2,11 +2,9 @@ import { createContext, useState, useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContext"
 import api from "../services/api"
 
-const MediaContext = createContext()
+export const MediaContext = createContext()
 
-export const useMediaContext = () => useContext(MediaContext)
-
-export const MediaProvider = ({ children }) => {
+export function MediaProvider({ children }) {
 
     const [favorites, setFavorites] = useState([])
     const [watchlist, setWatchlist] = useState([])

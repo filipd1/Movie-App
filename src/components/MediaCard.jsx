@@ -1,8 +1,8 @@
 import "../css/MediaCard.css"
-import { useMediaContext } from "../contexts/MediaContext"
-import { AuthContext } from "../contexts/AuthContext"
+import { getMovieById, getTVSeriesById } from "../services/api"
+import { MediaContext } from "../contexts/MediaContext"
 import { Link } from "react-router-dom"
-import { useEffect, useState, useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import watchLaterIcon from "../assets/eye.svg"
 import ratingIcon from "../assets/star-filled.svg"
 import Toast from "./Toast"
@@ -16,17 +16,17 @@ function MediaCard({movie, pageType = "home"}) {
         removeFromFavorites,
         addToWatchlist,
         removeFromWatchlist
-    } = useMediaContext()
+    } = useContext(MediaContext)
 
     const [isInFavorites, setIsInFavorites] = useState(false)
     const [isInWatchlist, setIsInWatchlist] = useState(false)
     const [toastVisible, setToastVisible] = useState(false)
+    const [genres, setGenres] = useState(movie.genres || [])
 
     const mediaType = movie.first_air_date ? "tv" : "movie"
 
     const isPerson = movie.media_type === "person"
     const isTV = movie.media_type === "tv" || movie.name
-    const isMovie = movie.media_type === "movie"
 
     const imagePath = isPerson
         ? movie.profile_path
@@ -52,13 +52,28 @@ function MediaCard({movie, pageType = "home"}) {
     const userCurrentRating = userCurrentRatingObj?.rating
 
     useEffect(() => {
+
+        const loadGenres = async () => {
+            try {
+                if (!movie.genres || movie.genres.length === 0) {
+                    const fullDetails = mediaType === "tv"
+                        ? await getTVSeriesById(movie.id)
+                        : await getMovieById(movie.id)
+                    setGenres(fullDetails.genres || [])
+                }
+            } catch (err) {
+                console.log("Error fetching genres:", err)
+            }
+        }
+
         if (favorites) {
             setIsInFavorites(favorites.some(fav => fav.id === movie.id))
         }
         if (watchlist) {
             setIsInWatchlist(watchlist.some(watch => watch.id === movie.id))
         }
-    }, [favorites, watchlist, movie.id])
+        loadGenres()
+    }, [favorites, watchlist, movie.id, mediaType])
 
     const handleFavorites = () => {
         if (isInFavorites) {
@@ -92,14 +107,17 @@ function MediaCard({movie, pageType = "home"}) {
                         alt={title} />
                     <div className="movie-overlay">
                         {(pageType === "home" || pageType === "watchlist") &&
-                            <div className="overlay-rating">
-                                <img src={ratingIcon} alt="rating-icon" />
-                                <p>{movie.vote_average.toFixed(1)}</p>
-                                <div className="movie-genres-wrapper">{movie.genres?.map((m, i) => (
-                                    <p className="movie-genre" key={i}>{m.name}</p>
-                                    ))}
+                            <>
+                                <div className="overlay-rating">
+                                    <img src={ratingIcon} alt="rating-icon" />
+                                    <p>{movie.vote_average.toFixed(1)}</p>
+
                                 </div>
-                            </div>
+                                    <div className="overlay-genres-wrapper">{genres.map((g, i) => (
+                                        <p className="overlay-genre" key={i}>{g.name}</p>
+                                        ))}
+                                </div>
+                            </>
                         }
 
                         {pageType === "favorites" && 
