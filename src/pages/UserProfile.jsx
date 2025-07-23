@@ -5,7 +5,6 @@ import "../css/UserProfile.css"
 import Favorites from "../components/Favorites.jsx"
 import Watchlist from "../components/Watchlist.jsx"
 import Ratings from "../components/Ratings.jsx"
-import { useMediaContext } from "../contexts/MediaContext"
 
 const UserProfile = () => {
   const { username } = useParams()
@@ -13,7 +12,6 @@ const UserProfile = () => {
   const [votesShown, setVotesShown] = useState(true)
   const [favoritesShown, setfavoritesShown] = useState(false)
   const [watchlistShown, setwatchlistShown] = useState(false)
-  const { favorites, watchlist, ratings } = useMediaContext();
 
   useEffect(() => {
     axios.get(`/api/users/${username}`)
@@ -52,7 +50,7 @@ const UserProfile = () => {
               setwatchlistShown(false)
             }}
           >
-            Ratings ({ratings.length})
+            Ratings ({user.ratings.length})
           </button>
 
           <button
@@ -63,7 +61,7 @@ const UserProfile = () => {
               setwatchlistShown(true)
             }}
           >
-            Watchlist ({watchlist.length})
+            Watchlist ({user.watchlist.length})
           </button>
 
           <button
@@ -74,14 +72,14 @@ const UserProfile = () => {
               setwatchlistShown(false)
             }}
           >
-            Favorites ({favorites.length})
+            Favorites ({user.favorites.length})
           </button>
         </div>
       </div>
 
-      {votesShown && <Ratings/>}
-      {watchlistShown && <Watchlist/>}
-      {favoritesShown && <Favorites/>}
+      {votesShown && <Ratings ratings={user.ratings}/>}
+      {watchlistShown && <Watchlist watchlist={user.watchlist}/>}
+      {favoritesShown && <Favorites favorites={user.favorites}/>}
       
     </div>
   )

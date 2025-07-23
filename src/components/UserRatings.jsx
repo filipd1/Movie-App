@@ -1,4 +1,4 @@
-import { useParams, useLocation } from "react-router-dom"
+import { useParams, useLocation, Link } from "react-router-dom"
 import starIcon from "../assets/star.svg"
 import starFilledIcon from "../assets/star-filled.svg"
 import ratingIcon from "../assets/ratings.svg"
@@ -26,8 +26,8 @@ function userRatings({ ratings }) {
             {usersRatings.length > 0 ? (
                 <div className="user-ratings">
                     {usersRatings.map((rating, i) => (
-                        <div key={i} className="rating-stars-wrapper">
-                            <p>{rating.username}</p>
+                        <div key={i} className="rating-stars-wrapper">  
+                            <Link to={`/users/${rating.username}`}><p>{rating.username}</p></Link>
                             <div>
                                 {Array(10).fill().map((_, i) => {
                                     return (

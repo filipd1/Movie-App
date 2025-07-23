@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react"
 import { getMovieById, getTVSeriesById } from "../services/api"
-import { useMediaContext } from "../contexts/MediaContext"
 import AddedMediaList from "./AddedMediaList"
 
-function Ratings() {
-
-    const { ratings } = useMediaContext()
+function Ratings({ ratings }) {
     const [ratingsDetails, setRatingsDetails] = useState([])
 
     useEffect(() => {

@@ -1,10 +1,8 @@
 import AddedMediaList from "../components/AddedMediaList"
-import { useMediaContext } from "../contexts/MediaContext"
 import { getMovieById, getTVSeriesById } from "../services/api"
 import { useEffect, useState } from "react"
 
-function Watchlist() {
-    const { watchlist } = useMediaContext()
+function Watchlist({ watchlist }) {
     const [watchlistDetails, setWatchlistDetails] = useState([])
 
     useEffect(() => {

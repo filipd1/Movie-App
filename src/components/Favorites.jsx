@@ -1,10 +1,8 @@
 import AddedMediaList from "../components/AddedMediaList"
-import { useMediaContext } from "../contexts/MediaContext"
 import { getMovieById, getTVSeriesById } from "../services/api"
 import { useEffect, useState } from "react"
 
-function Favorites() {
-    const { favorites } = useMediaContext()
+function Favorites({ favorites }) {
     const [favoritesDetails, setFavoritesDetails] = useState([])
 
     useEffect(() => {
