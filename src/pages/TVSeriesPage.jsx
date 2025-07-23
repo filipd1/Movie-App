@@ -1,4 +1,4 @@
-import { getTVSeriesById, getTVSeriesCredits, getTVSeriesImages, getTVSeriesReviews, getSimilarTVSeries, getTVSeriesVideos} from "../services/api"
+import { getTVSeriesById, getTVSeriesCredits, getTVSeriesImages, getTVSeriesReviews, getSimilarTVSeries, getTVSeriesVideos, getUserRatings} from "../services/api"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import MediaDetails from "../components/MediaDetails"
@@ -6,6 +6,7 @@ import Cast from "../components/Cast"
 import Reviews from "../components/Reviews"
 import Similar from "../components/Similar"
 import Gallery from "../components/Gallery"
+import UserRatings from "../components/UserRatings"
 
 function TVSeriesPage() {
 
@@ -16,19 +17,21 @@ function TVSeriesPage() {
    const [tvReviews, setTVReviews] = useState([])
    const [similarTVShows, setSimilarTVShows] = useState([])
    const [tvVideos, setTVVideos] = useState([])
+   const [userRatings, setUserRatings] = useState([])
    const [loading, setLoading] = useState(true)
    const [error, setError] = useState(false)
 
    useEffect(() => {
       const loadTVSeriesData = async () => {
          try {
-               const [tvData, tvCreditsData, tvImagesData, tvReviewsData, tvSimilarData, tvVideosData] = await Promise.all([
+               const [tvData, tvCreditsData, tvImagesData, tvReviewsData, tvSimilarData, tvVideosData, ratingsData] = await Promise.all([
                   getTVSeriesById(id),
                   getTVSeriesCredits(id),
                   getTVSeriesImages(id),
                   getTVSeriesReviews(id),
                   getSimilarTVSeries(id),
-                  getTVSeriesVideos(id)
+                  getTVSeriesVideos(id),
+                  getUserRatings()
                ]) 
                setTV(tvData)
                setTVCredits(tvCreditsData)
@@ -36,6 +39,7 @@ function TVSeriesPage() {
                setTVReviews(tvReviewsData)
                setSimilarTVShows(tvSimilarData)
                setTVVideos(tvVideosData)
+               setUserRatings(ratingsData)
          } catch (err) {
                console.log(err)
                setError("Failed to load tv series...")
@@ -85,6 +89,7 @@ function TVSeriesPage() {
                         <Similar movie={similarTVShows}/>
                   </div>
                <Reviews reviews={tvReviews} mediaType="tv show"/>
+               <UserRatings ratings={userRatings}/>
             </div>
          )}
       </>

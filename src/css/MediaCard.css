@@ -49,6 +49,21 @@
   opacity: 1;
 }
 
+.overlay-rating {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.overlay-rating img {
+  width: 90px;
+}
+
+.overlay-rating p {
+  text-align: center;
+}
+
 .favorite-btn {
   position: absolute;
   top: 1rem;

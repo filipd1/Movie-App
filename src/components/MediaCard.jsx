@@ -4,9 +4,10 @@ import { AuthContext } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
 import { useEffect, useState, useContext } from "react"
 import watchLaterIcon from "../assets/eye.svg"
+import ratingIcon from "../assets/star-filled.svg"
 import Toast from "./Toast"
 
-function MediaCard({movie, pageType}) {
+function MediaCard({movie, pageType = "home"}) {
     const {
         favorites,
         watchlist,
@@ -16,8 +17,6 @@ function MediaCard({movie, pageType}) {
         addToWatchlist,
         removeFromWatchlist
     } = useMediaContext()
-
-    const {userLoggedIn} = useContext(AuthContext)
 
     const [isInFavorites, setIsInFavorites] = useState(false)
     const [isInWatchlist, setIsInWatchlist] = useState(false)
@@ -92,37 +91,46 @@ function MediaCard({movie, pageType}) {
                     }
                         alt={title} />
                     <div className="movie-overlay">
-                        {pageType === "favorites" ? (
-                            userLoggedIn &&
-                                <button
-                                    className={
-                                        `favorite-btn ${isInFavorites ? "active" : ""}`
-                                    }
-                                        onClick={(e) => {
-                                            e.preventDefault()
-                                            e.stopPropagation()
-                                            handleFavorites()
-                                        }}
-                                >
-                                    ♥
-                                </button>
-                        ) : (
-                            pageType === "watchlist" && (
-                                <button
-                                    className={
-                                        `favorite-btn ${isInWatchlist ? "active" : ""}`
-                                    }
+                        {(pageType === "home" || pageType === "watchlist") &&
+                            <div className="overlay-rating">
+                                <img src={ratingIcon} alt="rating-icon" />
+                                <p>{movie.vote_average.toFixed(1)}</p>
+                                <div className="movie-genres-wrapper">{movie.genres?.map((m, i) => (
+                                    <p className="movie-genre" key={i}>{m.name}</p>
+                                    ))}
+                                </div>
+                            </div>
+                        }
+
+                        {pageType === "favorites" && 
+                            <button
+                                className={
+                                    `favorite-btn ${isInFavorites ? "active" : ""}`
+                                }
                                     onClick={(e) => {
                                         e.preventDefault()
                                         e.stopPropagation()
-                                        handleWatchlist()
+                                        handleFavorites()
                                     }}
-                                >
-                                    <img src={watchLaterIcon} alt="eye icon" />
-                                </button>
-                            )
-                        )}
-
+                            >
+                                ♥
+                            </button>
+                        }
+                        
+                        {pageType === "watchlist" && 
+                            <button
+                                className={
+                                    `favorite-btn ${isInWatchlist ? "active" : ""}`
+                                }
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    e.stopPropagation()
+                                    handleWatchlist()
+                                }}
+                            >
+                                <img src={watchLaterIcon} alt="eye icon" />
+                            </button>
+                        }
                     </div>
                 </div>
                 {userCurrentRating &&
