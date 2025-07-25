@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { getPersonById, getPersonCombinedCredits } from "../services/api"
 import PersonDetails from "../components/PersonDetails"
+import PersonCredits from "../components/PersonCredits"
 
 function PersonPage() {
     const { id } = useParams()
@@ -41,8 +42,11 @@ function PersonPage() {
         <div className="container">
             {error && <div className="error-message">{error}</div>}
             {loading ? <div className="loading">Loading...</div> : (
-                <PersonDetails person={person} credits={personCredits}/>
-                )}
+                <>
+                    <PersonDetails person={person} />
+                    <PersonCredits credits={personCredits} person={person}/>
+                </>
+                )}             
         </div>
     )
 }

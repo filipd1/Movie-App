@@ -96,7 +96,7 @@ function SearchResults() {
                 {searchResults.length > 0 ? (
                   filteredSearchResults.map(movie => (
                     (movie.profile_path || movie.poster_path) &&
-                      <MediaCard movie={movie} key={movie.id} pageType="favorites"/>
+                      <MediaCard movie={movie} key={movie.id} pageType="none"/>
                   ))
                 ) : (
                   <p>No matching movies</p>

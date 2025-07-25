@@ -1,107 +1,56 @@
 import "../css/PersonDetails.css"
-import { Link } from "react-router-dom"
+import bioIcon from "../assets/bio.svg"
+import birthIcon from "../assets/calendar.svg"
+import placeIcon from "../assets/location.svg"
+import deathIcon from "../assets/tombstone.svg"
+import personIcon from "../assets/person.svg"
 
-function PersonDetails({ person, credits }) {
+function PersonDetails({ person }) {
 
-    const directedMovies = credits?.crew.filter(c => c.job === "Director" ) || []
-    const uniqueDirectedMovies = Array.from(
-        new Map(directedMovies.map(item => [item.id, item])).values()
-    )
-    const sortedDirectedMovies = uniqueDirectedMovies.sort(
-        (a,b) => b.vote_average - a.vote_average
-    )
+    function formatDate(dateString) {
+        const date = new Date(dateString)
+        return new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }).format(date)
+    }
 
-    const actedMovies = credits?.cast || []
-    const uniqueActedMovies = Array.from(
-    new Map(actedMovies.map(item => [item.id, item])).values()
-    );
-    const sortedActedMovies = uniqueActedMovies
-    .filter(movie => movie.vote_count >= 1000)
-    .sort((a, b) => b.vote_average - a.vote_average)
 
     return (
         <div className="person-details">
-            <div className="person-details-top">
-                <div className="person-img-wrapper">
+            <h5 className="media-type">{person.known_for_department}</h5>
+            <h1>{person.name}</h1>
+            <div className="person-details-inner">
+                <div className="person-details-left">
                     <img
+                        className="person-img"
                         src={person.profile_path
                             ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
                             : "/person_placeholder.png"}
                         alt={person.name}
                     />
-                </div>
-                <div className="person-desc">
-                    <h2>{person.name}</h2>
-                    <p>{person.biography ? (person.biography) : ("No biography found")}</p>
-
-                    <div className="combined-credits">
-                        {person.known_for_department === "Directing" ? (
-                            sortedDirectedMovies?.map((role, i) => (
-                                role.media_type === "tv" ? (
-                                    <div key={i} className="credit-card">
-                                        <Link to={`/tv/${role.id}`}>
-                                        <img
-                                            src={role.poster_path ? 
-                                                `https://image.tmdb.org/t/p/w500${role.poster_path}`
-                                                : "/poster_placeholder.png"
-                                                }
-                                            alt={role.title}
-                                        />
-                                        </Link>
-                                        <p>{role.name}</p>
-                                    </div>
-                                ) : (
-                                    <div key={i} className="credit-card">
-                                        <Link to={`/movie/${role.id}`}>
-                                            <img
-                                                src={role.poster_path ? 
-                                                    `https://image.tmdb.org/t/p/w500${role.poster_path}`
-                                                    : "/poster_placeholder.png"
-                                                    }
-                                                alt={role.title}
-                                            />
-                                        </Link>
-                                            <p>{role.title}</p>
-                                    </div>
-                                )
-
-                            
-                        ))
-                        ) : (
-                            sortedActedMovies.map((role, i) => (
-                                role.media_type === "tv" ? (
-                                    <div key={i} className="credit-card">
-                                        <Link to={`/tv/${role.id}`}>
-                                            <img
-                                                src={`https://image.tmdb.org/t/p/w500${role.poster_path}`}
-                                                alt={role.title}
-                                            />
-                                            <p>{role.name}</p>
-                                        </Link>
-                                    </div>
-                                ) : (
-                                    <div key={i} className="credit-card">
-                                        <Link to={`/movie/${role.id}`}>
-                                            <img
-                                                src={`https://image.tmdb.org/t/p/w500${role.poster_path}`}
-                                                alt={role.title}
-                                            />
-                                            <p>{role.title}</p>
-                                        </Link>
-                                    </div>
-                                )
-
-                            ))
-                        )}
-
+                    <div className="person-left-info">
+                        <div className="flex"><img src={birthIcon} alt="birth-icon" /><strong>Birthday</strong></div>
+                        <p>{formatDate(person.birthday)}</p>
+                        <div className="flex"><img src={placeIcon} alt="place-icon" /><strong>Place of birth</strong></div>         
+                        <p>{person.place_of_birth}</p>
+                        {person.deathday && 
+                            <>
+                                <div className="flex"><img src={deathIcon} alt="death-icon" /><strong>Deathday</strong></div>
+                                <p>{person.deathday}</p>
+                            </>
+                        }
+                        <div className="flex"><img src={personIcon} alt="place-icon" /><strong>Gender</strong></div>         
+                        <p>{person.gender === 1 ? "Female" : person.gender === 2 ? "Male" : "XD"}</p>
                     </div>
                 </div>
-                
+
+                <div className="person-details-right">
+                    <div className="flex"><img src={bioIcon} alt="bio-icon" /><h4>Biography</h4></div>
+                    <p className="person-bio">{person.biography ? (person.biography) : ("No biography found")}</p>
+                </div>
             </div>
-
-
-
-
         </div>
     )
 }
