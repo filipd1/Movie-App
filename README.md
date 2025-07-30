@@ -24,7 +24,7 @@ Dane są pobierane z [TheMovieDB API](https://www.themoviedb.org/) – jednego z
 
 ---
 
-## 📸 Screeny
+## 📸 Przykładowe screeny
 
 ### 🔍 Strona filmu
 
