@@ -1,4 +1,4 @@
-# 🎬 FilmWeb Clone – React App for Browsing and Rating Movies & TV Series
+# 🎬 React App for Browsing and Rating Movies & TV Series
 
 Projekt to nowoczesna aplikacja webowa inspirowana serwisem Filmweb, stworzona z wykorzystaniem React, która umożliwia:
 
@@ -28,7 +28,7 @@ Dane są pobierane z [TheMovieDB API](https://www.themoviedb.org/) – jednego z
 
 ### 🔍 Strona filmu
 
-Zawiera szczegółowe informacje o filmie, ocenę użytkowników, możliwość oceny własnej, dodania do ulubionych lub watchlisty:
+Zawiera szczegółowe informacje o filmie, ocenę użytkowników, możliwość oceny własnej, dodania do ulubionych lub listy do obejrzenia:
 
 ![Screenshot - Strona filmu](./screenshots/movie_page.png)
 
@@ -36,7 +36,7 @@ Zawiera szczegółowe informacje o filmie, ocenę użytkowników, możliwość o
 
 ### 👤 Strona aktora
 
-Pokazuje dane osobowe, znane role, filmy pogrupowane wg lat z przypisaną postacią:
+Pokazuje dane osobowe, znane role, ostatnie role pogrupowane wg lat:
 
 ![Screenshot - Strona aktora](./screenshots/actor_page.png)
 
