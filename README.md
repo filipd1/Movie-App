@@ -14,13 +14,13 @@ Dane są pobierane z [TheMovieDB API](https://www.themoviedb.org/) – jednego z
 ## 🔧 Technologie
 
 - React (z routingiem)
-- Context API (zarządzanie stanem)
-- CSS Modules / własny system klas
+- Context API
+- CSS
 - Fetch API + async/await
 - TheMovieDB API
-- JWT (dla autoryzacji użytkownika)
-- Express (w backendzie – jeśli dotyczy)
-- MongoDB (jeśli dotyczy)
+- JWT
+- Express
+- MongoDB
 
 ---
 
