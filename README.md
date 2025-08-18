@@ -41,3 +41,5 @@ Pokazuje dane osobowe, znane role, ostatnie role pogrupowane wg lat:
 ![Screenshot - Strona aktora](./screenshots/actor_page.png)
 
 ---
+
+UI by https://www.behance.net/fedycki
