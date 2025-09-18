@@ -32,7 +32,7 @@ function Home() {
   }, [])
 
   useEffect(() => {
-    document.title = "Rate Your Movie"
+    document.title = "FilmScope"
   }, [])
 
   const handleSubmit = (e) => {

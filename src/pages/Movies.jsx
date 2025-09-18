@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { getPopularMovies, getTopMovies } from "../services/api"
 import MediaList from "../components/MediaList"
 
-
 function Movies() {
   const [popularMovies, setPopularMovies] = useState([])
   const [topMovies, setTopMovies] = useState([])
@@ -28,7 +27,7 @@ function Movies() {
   }, [])
 
   useEffect(() => {
-        document.title = "Movies"
+    document.title = "Movies"
   }, [])
 
   return (
