@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://movie-app-backend-xcuo.onrender.com/api"
+  baseURL: "https://movie-app-backend-xcuo.onrender.com"
 });
 
-const BASE_URL = "https://movie-app-backend-xcuo.onrender.com/api";
+const BASE_URL = "https://movie-app-backend-xcuo.onrender.com";
 
 
 // const api = axios.create({
