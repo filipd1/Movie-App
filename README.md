@@ -1,11 +1,6 @@
 # 🎬 Movie App for Browsing and Rating Movies & TV Series
 
-Projekt to nowoczesna aplikacja webowa inspirowana serwisem Filmweb, stworzona z wykorzystaniem React, która umożliwia:
-
-- przeglądanie filmów i seriali,
-- ocenianie obejrzanych tytułów,
-- zapisywanie ich w swojej bibliotece (do obejrzenia, ulubione),
-- sprawdzanie szczegółowych informacji o aktorach oraz twórcach.
+Aplikacja webowa inspirowana serwisem Filmweb, umożliwiająca przeglądanie szczegółowych informacji o filmach, serialach, aktorach, twórcach, ludziach kina, a także stworzenie własnego konta użytkownika w celu oceniania filmów/seriali, dodawania ich do swojej biblioteki "do obejrzenia" czy "uluibone".
 
 Dane są pobierane z [TheMovieDB API](https://www.themoviedb.org/)
 
@@ -13,14 +8,16 @@ Dane są pobierane z [TheMovieDB API](https://www.themoviedb.org/)
 
 ## 🔧 Technologie
 
-- React (z routingiem)
-- Context API
+- React
+- Node.js
 - CSS
-- Fetch API + async/await
-- TheMovieDB API
+- React Router
+- Context API
+- Fetch API
 - JWT
 - Express
 - MongoDB
+- Render
 
 ---
 
