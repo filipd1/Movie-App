@@ -1,10 +1,16 @@
+.full-cast-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
 .cast-card {
     margin-top: 1em;
     display: flex;
     align-items: start;
     gap: 2em;
     background-color: rgba(0, 0, 0, .2);
-    width: 40%;
+    width: 100%;
     max-height: 180px;
     border-radius: 8px;
 }
