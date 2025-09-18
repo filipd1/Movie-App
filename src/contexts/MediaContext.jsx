@@ -24,7 +24,7 @@ export function MediaProvider({ children }) {
 
     useEffect(() => {
         if (username) {
-            api.get(`/users/${username}`, getAuthHeader())
+            api.get(`/users/${username}`)
                 .then(res => {
                     setFavorites(res.data.favorites)
                     setWatchlist(res.data.watchlist)
