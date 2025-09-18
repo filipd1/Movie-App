@@ -1,11 +1,17 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api"
+  baseURL: "https://movie-app-backend-xcuo.onrender.com/api"
 });
 
+const BASE_URL = "https://movie-app-backend-xcuo.onrender.com/api";
 
-const BASE_URL = "http://localhost:5000/api";
+
+// const api = axios.create({
+//   baseURL: "http://localhost:5000/api"
+// });
+
+// const BASE_URL = "http://localhost:5000/api";
 //const BASE_URL = "/api";
 
 export const getPopularMovies = async () => {
