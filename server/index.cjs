@@ -53,49 +53,49 @@ const fetchMultiplePagesFromTMDB = async (endpoint, totalPages, res) => {
     }
 }
 
-app.get("/api/movie/popular", (req, res) => fetchFromTMDB("/movie/popular", res))
-app.get("/api/movie/top", (req, res) => fetchFromTMDB("/movie/top_rated", res))
-app.get("/api/movie/upcoming", (req, res) => fetchFromTMDB("/movie/upcoming", res))
-app.get("/api/movie/:id", (req, res) => fetchFromTMDB(`/movie/${req.params.id}`, res))
-app.get("/api/movie/:id/reviews", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/reviews`, res))
-app.get("/api/movie/:id/credits", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/credits`, res))
-app.get("/api/movie/:id/similar", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/similar`, res))
-app.get("/api/movie/:id/images", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/images`, res))
-app.get("/api/movie/:id/videos", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/videos`, res))
+app.get("/movie/popular", (req, res) => fetchFromTMDB("/movie/popular", res))
+app.get("/movie/top", (req, res) => fetchFromTMDB("/movie/top_rated", res))
+app.get("/movie/upcoming", (req, res) => fetchFromTMDB("/movie/upcoming", res))
+app.get("/movie/:id", (req, res) => fetchFromTMDB(`/movie/${req.params.id}`, res))
+app.get("/movie/:id/reviews", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/reviews`, res))
+app.get("/movie/:id/credits", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/credits`, res))
+app.get("/movie/:id/similar", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/similar`, res))
+app.get("/movie/:id/images", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/images`, res))
+app.get("/movie/:id/videos", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/videos`, res))
 
-app.get("/api/tv/popular", (req, res) => fetchFromTMDB("/tv/popular", res))
-app.get("/api/tv/top", (req, res) => fetchFromTMDB("/tv/top_rated", res))
-app.get("/api/tv/:id", (req, res) => fetchFromTMDB(`/tv/${req.params.id}`, res))
-app.get("/api/tv/:id/reviews", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/reviews`, res))
-app.get("/api/tv/:id/credits", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/aggregate_credits`, res))
-app.get("/api/tv/:id/similar", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/similar`, res))
-app.get("/api/tv/:id/images", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/images`, res))
-app.get("/api/tv/:id/videos", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/videos`, res))
+app.get("/tv/popular", (req, res) => fetchFromTMDB("/tv/popular", res))
+app.get("/tv/top", (req, res) => fetchFromTMDB("/tv/top_rated", res))
+app.get("/tv/:id", (req, res) => fetchFromTMDB(`/tv/${req.params.id}`, res))
+app.get("/tv/:id/reviews", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/reviews`, res))
+app.get("/tv/:id/credits", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/aggregate_credits`, res))
+app.get("/tv/:id/similar", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/similar`, res))
+app.get("/tv/:id/images", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/images`, res))
+app.get("/tv/:id/videos", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/videos`, res))
 
-app.get("/api/person/:id", (req, res) => fetchFromTMDB(`/person/${req.params.id}`, res))
-app.get("/api/person/:id/credits", (req, res) => fetchFromTMDB(`/person/${req.params.id}/combined_credits`, res))
+app.get("/person/:id", (req, res) => fetchFromTMDB(`/person/${req.params.id}`, res))
+app.get("/person/:id/credits", (req, res) => fetchFromTMDB(`/person/${req.params.id}/combined_credits`, res))
 
-app.get("/api/movie/top/multi", (req, res) => {
+app.get("/movie/top/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
   fetchMultiplePagesFromTMDB("/movie/top_rated", pages, res)
 })
 
-app.get("/api/movie/popular/multi", (req, res) => {
+app.get("/movie/popular/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
   fetchMultiplePagesFromTMDB("/movie/popular", pages, res)
 })
 
-app.get("/api/tv/top/multi", (req, res) => {
+app.get("/tv/top/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
   fetchMultiplePagesFromTMDB("/tv/top_rated", pages, res)
 })
 
-app.get("/api/tv/popular/multi", (req, res) => {
+app.get("/tv/popular/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
   fetchMultiplePagesFromTMDB("/tv/popular", pages, res)
 })
 
-app.get("/api/search", async (req, res) => {
+app.get("/search", async (req, res) => {
   const query = req.query.query
   try {
       const response = await axios.get(`${BASE_URL}/search/multi`, {
@@ -110,7 +110,7 @@ app.get("/api/search", async (req, res) => {
   }
 })
 
-app.post("/api/register", async (req,res) => {
+app.post("/register", async (req,res) => {
   try {
       const {username, email, password} = req.body
 
@@ -134,7 +134,7 @@ app.post("/api/register", async (req,res) => {
   }
 })
 
-app.post("/api/login", async (req,res) => {
+app.post("/login", async (req,res) => {
   try {
       const { username, password} = req.body
 
@@ -165,7 +165,7 @@ app.post("/api/login", async (req,res) => {
   }
 })
 
-app.get("/api/users/:username", async (req, res) => {
+app.get("/users/:username", async (req, res) => {
   try {
       const user = await User.findOne({ username: req.params.username }).select("-password")
       if (!user) return res.status(404).json({ message: "User not found" })
@@ -176,7 +176,7 @@ app.get("/api/users/:username", async (req, res) => {
   }
 })
 
-app.post("/api/users/:username/favorites", auth, async (req, res) => {
+app.post("/users/:username/favorites", auth, async (req, res) => {
   try {
     const { id, media_type } = req.body
     if (!id || !media_type) {
@@ -201,7 +201,7 @@ app.post("/api/users/:username/favorites", auth, async (req, res) => {
   }
 })
 
-app.delete("/api/users/:username/favorites/:media_type/:id", auth, async (req, res) => {
+app.delete("/users/:username/favorites/:media_type/:id", auth, async (req, res) => {
   try {
     const { username, media_type, id } = req.params
 
@@ -218,7 +218,7 @@ app.delete("/api/users/:username/favorites/:media_type/:id", auth, async (req, r
     }
 })
 
-app.get("/api/users/:username/favorites", auth, async (req, res) => {
+app.get("/users/:username/favorites", auth, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username })
     if (!user) return res.status(404).json({ message: "User not found" })
@@ -229,7 +229,7 @@ app.get("/api/users/:username/favorites", auth, async (req, res) => {
   }
 })
 
-app.post("/api/users/:username/watchlist", auth, async (req, res) => {
+app.post("/users/:username/watchlist", auth, async (req, res) => {
   try {
     const { id, media_type } = req.body
     if (!id || !media_type) {
@@ -251,7 +251,7 @@ app.post("/api/users/:username/watchlist", auth, async (req, res) => {
   }
 })
 
-app.delete("/api/users/:username/watchlist/:media_type/:id", auth, async (req, res) => {
+app.delete("/users/:username/watchlist/:media_type/:id", auth, async (req, res) => {
   try {
     const { username, media_type, id } = req.params
 
@@ -268,7 +268,7 @@ app.delete("/api/users/:username/watchlist/:media_type/:id", auth, async (req, r
     }
 })
 
-app.get("/api/users/:username/watchlist", auth, async (req, res) => {
+app.get("/users/:username/watchlist", auth, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username })
     if (!user) return res.status(404).json({ message: "User not found" })
@@ -279,7 +279,7 @@ app.get("/api/users/:username/watchlist", auth, async (req, res) => {
   }
 })
 
-app.post("/api/users/:username/ratings", auth, async (req, res) => {
+app.post("/users/:username/ratings", auth, async (req, res) => {
   try {
     const { id, media_type, rating } = req.body
     if (!id || !media_type || typeof rating !== "number") {
@@ -304,7 +304,7 @@ app.post("/api/users/:username/ratings", auth, async (req, res) => {
   }
 })
 
-app.delete("/api/users/:username/ratings/:media_type/:id", auth, async (req, res) => {
+app.delete("/users/:username/ratings/:media_type/:id", auth, async (req, res) => {
   try {
     const { username, media_type, id } = req.params
 
@@ -321,7 +321,7 @@ app.delete("/api/users/:username/ratings/:media_type/:id", auth, async (req, res
     }
 })
 
-app.get("/api/users/:username/ratings", auth, async (req, res) => {
+app.get("/users/:username/ratings", auth, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username }).select("ratings")
     if (!user) return res.status(404).json({ message: "User not found" })
@@ -333,7 +333,7 @@ app.get("/api/users/:username/ratings", auth, async (req, res) => {
   }
 })
 
-app.get("/api/ratings/all", async (req, res) => {
+app.get("/ratings/all", async (req, res) => {
   try {
     const usersRatings = await User.find({}, "username ratings")
     res.json( { usersRatings } )
