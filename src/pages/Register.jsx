@@ -35,7 +35,7 @@ function Register() {
 
         try {
             const { username, email, password } = formData
-            const res = await axios.post("http://localhost:5000/api/register", {
+            const res = await axios.post("https://movie-app-backend-xcuo.onrender.com/register", {
                 username,
                 email,
                 password

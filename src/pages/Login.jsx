@@ -29,7 +29,7 @@ function Login() {
         setSuccess("")
 
         try {
-            const res = await axios.post("http://localhost:5000/api/login", formData)
+            const res = await axios.post("https://movie-app-backend-xcuo.onrender.com/login", formData)
             setSuccess(res.data.message)
             login(res.data.token, res.data.user)
             navigate("/")
