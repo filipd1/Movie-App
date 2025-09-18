@@ -14,7 +14,7 @@ const UserProfile = () => {
   const [watchlistShown, setwatchlistShown] = useState(false)
 
   useEffect(() => {
-    axios.get(`/api/users/${username}`)
+    axios.get(`https://movie-app-backend-xcuo.onrender.com/users/${username}`)
       .then(res => setUser(res.data))
       .catch(err => console.log(err))
 
