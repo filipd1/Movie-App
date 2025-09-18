@@ -75,7 +75,7 @@ function NavBar() {
     return (
         <header>
             <nav className="navbar">
-                <Link to="/"><img src="/Logo.png" alt="movie app" /></Link>
+                <Link to="/" className="navbar-logo"><img src="/Logo2.png" alt="movie app" /><span>FilmScope</span></Link>
                 <div className="navbar-links">
                     <NavLink to="/movies" className="nav-link ">Movies</NavLink>
                     <NavLink to="/tvseries" className="nav-link">TV Series</NavLink>
