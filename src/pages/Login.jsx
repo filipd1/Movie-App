@@ -121,7 +121,7 @@ function Login() {
                     </div>
 
                     <p className="form-desc-paragraph">Don't wait, there are movies to be watched!</p>
-                    {haveAccount && <button type="submit" className="form-btn" onClick={() => setHaveAccount(prev => !prev)}>Create Your Account</button>}
+                    <button type="submit" className="form-btn" onClick={() => setHaveAccount(prev => !prev)}>{haveAccount ? "Create your account" : "Login instead"}</button>
                 </div>
             </div>
         </div>
