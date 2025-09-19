@@ -53,3 +53,28 @@
     margin-top: 1em;
     font-size: 16px;
 }
+
+@media (min-width: 769px) {
+    .read-more-btn {
+        display: none; 
+    }
+}
+
+@media (max-width: 768px) {
+
+    .person-details-inner {
+        flex-direction: column;
+    }
+
+    .person-details-right,
+    .person-details-left {
+        width: 100%;
+    }
+
+    .person-img {
+        width: 380px;
+        height: 570px;
+        margin: 0 auto;
+        display: block;
+    }
+}

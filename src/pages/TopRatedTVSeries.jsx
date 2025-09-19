@@ -11,14 +11,14 @@ function TopRatedMovies() {
     useEffect(() => {
     const loadData = async () => {
         try {
-            const tvData = await getTopTVSeriesMultiPages()
-            setTV(tvData)
-            setError(null)
+          const tvData = await getTopTVSeriesMultiPages()
+          setTV(tvData)
+          setError(null)
         } catch (err) {
-            console.log(err)
-            setError("Failed to load tv series...")
+          console.log(err)
+          setError("Failed to load tv series...")
         } finally {
-            setLoading(false)
+          setLoading(false)
         }
     }
         loadData()

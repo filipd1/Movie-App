@@ -24,27 +24,27 @@ function TVSeriesPage() {
    useEffect(() => {
       const loadTVSeriesData = async () => {
          try {
-               const [tvData, tvCreditsData, tvImagesData, tvReviewsData, tvSimilarData, tvVideosData, ratingsData] = await Promise.all([
-                  getTVSeriesById(id),
-                  getTVSeriesCredits(id),
-                  getTVSeriesImages(id),
-                  getTVSeriesReviews(id),
-                  getSimilarTVSeries(id),
-                  getTVSeriesVideos(id),
-                  getUserRatings()
-               ]) 
-               setTV(tvData)
-               setTVCredits(tvCreditsData)
-               setTVImages(tvImagesData)
-               setTVReviews(tvReviewsData)
-               setSimilarTVShows(tvSimilarData)
-               setTVVideos(tvVideosData)
-               setUserRatings(ratingsData)
+            const [tvData, tvCreditsData, tvImagesData, tvReviewsData, tvSimilarData, tvVideosData, ratingsData] = await Promise.all([
+               getTVSeriesById(id),
+               getTVSeriesCredits(id),
+               getTVSeriesImages(id),
+               getTVSeriesReviews(id),
+               getSimilarTVSeries(id),
+               getTVSeriesVideos(id),
+               getUserRatings()
+            ]) 
+            setTV(tvData)
+            setTVCredits(tvCreditsData)
+            setTVImages(tvImagesData)
+            setTVReviews(tvReviewsData)
+            setSimilarTVShows(tvSimilarData)
+            setTVVideos(tvVideosData)
+            setUserRatings(ratingsData)
          } catch (err) {
-               console.log(err)
-               setError("Failed to load tv series...")
+            console.log(err)
+            setError("Failed to load tv series...")
          } finally {
-               setLoading(false)
+            setLoading(false)
          }
       }
       loadTVSeriesData()

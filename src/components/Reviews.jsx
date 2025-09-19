@@ -29,7 +29,7 @@ function Reviews({ reviews, mediaType }) {
                                         <>
                                             <p>{review.content.slice(0, 350)}...</p>
                                             <button
-                                                className="media-switch-button"
+                                                className="read-more-btn"
                                                 onClick={() => setExpandedIndex(i)}
                                             >
                                                 read more

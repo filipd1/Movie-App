@@ -12,16 +12,16 @@ function TVSeries() {
     useEffect(() => {
     const loadData = async () => {
         try {
-        const popularTVsData = await getPopularTVSeries()
-        setPopularTVSeries(popularTVsData)
-        const topTVData = await getTopTVSeries()
-        setTopTVSeries(topTVData)
-        setError(null)
+            const popularTVsData = await getPopularTVSeries()
+            setPopularTVSeries(popularTVsData)
+            const topTVData = await getTopTVSeries()
+            setTopTVSeries(topTVData)
+            setError(null)
         } catch (err) {
-        console.log(err)
-        setError("Failed to load movies...")
+            console.log(err)
+            setError("Failed to load movies...")
         } finally {
-        setLoading(false)
+            setLoading(false)
         }
     }
     loadData()

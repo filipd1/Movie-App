@@ -31,7 +31,8 @@
 }
 
 @media (max-width: 768px) {
-    .cast-card {
-        width: 100%;
+
+    .full-cast-list {
+        grid-template-columns: 1fr;
     }
 }

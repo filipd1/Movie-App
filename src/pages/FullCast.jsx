@@ -23,7 +23,6 @@ function FullCast() {
                     ? await getMovieCredits(id)
                     : await getTVSeriesCredits(id)
                 setCredits(credits)
-                console.log(credits)
             } catch (err) {
                 console.log(err)
                 setError("Failed to load credits...")

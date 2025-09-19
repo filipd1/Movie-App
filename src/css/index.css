@@ -77,12 +77,23 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.read-more-btn {
+  background: none;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
 }
 
 .flex {

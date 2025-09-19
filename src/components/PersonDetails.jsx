@@ -4,6 +4,8 @@ import birthIcon from "../assets/calendar.svg"
 import placeIcon from "../assets/location.svg"
 import deathIcon from "../assets/tombstone.svg"
 import personIcon from "../assets/person.svg"
+import { useState, useEffect } from "react"
+
 
 function PersonDetails({ person }) {
 
@@ -16,6 +18,28 @@ function PersonDetails({ person }) {
         }).format(date)
     }
 
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(typeof window !== "undefined" && window.innerWidth <= 768)
+        }
+            handleResize();
+            window.addEventListener("resize", handleResize)
+            return () => window.removeEventListener("resize", handleResize)
+    }, [])
+
+    const truncateToWord = (text, limit) => {
+        if (!text) return "No biography found"
+        if (text.length <= limit) return text
+        const truncated = text.slice(0, limit)
+        const lastSpace = truncated.lastIndexOf(" ")
+        return (lastSpace === -1 ? truncated : truncated.slice(0, lastSpace)) + "..."
+    }
+
+    const shouldTruncate = isMobile && person && person.biography && person.biography.length > 300
+    const displayedBio = shouldTruncate && !isExpanded ? truncateToWord(person.biography, 300) : (person.biography || 'No biography found')
 
     return (
         <div className="person-details">
@@ -47,8 +71,18 @@ function PersonDetails({ person }) {
                 </div>
 
                 <div className="person-details-right">
-                    <div className="flex"><img src={bioIcon} alt="bio-icon" /><h4>Biography</h4></div>
-                    <p className="person-bio">{person.biography ? (person.biography) : ("No biography found")}</p>
+                    <div className="flex"><img src={bioIcon} alt="bio-icon" /><h4>Biography</h4></div>                   
+                    <p className="person-bio">{displayedBio}</p>
+                    {shouldTruncate && (
+                    <button
+                        className="read-more-btn"
+                        onClick={() => setIsExpanded(prev => !prev)}
+                        aria-expanded={isExpanded}
+                    >
+                        {isExpanded ? 'Read less' : 'Read more'}
+                    </button>
+                    )}
+
                 </div>
             </div>
         </div>

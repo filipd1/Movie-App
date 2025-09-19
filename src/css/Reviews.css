@@ -34,13 +34,6 @@
   margin: 1em 0;
 }
 
-.review-show-more {
-  font-style: italic;
-  background-color: none;
-  border: none;
-  outline: none;
-}
-
 .review-created {
   font-style: italic;
   font-size: 11px;

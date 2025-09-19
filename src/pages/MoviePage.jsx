@@ -40,7 +40,6 @@ function MoviePage() {
                 setImages(movieImagesData)
                 setMovieVideos(movieVideosData)
                 setUserRatings(ratingsData)
-                console.log(ratingsData)
             } catch (err) {
                 console.log(err)
                 setError("Failed to load movie...")

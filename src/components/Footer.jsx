@@ -49,21 +49,13 @@ function Footer() {
 
                 <div>
                     <div className="footer-social">
-                        <Link className="footer-social-link" to="https://github.com/filipd1/Movie-App/tree/master">
+                        <Link className="footer-social-link" target="_blank" to="https://github.com/filipd1/Movie-App/tree/master">
                             <img src={githubIcon} alt="github" />
                         </Link>
 
-                        <Link className="footer-social-link" to="https://github.com/filipd1/Movie-App/tree/master">
+                        <Link className="footer-social-link" target="_blank" to="https://www.linkedin.com/in/filip-dudziak-36b38332b">
                             <img src={linkedinIcon} alt="linkedin" />
                         </Link>
-                    </div>
-
-                    <div>
-                        <Link className="footer-link" to="/favorites">Favorites</Link>
-                        <Link className="footer-link" to="/">About</Link>
-                        <Link className="footer-link" to="/">Contact</Link>
-                        <Link className="footer-link" to="/">Privacy</Link>
-                        <Link className="footer-link" to="/">Terms</Link>
                     </div>
                 </div>
 
