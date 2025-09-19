@@ -111,7 +111,14 @@ header {
 }
 
 .button-nav {
-  background-color: rgb(19, 16, 34);
+  background-color: var(--font-color-main);
+  color: #000000;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.button-nav:hover {
+  color: #222222;
 }
 
 .mobile-menu-icon {

@@ -21,22 +21,9 @@
   box-shadow: 0 0 0 2px #666;
 }
 
-.button-main {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--bg-nav);
-  color: white;
-  border-radius: 4px;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  white-space: nowrap;
-  outline: none;
-  border: none;
-}
-
 .search-button:hover {
   background-color: rgba(0, 0, 0, .5);
 }
-
 
 @media (max-width: 768px) {
   .home {
