@@ -51,11 +51,8 @@
 }
 
 .actor-card {
-  max-width: 150px;
-  max-height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+  width: 150px;
+  min-height: 300px;
   background-color: #1B3A4E;
   border-radius: 5px;
 }
@@ -68,7 +65,8 @@
 
 .actor-name,
 .actor-role {
-  text-align: center;
+  display: block;
+  width: 100%;
   font-size: 14px;
   margin: 4px 0;
   white-space: nowrap;
@@ -76,7 +74,7 @@
   text-overflow: ellipsis;
   max-width: 100%;
   color: #fff;
-  padding-left: 1em;
+  padding: 0 0.5em;
 }
 
 .actor-name {

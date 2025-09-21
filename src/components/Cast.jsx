@@ -117,11 +117,11 @@ function Cast({ movie, credits }) {
                                 <p className="actor-name">{actor.name}</p>
                             </Link>
                             {movie.release_date ? (
-                                <p className="actor-role">{actor.character}</p>
+                                <p className="actor-role" title={actor.character}>{actor.character}</p>
                             ) : (
-                                <div >
+                                <div>
                                     {actor.roles?.map((r, i) => (
-                                        <p className="actor-role" key={i}>{r.character}</p>
+                                        <p className="actor-role" key={i} title={r.character}>{r.character}</p>
                                     ))}
                                 </div>
                             )}
