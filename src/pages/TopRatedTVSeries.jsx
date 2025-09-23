@@ -10,19 +10,20 @@ function TopRatedMovies() {
 
     useEffect(() => {
     const loadData = async () => {
-        try {
-          const tvData = await getTopTVSeriesMultiPages()
-          setTV(tvData)
-          setError(null)
-        } catch (err) {
-          console.log(err)
-          setError("Failed to load tv series...")
-        } finally {
-          setLoading(false)
-        }
+      try {
+        const tvData = await getTopTVSeriesMultiPages()
+        setTV(tvData)
+        setError(null)
+        console.log(tvData)
+      } catch (err) {
+        console.log(err)
+        setError("Failed to load tv series...")
+      } finally {
+        setLoading(false)
+      }
     }
-        loadData()
-        document.title = "Top Rated TV Series"
+      loadData()
+      document.title = "Top Rated TV Series"
     }, [])
 
     return (
@@ -32,7 +33,7 @@ function TopRatedMovies() {
       {loading ? (
         <div className="loading">Loading...</div>
       ) : (
-        <MediaChart movies={tv}/>
+        <MediaChart movies={tv} header="Top rated TV Series of all time"/>
       )}
     </div>
     )

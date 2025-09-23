@@ -220,11 +220,6 @@
         width: 100%;
     }
 
-    .movie-poster-wrapper {
-        height: 600px;
-        width: 400px;
-    }
-
     .movie-details {
         gap: 20px;
         height: 100%;

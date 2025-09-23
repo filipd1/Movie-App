@@ -18,17 +18,11 @@ function MediaChart( { movies, header } ) {
                     </Link>
                     <div className="chart-item-desc">
                         <Link to={m.title ? `/movie/${m.id}` : `/tv/${m.id}`}><p>{i+1}. {movies[0].title ? m.title : m.name}</p></Link>
-                        <p>{m.tagline}</p>
                         <p className="movie-time">{movies[0].title ? m.release_date?.split('-')[0] : m.first_air_date?.split('-')[0]}</p>
                         <div className="movie-desc">
-                            <div className="movie-genres-wrapper">{m.genres?.map((m, i) => (
-                                    <p className="movie-genre" key={i}>{m.name}</p>
-                                ))}
-                            </div>
-                            
                             <p className="movie-overview">
-                                {m.overview.length > 150
-                                    ? m.overview.slice(0, 150).slice(0, m.overview.slice(0, 150).lastIndexOf(" ")) + " ..."
+                                {m.overview.length > 250
+                                    ? m.overview.slice(0, 250).slice(0, m.overview.slice(0, 250).lastIndexOf(" ")) + " ..."
                                     : m.overview
                                 }
                                 {m.overview.length > 150 &&
@@ -36,7 +30,6 @@ function MediaChart( { movies, header } ) {
                                 }
                             </p>
                             
-
                             <div className="movie-votes">
                                 <p className={`vote-average ${m.vote_average >= 6 ? "high" : "low"}`}>
                                     {m.vote_average != null

@@ -114,62 +114,62 @@ function MediaDetails({ media, credits, images }) {
                     ))}
                 </div>
 
-            <div className="movie-director">
-                <img src={directorIcon} alt="director-icon" />
-                
-                {media.title && directors && directors.length > 0 ? (
-                    directors.map((d, i) => (
-                        <Link key={i} to={`/person/${d.id}`}>{d.name}</Link>
-                    ))
-                ) : media.created_by && media.created_by.length > 0 ? (
-                    media.created_by.map((c, i) => (
-                        <Link key={i} to={`/person/${c.id}`}>{c.name}</Link>
-                    ))
-                ) : (
-                    <p>N/A</p>
-                )}
-            </div>
-
-            <div className="movie-actors">
-                <img src={actorIcon} alt="actor-icon" />
-                    {credits?.cast.slice?.(0, 3).map((actor, i) => (
-                        <Link key={i} to={`/person/${actor.id}`}>{actor.name}</Link>
-                    ))}
-            </div>
-                
-            <p className="movie-overview">{media.overview}</p>
-
-            <div className="movie-votes">
-                <p className={`vote-average ${media.vote_average >= 6.5 ? "high" : (media.vote_average < 4 ? "low" : "mid")}`}>
-                    {media.vote_average != null
-                        ? media.vote_average.toFixed(1)
-                        : "N/A"
-                    }
-                </p>
-                <p>{media.vote_count} votes</p>
-            </div>
-
-            <div className="movie-rating">
-                <div>
-                    <img src={ratingIcon} alt="rating-star" />
-                    <p>{userCurrentRating ? `Your rating:  ${userCurrentRating}/10` : `Rate this ${mediaType === "movie" ? "movie" : "TV series"}:`}</p>
+                <div className="movie-director">
+                    <img src={directorIcon} alt="director-icon" />
+                    
+                    {media.title && directors && directors.length > 0 ? (
+                        directors.map((d, i) => (
+                            <Link key={i} to={`/person/${d.id}`}>{d.name}</Link>
+                        ))
+                    ) : media.created_by && media.created_by.length > 0 ? (
+                        media.created_by.map((c, i) => (
+                            <Link key={i} to={`/person/${c.id}`}>{c.name}</Link>
+                        ))
+                    ) : (
+                        <p>N/A</p>
+                    )}
                 </div>
-                {Array(10).fill().map((_, index) => {
-                    const starValue = index +1
-                    const isFilled = hoverRating >= starValue || userRating >= starValue
-                    return (
-                        <img
-                            key={index}
-                            src={isFilled ? starFilledIcon : starIcon}
-                            alt="rating-star"
-                            onMouseEnter={() => setHoverRating(starValue)}
-                            onMouseLeave={() => setHoverRating(null)}
-                            onClick={() => handleRate(starValue)}
-                            className="rating-star"
-                        />
-                    )
-                })}
-            </div>
+
+                <div className="movie-actors">
+                    <img src={actorIcon} alt="actor-icon" />
+                        {credits?.cast.slice?.(0, 3).map((actor, i) => (
+                            <Link key={i} to={`/person/${actor.id}`}>{actor.name}</Link>
+                        ))}
+                </div>
+                
+                <p className="movie-overview">{media.overview}</p>
+
+                <div className="movie-votes">
+                    <p className={`vote-average ${media.vote_average >= 6.5 ? "high" : (media.vote_average < 4 ? "low" : "mid")}`}>
+                        {media.vote_average != null
+                            ? media.vote_average.toFixed(1)
+                            : "N/A"
+                        }
+                    </p>
+                    <p>{media.vote_count} votes</p>
+                </div>
+
+                <div className="movie-rating">
+                    <div>
+                        <img src={ratingIcon} alt="rating-star" />
+                        <p>{userCurrentRating ? `Your rating:  ${userCurrentRating}/10` : `Rate this ${mediaType === "movie" ? "movie" : "TV series"}:`}</p>
+                    </div>
+                    {Array(10).fill().map((_, index) => {
+                        const starValue = index +1
+                        const isFilled = hoverRating >= starValue || userRating >= starValue
+                        return (
+                            <img
+                                key={index}
+                                src={isFilled ? starFilledIcon : starIcon}
+                                alt="rating-star"
+                                onMouseEnter={() => setHoverRating(starValue)}
+                                onMouseLeave={() => setHoverRating(null)}
+                                onClick={() => handleRate(starValue)}
+                                className="rating-star"
+                            />
+                        )
+                    })}
+                </div>
 
             <div className="movie-buttons">
                 <button onClick={handleFavorites}

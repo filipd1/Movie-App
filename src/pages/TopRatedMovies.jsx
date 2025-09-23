@@ -10,19 +10,19 @@ function TopRatedMovies() {
 
     useEffect(() => {
     const loadData = async () => {
-        try {
-            const moviesData = await getTopMoviesMultiPages()
-            setMovies(moviesData)
-            setError(false)
-        } catch (err) {
-            console.log(err)
-            setError("Failed to load movies...")
-        } finally {
-            setLoading(false)
-        }
+      try {
+          const moviesData = await getTopMoviesMultiPages()
+          setMovies(moviesData)
+          setError(false)
+      } catch (err) {
+          console.log(err)
+          setError("Failed to load movies...")
+      } finally {
+          setLoading(false)
+      }
     }
-        loadData()
-        document.title = "Top Rated Movies"
+      loadData()
+      document.title = "Top Rated Movies"
     }, [])
 
     return (

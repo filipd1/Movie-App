@@ -21,7 +21,7 @@ const UserProfile = () => {
     if (username) {
       document.title = username + "'s Profile"
     } else {
-      document.title = "Ładowanie..."
+      document.title = "Loading..."
     }
   }, [username])
 
@@ -80,7 +80,6 @@ const UserProfile = () => {
       {votesShown && <Ratings ratings={user.ratings}/>}
       {watchlistShown && <Watchlist watchlist={user.watchlist}/>}
       {favoritesShown && <Favorites favorites={user.favorites}/>}
-      
     </div>
   )
 }

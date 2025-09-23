@@ -31,7 +31,7 @@ function PopularTVSeries() {
             {loading ? (
                 <div className="loading">Loading...</div>
             ) : (
-                <MediaChart movies={movies} header="Now popular movies"/>
+                <MediaChart movies={movies} header="Now popular TV Series"/>
             )}
         </div>
     )
