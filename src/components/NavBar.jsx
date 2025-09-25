@@ -81,6 +81,9 @@ function NavBar() {
                     <NavLink to="/tvseries" className="nav-link">TV Series</NavLink>
                 </div>
                 <div className="navbar-account">
+                    <button className="navbar-search-button" onClick={() => setShowSearchForm(prev => !prev)}>
+                        <img src={searchIcon} alt="search" />
+                    </button>
                     <form
                         className={`search-form navbar-search-form ${showSearchForm ? "show" : ""}`}
                         onSubmit={handleSubmit}
@@ -93,12 +96,11 @@ function NavBar() {
                                 onChange={(e) => setQuery(e.target.value)}
                             />
                     </form>
-                    <button className="navbar-search-button" onClick={() => setShowSearchForm(prev => !prev)}>
-                        <img src={searchIcon} alt="search" />
-                    </button>
+
 
                     {userLoggedIn ? (
                         <>
+
                             <Link to={`/users/${user.username}`}><img className="navbar-avatar" src="https://avatar.iran.liara.run/public/boy" alt="avatar" /></Link>
                             <Link to={`/users/${user.username}`}><p className="navbar-name">{user?.username}</p></Link>
                             <button onClick={() => setShowDropdownMenu(prev => !prev)} className="dropdown-menu-button" ref={dropdownMenuButtonRef}>

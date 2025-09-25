@@ -88,7 +88,7 @@ header {
 .navbar-search-form {
   position: absolute;
   bottom: 50%;
-  left: -72%;
+  right: 110%;
   max-width: 200px;
   margin: 0;
   padding: 0;
