@@ -18,6 +18,7 @@ import Login from './pages/Login'
 import UserProfile from './pages/UserProfile'
 import PopularMovies from './pages/PopularMovies'
 import PopularTVSeries from './pages/PopularTVSeries'
+import NotFound from './pages/NotFound'
 
 function App() {
   
@@ -41,6 +42,7 @@ function App() {
             <Route path="/:mediaTypeURL/:id/cast" element={<FullCast/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/users/:username" element={<UserProfile/>} />
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
         </main>
         <Footer/>
