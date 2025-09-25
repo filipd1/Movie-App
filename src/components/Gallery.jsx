@@ -1,10 +1,18 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import trailerIcon from "../assets/trailer.svg"
 import "../css/Gallery.css"
 
 function Gallery({ videos, photos }) {
     const [active, setActive] = useState("videos")
-  
+    const [activeVideo, setActiveVideo] = useState(null)
+    const [activePhoto, setActivePhoto] = useState(null)
+    const [lightboxImage, setLightboxImage] = useState(null)
+
+    useEffect(() => {
+        if (videos && videos.length > 0) setActiveVideo(videos[0])
+        if (photos?.backdrops && photos.backdrops.length > 0) setActivePhoto(photos.backdrops[0])
+    }, [videos, photos])
+
     return (
         <div className="media-container">
             <div className="flex">
@@ -32,24 +40,23 @@ function Gallery({ videos, photos }) {
                     <p className="component-empty">No videos found</p>
                 ) : (
                     <>
-                        {videos.slice(0, 1).map((video) => (
-                            <div className="media-main-video" key={video.key}>
-                                {video.site === "YouTube" && (
-                                    <iframe
-                                        className="media-main"
-                                        src={`https://www.youtube.com/embed/${video.key}`}
-                                        title={video.name}
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    ></iframe>
-                                )}
-                            </div>
-                        ))}
+                        <div className="media-main-video">
+                            {activeVideo && activeVideo.site === "YouTube" && (
+                                <iframe
+                                    className="media-main"
+                                    src={`https://www.youtube.com/embed/${activeVideo.key}`}
+                                    title={activeVideo.name}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
+                            )}
+                        </div>
+
                         <h4 className="media-slider-title">All trailers</h4>
                         <div className="media-slider">
                             {videos.length > 1 ? (
-                                videos.slice(1).map((video, i) =>
+                                videos.map((video, i) =>
                                     video.site === "YouTube" ? (
                                         <iframe
                                             className="media-item"
@@ -59,6 +66,7 @@ function Gallery({ videos, photos }) {
                                             frameBorder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowFullScreen
+                                            onClick={() => setActiveVideo(video)}
                                         ></iframe>
                                 ) : null
                             )
@@ -73,31 +81,40 @@ function Gallery({ videos, photos }) {
                 <p className="component-empty">No photos found</p>
             ) : (
                 <>
-                    {photos.backdrops.slice(0, 1).map((photo, i) => (
-                        <div className="media-main-video" key={i}>
+                    <div className="media-main-video">
+                        {activePhoto && (
                             <img
-                                src={`https://image.tmdb.org/t/p/w500${photo.file_path}`}
-                                alt={`image.title img-${i}`}
+                                src={`https://image.tmdb.org/t/p/original${activePhoto.file_path}`}
+                                alt={`main`}
                                 className="media-main"
+                                onClick={() => setLightboxImage(`https://image.tmdb.org/t/p/original${activePhoto.file_path}`)}
                             />
-                        </div>
-                    ))}
+                        )}
+                    </div>
+
                     <h4 className="media-slider-title">All images</h4>
                     <div className="media-slider">
                         {photos.backdrops.length > 1 ? (
-                            photos.backdrops.slice(1).map((photo, i) => (
+                            photos.backdrops.map((photo, i) => (
                                 <img
                                     key={i}
                                     src={`https://image.tmdb.org/t/p/w500${photo.file_path}`}
                                     alt={`image.title img-${i}`}
                                     className="media-item"
+                                    onClick={() => setActivePhoto(photo)}
                                 />
                         ))
                         ) : (
                             <p className="component-empty">No more photos found</p>
                         )}
-
                     </div>
+
+                    {lightboxImage && (
+                    <div className="lightbox" onClick={() => setLightboxImage(null)}>
+                        <img src={lightboxImage} alt="Full size" />
+                        <span className="close-lightbox">&times;</span>
+                    </div>
+                    )}
                 </>
             )}
         </div>

@@ -51,6 +51,7 @@
     width: 284px;
     height: 160px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {

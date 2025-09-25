@@ -1,6 +1,5 @@
 import { MediaContext } from "../contexts/MediaContext"
 import { AuthContext } from "../contexts/AuthContext"
-import "../css/MediaDetails.css"
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect, useContext } from "react"
 import actorIcon from "../assets/actor-icon.svg"
@@ -10,6 +9,7 @@ import watchLaterIcon from "../assets/eye.svg"
 import starIcon from "../assets/star.svg"
 import starFilledIcon from "../assets/star-filled.svg"
 import ratingIcon from "../assets/star-icon.svg"
+import "../css/MediaDetails.css"
 
 function MediaDetails({ media, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
@@ -96,7 +96,7 @@ function MediaDetails({ media, credits, images }) {
         <div className="movie-details">
         
             <div className={`bg-image ${media.backdrop_path ? "" : "no-bg-img"}`}>
-                {media.backdrop_path && <img src={`https://image.tmdb.org/t/p/w500${media.backdrop_path}`} alt={media.title} />}
+                {media.backdrop_path && <img src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`} alt={media.title} />}
             </div>
             
             <div className="movie-poster-wrapper">
@@ -171,28 +171,28 @@ function MediaDetails({ media, credits, images }) {
                     })}
                 </div>
 
-            <div className="movie-buttons">
-                <button onClick={handleFavorites}
-                    className={`
-                        ${isFavoritesClicked ? "btn-anim" : ""}
-                        ${isFavoritesUnclicked ? "btn-anim-back" : ""}
-                        ${isInFavorites ? "btn-clicked" : ""}
-                    `}>
-                    <img src={favoriteIcon} alt="favorite" />
-                    <span className={isInFavorites ? "hide-text" : ""}>Add to favorites</span>
-                </button>
-                <button onClick={handleWatchlist}
-                    className={`
-                        ${isWatchlistClicked ? "btn-anim" : ""}
-                        ${isWatchlistUnclicked ? "btn-anim-back" : ""}
-                        ${isInWatchlist ? "btn-clicked" : ""}
-                    `}>
-                    <img src={watchLaterIcon} alt="watch later" />
-                    <span>{isInWatchlist ? "" : "Add to watchlist"}</span>
-                </button>
-            </div>
+                <div className="movie-buttons">
+                    <button onClick={handleFavorites}
+                        className={`
+                            ${isFavoritesClicked ? "btn-anim" : ""}
+                            ${isFavoritesUnclicked ? "btn-anim-back" : ""}
+                            ${isInFavorites ? "btn-clicked" : ""}
+                        `}>
+                        <img src={favoriteIcon} alt="favorite" />
+                        <span className={isInFavorites ? "hide-text" : ""}>Add to favorites</span>
+                    </button>
+                    <button onClick={handleWatchlist}
+                        className={`
+                            ${isWatchlistClicked ? "btn-anim" : ""}
+                            ${isWatchlistUnclicked ? "btn-anim-back" : ""}
+                            ${isInWatchlist ? "btn-clicked" : ""}
+                        `}>
+                        <img src={watchLaterIcon} alt="watch later" />
+                        <span>{isInWatchlist ? "" : "Add to watchlist"}</span>
+                    </button>
+                </div>
 
-        </div>
+            </div>
 
             <div className="movie-media">
                 {images?.backdrops.slice(0, 8).map((image, i) => (

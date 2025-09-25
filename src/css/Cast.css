@@ -59,6 +59,7 @@
 
 .actor-card img {
   width: 150px;
+  min-height: 225px;
   border-radius: 5px;
   object-fit: cover;
 }
