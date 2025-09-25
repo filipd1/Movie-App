@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import "../css/Home.css"
 import MediaList from "../components/MediaList"
+import Loading from "../components/Loading"
 import { getPopularMovies, getPopularTVSeries } from "../services/api"
 import { useNavigate } from "react-router-dom"
 
@@ -56,9 +57,9 @@ function Home() {
         <button type="submit">Search</button>
       </form>
 
-      {error && <div className="error-message">{error}</div>}
+      {error && <div>{error}</div>}
       {loading ? (
-        <div className="loading">Loading...</div>
+        <Loading/>
       ) : (
         <>
           <MediaList mediaList={popularMovies} mediaListHeader="Trending movies" mediaNumber={6} URLto="/popular-movies"/>

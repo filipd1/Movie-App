@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { searchMedia } from "../services/api"
 import MediaCard from "../components/MediaCard"
+import Loading from "../components/Loading"
 
 function SearchResults() {
 
@@ -88,9 +89,9 @@ function SearchResults() {
         </form>
 
         <h2>Search results for: <i>{query}</i></h2>
-        {error && <div className="error-message">{error}</div>}
+        {error && <div>{error}</div>}
         {loading ? (
-        <div className="loading">Loading...</div>
+          <Loading/>
             ) : (
               <div className="movies-grid">
                 {searchResults.length > 0 ? (

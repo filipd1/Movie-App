@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { getTopTVSeriesMultiPages } from "../services/api"
 import MediaChart from "../components/MediaChart"
+import Loading from "../components/Loading"
 
 function TopRatedMovies() {
 
@@ -29,9 +30,9 @@ function TopRatedMovies() {
     return (
 
     <div className="container">
-      {error && <div className="error-message">{error}</div>}
+      {error && <div>{error}</div>}
       {loading ? (
-        <div className="loading">Loading...</div>
+        <Loading/>
       ) : (
         <MediaChart movies={tv} header="Top rated TV Series of all time"/>
       )}

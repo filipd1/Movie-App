@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { getPopularMovies, getTopMovies } from "../services/api"
 import MediaList from "../components/MediaList"
+import Loading from "../components/Loading"
 
 function Movies() {
   const [popularMovies, setPopularMovies] = useState([])
@@ -32,9 +33,9 @@ function Movies() {
 
   return (
     <div className="container">
-      {error && <div className="error-message">{error}</div>}
+      {error && <div>{error}</div>}
       {loading ? (
-        <div className="loading">Loading...</div>
+        <Loading/>
       ) : (
         <>
           <MediaList mediaList={popularMovies} mediaListHeader="Now popular movies" mediaNumber={6} URLto="/popular-movies"/>

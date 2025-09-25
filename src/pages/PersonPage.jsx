@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { getPersonById, getPersonCombinedCredits } from "../services/api"
 import PersonDetails from "../components/PersonDetails"
 import PersonCredits from "../components/PersonCredits"
+import Loading from "../components/Loading"
 
 function PersonPage() {
     const { id } = useParams()
@@ -40,8 +41,8 @@ function PersonPage() {
 
     return (
         <div className="container">
-            {error && <div className="error-message">{error}</div>}
-            {loading ? <div className="loading">Loading...</div> : (
+            {error && <div>{error}</div>}
+            {loading ? <Loading/> : (
                 <>
                     <PersonDetails person={person} />
                     <PersonCredits credits={personCredits} person={person}/>

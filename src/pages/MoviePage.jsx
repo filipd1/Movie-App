@@ -7,6 +7,7 @@ import Reviews from "../components/Reviews"
 import Similar from "../components/Similar"
 import Gallery from "../components/Gallery"
 import UserRatings from "../components/UserRatings"
+import Loading from "../components/Loading"
 import "../css/MediaPage.css"
 
 function MoviePage() {
@@ -61,8 +62,8 @@ function MoviePage() {
 
     return (
         <>
-            {error && <div className="error-message">{error}</div>}
-            {loading ? <div className="loading">Loading...</div> : (
+            {error && <div>{error}</div>}
+            {loading ? <Loading/> : (
                 <div className="container">
                     <div className="movie-title-wrapper"> 
                         <h5 className="media-type">Movie</h5>

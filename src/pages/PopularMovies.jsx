@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import MediaChart from "../components/MediaChart.jsx"
 import { getPopularMoviesMultiPages } from "../services/api.js"
+import MediaChart from "../components/MediaChart.jsx"
+import Loading from "../components/Loading.jsx"
 
 function PopularMovies() {
 
@@ -27,9 +28,9 @@ function PopularMovies() {
 
     return (
         <div className="container">
-            {error && <div className="error-message">{error}</div>}
+            {error && <div>{error}</div>}
             {loading ? (
-                <div className="loading">Loading...</div>
+                <Loading/>
             ) : (
                 <MediaChart movies={movies} header="Now popular movies"/>
             )}

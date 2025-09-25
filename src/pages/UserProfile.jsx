@@ -5,6 +5,7 @@ import "../css/UserProfile.css"
 import Favorites from "../components/Favorites.jsx"
 import Watchlist from "../components/Watchlist.jsx"
 import Ratings from "../components/Ratings.jsx"
+import Loading from "../components/Loading.jsx"
 
 const UserProfile = () => {
   const { username } = useParams()
@@ -25,11 +26,10 @@ const UserProfile = () => {
     }
   }, [username])
 
-  if (!user) return <div>Loading...</div>
+  if (!user) return <Loading/>
 
   return (
     <div className="container">
-
       <div className="user-profile">
         <div className="user-info-wrapepr">
           <img src="https://avatar.iran.liara.run/public/boy" alt="user-avatar" />

@@ -3,6 +3,7 @@ import { getMovieCredits, getTVSeriesCredits } from "../services/api"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import Loading from "../components/Loading"
 
 function FullCast() {
 
@@ -36,8 +37,8 @@ function FullCast() {
     return (
         <div className="container">
             <h1 className="container-title">Full credits</h1>
-            {error && <div className="error-message">{error}</div>}
-            {loading ? <div className="loading">Loading...</div> : (
+            {error && <div>{error}</div>}
+            {loading ? <Loading/> : (
                 <>
                     <div className="flex">
                         <button

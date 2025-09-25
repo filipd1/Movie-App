@@ -1,6 +1,7 @@
 import { getPopularTVSeries, getTopTVSeries } from "../services/api"
 import { useState, useEffect } from "react"
 import MediaList from "../components/MediaList"
+import Loading from "../components/Loading"
 
 function TVSeries() {
 
@@ -35,7 +36,7 @@ function TVSeries() {
         <div className="container">
             {error && <div className="error-message">{error}</div>}
             {loading ? (
-                <div className="loading">Loading...</div>
+                <Loading/>
             ) : (
                     <>
                         <MediaList mediaList={popularTVSeries} mediaListHeader="Now popular series" mediaNumber={6} URLto="/popular-tvseries"/>

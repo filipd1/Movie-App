@@ -7,6 +7,7 @@ import Reviews from "../components/Reviews"
 import Similar from "../components/Similar"
 import Gallery from "../components/Gallery"
 import UserRatings from "../components/UserRatings"
+import Loading from "../components/Loading"
 
 function TVSeriesPage() {
 
@@ -62,7 +63,7 @@ function TVSeriesPage() {
    return (
       <>
          {error && <div className="error-message">{error}</div>}
-         {loading ? <div className="loading">Loading...</div> : (
+         {loading ? <Loading/> : (
             <div className="container">
                <div className="movie-title-wrapper">
                   <h5 className="media-type">TV Series</h5>
