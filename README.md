@@ -2,8 +2,9 @@
 
 Aplikacja webowa inspirowana serwisem Filmweb, umożliwiająca przeglądanie szczegółowych informacji o filmach, serialach, aktorach, twórcach, ludziach kina, a także stworzenie własnego konta użytkownika w celu oceniania filmów/seriali, dodawania ich do swojej biblioteki "do obejrzenia" czy "uluibone".
 
+[Link do strony](https://movie-app-frontend-xmty.onrender.com)
+
 Dane są pobierane z [TheMovieDB API](https://www.themoviedb.org/)
-Link: https://movie-app-frontend-xmty.onrender.com
 ---
 
 ## 🔧 Technologie
