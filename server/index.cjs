@@ -18,116 +18,128 @@ app.use(express.json())
 const API_KEY = process.env.TMDB_API_KEY
 const BASE_URL = "https://api.themoviedb.org/3"
 
-const fetchFromTMDB = async (url, res) => {
-    try {
-        const response = await axios.get(`${BASE_URL}${url}`, {
-            params: { api_key: API_KEY }
-        })
-        res.json(response.data)
-    } catch (error) {
-        const status = error.response?.status || 500
-        const message = error.response?.data?.status_message || "Error fetching data from TMDB"
-        res.status(status).json({ error: message })
-    }
+const fetchFromTMDB = async (url, res, language = "en-US") => {
+  try {
+    const response = await axios.get(`${BASE_URL}${url}`, {
+      params: { api_key: API_KEY, language }
+    })
+    res.json(response.data)
+  } catch (error) {
+    const status = error.response?.status || 500
+    const message = error.response?.data?.status_message || "Error fetching data from TMDB"
+    res.status(status).json({ error: message })
+  }
 }
 
-const fetchMultiplePagesFromTMDB = async (endpoint, totalPages, res) => {
-    try {
-        const allResults = []
+const fetchMultiplePagesFromTMDB = async (endpoint, totalPages, res, language = "en-US") => {
+  try {
+    const allResults = []
 
-        for (let page = 1; page <= totalPages; page++) {
-            const response = await axios.get(`${BASE_URL}${endpoint}`, {
-                params: {
-                    api_key: API_KEY,
-                    page: page
-                }
-            })
-            allResults.push(...response.data.results)
+    for (let page = 1; page <= totalPages; page++) {
+      const response = await axios.get(`${BASE_URL}${endpoint}`, {
+        params: {
+          api_key: API_KEY,
+          page: page,
+          language
         }
-
-        res.json({ results: allResults })
-    } catch (error) {
-        const status = error.response?.status || 500
-        const message = error.response?.data?.status_message || "Error fetching multiple pages from TMDB"
-        res.status(status).json({ error: message })
+      })
+      allResults.push(...response.data.results)
     }
+
+    res.json({ results: allResults })
+  } catch (error) {
+      const status = error.response?.status || 500
+      const message = error.response?.data?.status_message || "Error fetching multiple pages from TMDB"
+      res.status(status).json({ error: message })
+  }
 }
 
-app.get("/movie/popular", (req, res) => fetchFromTMDB("/movie/popular", res))
-app.get("/movie/top", (req, res) => fetchFromTMDB("/movie/top_rated", res))
-app.get("/movie/upcoming", (req, res) => fetchFromTMDB("/movie/upcoming", res))
-app.get("/movie/:id", (req, res) => fetchFromTMDB(`/movie/${req.params.id}`, res))
-app.get("/movie/:id/reviews", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/reviews`, res))
-app.get("/movie/:id/credits", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/credits`, res))
-app.get("/movie/:id/similar", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/similar`, res))
-app.get("/movie/:id/images", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/images`, res))
-app.get("/movie/:id/videos", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/videos`, res))
+app.get("/movie/popular", (req, res) => fetchFromTMDB("/movie/popular", res, req.query.language))
+app.get("/movie/top", (req, res) => fetchFromTMDB("/movie/top_rated", res, req.query.language))
+app.get("/movie/upcoming", (req, res) => fetchFromTMDB("/movie/upcoming", res, req.query.language))
+app.get("/movie/:id", (req, res) => fetchFromTMDB(`/movie/${req.params.id}`, res, req.query.language))
+app.get("/movie/:id/reviews", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/reviews`, res, req.query.language))
+app.get("/movie/:id/credits", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/credits`, res, req.query.language))
+app.get("/movie/:id/similar", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/similar`, res, req.query.language))
+app.get("/movie/:id/images", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/images`, res, req.query.language))
+app.get("/movie/:id/videos", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/videos`, res, req.query.language))
 
-app.get("/tv/popular", (req, res) => fetchFromTMDB("/tv/popular", res))
-app.get("/tv/top", (req, res) => fetchFromTMDB("/tv/top_rated", res))
-app.get("/tv/:id", (req, res) => fetchFromTMDB(`/tv/${req.params.id}`, res))
-app.get("/tv/:id/reviews", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/reviews`, res))
-app.get("/tv/:id/credits", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/aggregate_credits`, res))
-app.get("/tv/:id/similar", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/similar`, res))
-app.get("/tv/:id/images", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/images`, res))
-app.get("/tv/:id/videos", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/videos`, res))
+app.get("/tv/popular", (req, res) => fetchFromTMDB("/tv/popular", res, req.query.language))
+app.get("/tv/top", (req, res) => fetchFromTMDB("/tv/top_rated", res, req.query.language))
+app.get("/tv/:id", (req, res) => fetchFromTMDB(`/tv/${req.params.id}`, res, req.query.language))
+app.get("/tv/:id/reviews", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/reviews`, res, req.query.language))
+app.get("/tv/:id/credits", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/aggregate_credits`, res, req.query.language))
+app.get("/tv/:id/similar", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/similar`, res, req.query.language))
+app.get("/tv/:id/images", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/images`, res, req.query.language))
+app.get("/tv/:id/videos", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/videos`, res, req.query.language))
 
-app.get("/person/:id", (req, res) => fetchFromTMDB(`/person/${req.params.id}`, res))
-app.get("/person/:id/credits", (req, res) => fetchFromTMDB(`/person/${req.params.id}/combined_credits`, res))
+app.get("/person/:id", (req, res) => fetchFromTMDB(`/person/${req.params.id}`, res, req.query.language))
+app.get("/person/:id/credits", (req, res) => fetchFromTMDB(`/person/${req.params.id}/combined_credits`, res, req.query.language))
 
 app.get("/movie/top/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
-  fetchMultiplePagesFromTMDB("/movie/top_rated", pages, res)
+  const language = req.query.language || "en-US"
+  fetchMultiplePagesFromTMDB("/movie/top_rated", pages, res, language)
 })
 
 app.get("/movie/popular/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
-  fetchMultiplePagesFromTMDB("/movie/popular", pages, res)
+  const language = req.query.language || "en-US"
+  fetchMultiplePagesFromTMDB("/movie/popular", pages, res, language)
 })
 
 app.get("/tv/top/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
-  fetchMultiplePagesFromTMDB("/tv/top_rated", pages, res)
+  const language = req.query.language || "en-US"
+  fetchMultiplePagesFromTMDB("/tv/top_rated", pages, res, language)
 })
 
 app.get("/tv/popular/multi", (req, res) => {
   const pages = parseInt(req.query.pages) || 1
-  fetchMultiplePagesFromTMDB("/tv/popular", pages, res)
+  const language = req.query.language || "en-US"
+  fetchMultiplePagesFromTMDB("/tv/popular", pages, res, language)
 })
 
 app.get("/search", async (req, res) => {
   const query = req.query.query
+  const language = req.query.language || "en-US"
+
+  if (!query) {
+    return res.status(400).json({ error: "Missing search query" })
+  }
+
   try {
-      const response = await axios.get(`${BASE_URL}/search/multi`, {
-          params: {
-              api_key: API_KEY,
-              query
-          }
-      })
-      res.json(response.data)
+    const response = await axios.get(`${BASE_URL}/search/multi`, {
+      params: {
+        api_key: API_KEY,
+        query,
+        language
+      }
+    })
+    res.json(response.data)
   } catch (err) {
-      res.status(500).json({ error: "Search failed" })
+      const status = err.response?.status || 500
+      res.status(status).json({ error: "Search failed" })
   }
 })
 
 app.post("/register", async (req,res) => {
   try {
-      const {username, email, password} = req.body
+    const {username, email, password} = req.body
 
-      if (!username || !email || !password) {
-          return res.status(400).json({ message: "All fields are required" })
-      }
+    if (!username || !email || !password) {
+        return res.status(400).json({ message: "All fields are required" })
+    }
 
-      const existingUser = await User.findOne({ email })
-      if (existingUser) {
-          return res.status(400).json({ message: "User with this email already exists" })
-      }
+    const existingUser = await User.findOne({ email })
+    if (existingUser) {
+        return res.status(400).json({ message: "User with this email already exists" })
+    }
 
-      const newUser = new User({ username, email, password })
-      await newUser.save()
+    const newUser = new User({ username, email, password })
+    await newUser.save()
 
-      res.status(201).json({ message: "User successfully registered" })
-
+    res.status(201).json({ message: "User successfully registered" })
   } catch (err) {
       console.log(err)
       res.status(500).json({ message: "Server error" })
@@ -136,29 +148,29 @@ app.post("/register", async (req,res) => {
 
 app.post("/login", async (req,res) => {
   try {
-      const { username, password} = req.body
+    const { username, password} = req.body
 
-      if (!username || !password) {
-          return res.status(400).json({ message: "Username and password are required" })
-      }
+    if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" })
+    }
 
-      const user = await User.findOne({ username })
-      if (!user) {
-          return res.status(400).json({ message: "User not found" })
-      }
+    const user = await User.findOne({ username })
+    if (!user) {
+        return res.status(400).json({ message: "User not found" })
+    }
 
-      const isMatch = await bcrypt.compare(password, user.password)
-      if (!isMatch) {
-          return res.status(401).json({ message: "Invalid password" })
-      }
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
+        return res.status(401).json({ message: "Invalid password" })
+    }
 
-      const token = jwt.sign(
-          { id: user._id, username: user.username },
-          process.env.JWT_SECRET,
-          { expiresIn: "30d" }
-      )
+    const token = jwt.sign(
+        { id: user._id, username: user.username },
+        process.env.JWT_SECRET,
+        { expiresIn: "30d" }
+    )
 
-      res.status(200).json({ message: "Login successful", token, user: { id: user._id, username: user.username} })
+    res.status(200).json({ message: "Login successful", token, user: { id: user._id, username: user.username} })
   } catch (err) {
       console.log(err)
       res.status(500).json({ message: "Server error" })
@@ -233,7 +245,7 @@ app.post("/users/:username/watchlist", auth, async (req, res) => {
   try {
     const { id, media_type } = req.body
     if (!id || !media_type) {
-      return res.status(400).json({ message: "id and media_type are required" })
+      return res.status(400).json({ message: "Id and media type are required" })
     }
 
     const user = await User.findOne({ username: req.params.username })
@@ -283,7 +295,7 @@ app.post("/users/:username/ratings", auth, async (req, res) => {
   try {
     const { id, media_type, rating } = req.body
     if (!id || !media_type || typeof rating !== "number") {
-      return res.status(400).json({ message: "id, media_type and rating are required" })
+      return res.status(400).json({ message: "Id, media type and rating are required" })
     }
 
     const user = await User.findOne({ username: req.params.username })
