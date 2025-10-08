@@ -6,6 +6,7 @@ import dropdownIcon from "../assets/dropdown.svg"
 import menuIcon from "../assets/menu.svg"
 import exitIcon from "../assets/exit.svg"
 import "../css/Navbar.css"
+import LangSwitch from "./LangSwitch"
 
 function NavBar() {
     const [query, setQuery] = useState("")
@@ -100,7 +101,6 @@ function NavBar() {
 
                     {userLoggedIn ? (
                         <>
-
                             <Link to={`/users/${user.username}`}><img className="navbar-avatar" src="https://avatar.iran.liara.run/public/boy" alt="avatar" /></Link>
                             <Link to={`/users/${user.username}`}><p className="navbar-name">{user?.username}</p></Link>
                             <button onClick={() => setShowDropdownMenu(prev => !prev)} className="dropdown-menu-button" ref={dropdownMenuButtonRef}>
@@ -110,6 +110,8 @@ function NavBar() {
                     ) : (
                         <Link to="/login" className="button-main button-nav">Login</Link>
                     )}
+
+                    <LangSwitch></LangSwitch>
 
                     {showDropdownMenu && 
                         <div className="dropdown-menu" ref={dropdownMenuRef}>
