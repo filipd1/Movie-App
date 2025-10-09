@@ -9,6 +9,8 @@ import Gallery from "../components/Gallery"
 import UserRatings from "../components/UserRatings"
 import Loading from "../components/Loading"
 import "../css/MediaPage.css"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function MoviePage() {
     const { id } = useParams()
@@ -21,6 +23,9 @@ function MoviePage() {
     const [userRatings, setUserRatings] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     useEffect(() => {
         const loadMovieData = async () => {

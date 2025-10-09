@@ -1,12 +1,17 @@
 import { useState, useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../contexts/AuthContext"
+import { useLanguage } from "../contexts/LangContext"
 import axios from "axios"
 import "../css/Login.css"
 import directorIcon from "../assets/director-icon.svg"
 import AuthForm from "../components/AuthForm"
+import { translations } from "../services/translations"
 
 function Login() {
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     const { login } = useContext(AuthContext)
     const [formData, setFormData] = useState({
@@ -105,23 +110,23 @@ function Login() {
                 <div className="form-desc">
                     <div className="flex">
                         <img src={directorIcon} alt="icon" />
-                        <p>Rate, review and track your favorite movies & shows.</p>
+                        <p>{t.loginFormDesc1}</p>
                     </div>
                     <div className="flex">
                         <img src={directorIcon} alt="icon" />
-                        <p>Join a community of film lovers from around the world.</p>
+                        <p>{t.loginFormDesc2}.</p>
                     </div>
                     <div className="flex">
                         <img src={directorIcon} alt="icon" />
-                        <p>From blockbusters to hidden gems — explore it all.</p>
+                        <p>{t.loginFormDesc3}</p>
                     </div>
                     <div className="flex">
                         <img src={directorIcon} alt="icon" />
-                        <p>Your personal universe of cinema starts here.</p>
+                        <p>{t.loginFormDesc4}</p>
                     </div>
 
-                    <p className="form-desc-paragraph">Don't wait, there are movies to be watched!</p>
-                    <button type="submit" className="form-btn" onClick={() => setHaveAccount(prev => !prev)}>{haveAccount ? "Create your account" : "Login instead"}</button>
+                    <p className="form-desc-paragraph">{t.loginFormDesc5}</p>
+                    <button type="submit" className="form-btn" onClick={() => setHaveAccount(prev => !prev)}>{haveAccount ? t.loginFormButton1 : t.loginFormButton2}</button>
                 </div>
             </div>
         </div>
