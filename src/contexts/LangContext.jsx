@@ -4,14 +4,16 @@ import { setCurrentLanguage } from "./LangContextHelper"
 const LangContext = createContext()
 
 export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useState("en")
+    const [language, setLanguage] = useState(() => localStorage.getItem("language") || "en")
 
     useEffect(() => {
         setCurrentLanguage(language)
+        localStorage.setItem("language", language)
     }, [language])
 
     const toggleLanguage = () => {
         setLanguage((prev) => (prev === "en" ? "pl" : "en"))
+        setTimeout(() => window.location.reload(), 1000)
     }
 
     return (

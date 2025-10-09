@@ -23,7 +23,21 @@ const fetchFromTMDB = async (url, res, language = "en-US") => {
     const response = await axios.get(`${BASE_URL}${url}`, {
       params: { api_key: API_KEY, language }
     })
-    res.json(response.data)
+
+    let data = response.data
+
+    if (
+      language === "pl-PL" &&
+      data &&
+      (!data.overview || data.overview.trim() === "")
+      ) {
+        const fallback = await axios.get(`${BASE_URL}${url}`, {
+          params: { api_key: API_KEY, language: "en-US" }
+        })
+        data.overview = fallback.data.overview
+    }
+
+    res.json(data)
   } catch (error) {
     const status = error.response?.status || 500
     const message = error.response?.data?.status_message || "Error fetching data from TMDB"
