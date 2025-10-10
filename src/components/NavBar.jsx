@@ -7,6 +7,8 @@ import menuIcon from "../assets/menu.svg"
 import exitIcon from "../assets/exit.svg"
 import "../css/Navbar.css"
 import LangSwitch from "./LangSwitch"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function NavBar() {
     const [query, setQuery] = useState("")
@@ -22,6 +24,9 @@ function NavBar() {
     const dropdownMenuRef = useRef(null)
     const dropdownMenuButtonRef = useRef(null)
     const navigate = useNavigate()
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -78,8 +83,8 @@ function NavBar() {
             <nav className="navbar">
                 <Link to="/" className="navbar-logo"><img src="/Logo2.png" alt="movie app" /><span>FilmScope</span></Link>
                 <div className="navbar-links">
-                    <NavLink to="/movies" className="nav-link ">Movies</NavLink>
-                    <NavLink to="/tvseries" className="nav-link">TV Series</NavLink>
+                    <NavLink to="/movies" className="nav-link ">{t.navbarMovies}</NavLink>
+                    <NavLink to="/tvseries" className="nav-link">{t.navbarTV}</NavLink>
                 </div>
                 <div className="navbar-account">
                     <button className="navbar-search-button" onClick={() => setShowSearchForm(prev => !prev)}>
@@ -91,7 +96,7 @@ function NavBar() {
                         ref={searchRef}>
                             <input
                                 type="text"
-                                placeholder="Search.."
+                                placeholder={`${t.searchText}...`}
                                 className="search-input navbar-search-input"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}

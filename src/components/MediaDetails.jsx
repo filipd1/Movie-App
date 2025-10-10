@@ -204,7 +204,6 @@ function MediaDetails({ media, credits, images }) {
                         className="movie-thumbnail"
                     />
                 ))}
-
             </div>
 
             {lightboxImage && (

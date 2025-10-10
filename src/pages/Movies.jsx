@@ -2,12 +2,17 @@ import { useState, useEffect } from "react"
 import { getPopularMovies, getTopMovies } from "../services/api"
 import MediaList from "../components/MediaList"
 import Loading from "../components/Loading"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function Movies() {
   const [popularMovies, setPopularMovies] = useState([])
   const [topMovies, setTopMovies] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
+
+  const { language } = useLanguage()
+  const t = translations[language]
 
   useEffect(() => {
     const loadData = async () => {
@@ -38,8 +43,8 @@ function Movies() {
         <Loading/>
       ) : (
         <>
-          <MediaList mediaList={popularMovies} mediaListHeader="Now popular movies" mediaNumber={6} URLto="/popular-movies"/>
-          <MediaList mediaList={topMovies} mediaListHeader="Top rated movies" mediaNumber={6} URLto="/top-movies"/>
+          <MediaList mediaList={popularMovies} mediaListHeader={t.moviePage1} mediaNumber={6} URLto="/popular-movies"/>
+          <MediaList mediaList={topMovies} mediaListHeader={t.moviePage2} mediaNumber={6} URLto="/top-movies"/>
         </>
       )}
     </div>

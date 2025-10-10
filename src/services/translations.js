@@ -1,5 +1,16 @@
 export const translations = {
     en: {
+        homeText1: "Trending movies",
+        homeText2: "Trending series",
+
+        moviePage1: "Now popular",
+        moviePage2: "Top rated",
+
+        searchText: "Search",
+
+        navbarMovies: "Movies",
+        navbarTV: "TV Series",
+
         loginTitle: "Welcome to",
         loginSubtitle: "Your universe of movies, reviews & ratings",
         loginFormDesc1: "Rate, review and track your favorite movies & shows.",
@@ -11,6 +22,17 @@ export const translations = {
         loginFormButton2: "Login instead",
     },
     pl: {
+        homeText1: "Filmy zyskujące popularność",
+        homeText2: "Seriale zyskujące popularność",
+
+        moviePage1: "Aktualnie na czasie",
+        moviePage2: "Najwyżej oceniane",
+
+        searchText: "Szukaj",
+
+        navbarMovies: "Filmy",
+        navbarTV: "Seriale",
+
         loginTitle: "Witamy w",
         loginSubtitle: "Odkrywaj filmy, seriale, recenzje i wiele więcej",
         loginFormDesc1: "Oceniaj, recenzuj, śledź swoje ulubione filmy i seriale.",

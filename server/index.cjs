@@ -75,8 +75,8 @@ app.get("/movie/:id", (req, res) => fetchFromTMDB(`/movie/${req.params.id}`, res
 app.get("/movie/:id/reviews", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/reviews`, res, "en-US"))
 app.get("/movie/:id/credits", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/credits`, res, req.query.language))
 app.get("/movie/:id/similar", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/similar`, res, req.query.language))
-app.get("/movie/:id/images", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/images`, res, req.query.language))
-app.get("/movie/:id/videos", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/videos`, res, req.query.language))
+app.get("/movie/:id/images", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/images`, res, "en-US"))
+app.get("/movie/:id/videos", (req, res) => fetchFromTMDB(`/movie/${req.params.id}/videos`, res, "en-US"))
 
 app.get("/tv/popular", (req, res) => fetchFromTMDB("/tv/popular", res, req.query.language))
 app.get("/tv/top", (req, res) => fetchFromTMDB("/tv/top_rated", res, req.query.language))
@@ -84,8 +84,8 @@ app.get("/tv/:id", (req, res) => fetchFromTMDB(`/tv/${req.params.id}`, res, req.
 app.get("/tv/:id/reviews", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/reviews`, res, "en-US"))
 app.get("/tv/:id/credits", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/aggregate_credits`, res, req.query.language))
 app.get("/tv/:id/similar", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/similar`, res, req.query.language))
-app.get("/tv/:id/images", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/images`, res, req.query.language))
-app.get("/tv/:id/videos", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/videos`, res, req.query.language))
+app.get("/tv/:id/images", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/images`, res, "en-US"))
+app.get("/tv/:id/videos", (req, res) => fetchFromTMDB(`/tv/${req.params.id}/videos`, res, "en-US"))
 
 app.get("/person/:id", (req, res) => fetchFromTMDB(`/person/${req.params.id}`, res, req.query.language))
 app.get("/person/:id/credits", (req, res) => fetchFromTMDB(`/person/${req.params.id}/combined_credits`, res, req.query.language))

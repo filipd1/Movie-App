@@ -13,7 +13,7 @@ export const LanguageProvider = ({ children }) => {
 
     const toggleLanguage = () => {
         setLanguage((prev) => (prev === "en" ? "pl" : "en"))
-        setTimeout(() => window.location.reload(), 1000)
+        window.location.reload()
     }
 
     return (

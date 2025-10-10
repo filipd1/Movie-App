@@ -4,6 +4,8 @@ import MediaList from "../components/MediaList"
 import Loading from "../components/Loading"
 import { getPopularMovies, getPopularTVSeries } from "../services/api"
 import { useNavigate } from "react-router-dom"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function Home() {
   const [query, setQuery] = useState("")
@@ -13,6 +15,9 @@ function Home() {
   const [popularTVSeries, setPopularTVSeries] = useState([])
 
   const navigate = useNavigate()
+
+  const { language } = useLanguage()
+  const t = translations[language]
 
   useEffect(() => {
     const loadData = async () => {
@@ -49,12 +54,12 @@ function Home() {
       <form className="search-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Search.."
+          placeholder={`${t.searchText}...`}
           className="search-input"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit">Search</button>
+        <button type="submit">{t.searchText}</button>
       </form>
 
       {error && <div>{error}</div>}
@@ -62,8 +67,8 @@ function Home() {
         <Loading/>
       ) : (
         <>
-          <MediaList mediaList={popularMovies} mediaListHeader="Trending movies" mediaNumber={6} URLto="/popular-movies"/>
-          <MediaList mediaList={popularTVSeries} mediaListHeader="Trending series" mediaNumber={6} URLto="/popular-tvseries"/>
+          <MediaList mediaList={popularMovies} mediaListHeader={t.homeText1} mediaNumber={6} URLto="/popular-movies"/>
+          <MediaList mediaList={popularTVSeries} mediaListHeader={t.homeText2} mediaNumber={6} URLto="/popular-tvseries"/>
         </>
       )}
     </div>

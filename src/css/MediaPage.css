@@ -2,6 +2,12 @@
     font-size: 40px;
 }
 
+.movie-original-title {
+    font-size: 19px;
+    opacity: .7;
+    margin-bottom: 6px;
+}
+
 .movie-time {
     color: rgba(255, 255, 255, .7);
 }
