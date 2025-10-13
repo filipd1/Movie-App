@@ -6,6 +6,11 @@ export const translations = {
         moviePage1: "Now popular",
         moviePage2: "Top rated",
 
+        topRatedMovies: "Top rated movies of all time",
+        topRatedTVSeries: "Top rated TV Series of all time",
+        popularMovies: "Currently popular movies",
+        popularTVSeries: "Currently popular TV Series",
+
         searchText: "Search",
 
         navbarMovies: "Movies",
@@ -22,8 +27,9 @@ export const translations = {
         loginFormButton2: "Login instead",
 
         movieDetailsVotes: "votes",
-        movieDetailsRate: "Rate this movie",
-        movieDetailsFavorite: "Add to favorite",
+        movieDetailsRate: "Rate this ",
+        movieDetailsRated: "Your score",
+        movieDetailsFavorites: "Add to favorite",
         movieDetailsWatchlist: "Add to watchlist",
         movieDetailsInfo: "Information",
         movieDetailsDirector: "Director",
@@ -51,8 +57,20 @@ export const translations = {
         movieDetailsReviewsEmpty: "No reviews",
         movieDetailsRatingsAll: "All ratings for this movie",
         movieDetailsRatingsAllEmpty: "Be first to rate this movie",
+        
+        castTitle: "Full credits",
+        cast: "Cast",
+        crew: "Crew",
+        castEmpty: "No cast data available",
+        crewEmpty: "No crew data available",
 
-        loading: "Loading..."
+        footerText: "Upcoming",
+
+        readMore: "read more",
+        loading: "Loading...",
+        movie: "movie",
+        tvSeries: "TV series",
+        seasons: "Seasons",
     },
     pl: {
         homeText1: "Filmy zyskujące popularność",
@@ -60,6 +78,11 @@ export const translations = {
 
         moviePage1: "Aktualnie na czasie",
         moviePage2: "Najwyżej oceniane",
+
+        topRatedMovies: "Najlepsze filmy",
+        topRatedTVSeries: "Najlepsze seriale",
+        popularMovies: "Najbardziej popularne filmy",
+        popularTVSeries: "Najbardziej popularne seriale",
 
         searchText: "Szukaj",
 
@@ -76,9 +99,10 @@ export const translations = {
         loginFormButton1: "Stwórz konto",
         loginFormButton2: "Mam już konto",
 
-        movieDetailsVotes: "głosów",
-        movieDetailsRate: "Twoja ocena",
-        movieDetailsFavorite: "Ulubione",
+        movieDetailsVotes: "ocen",
+        movieDetailsRate: "Oceń ten ",
+        movieDetailsRated: "Twoja ocena",
+        movieDetailsFavorites: "Ulubione",
         movieDetailsWatchlist: "Do obejrzenia",
         movieDetailsInfo: "Informacje",
         movieDetailsDirector: "Reżyser",
@@ -107,6 +131,18 @@ export const translations = {
         movieDetailsRatingsAll: "Oceny innych użytkowników",
         movieDetailsRatingsAllEmpty: "Bądź pierwszą osobą, która to oceni",
         
-        loading: "Ładowanie..."
+        castTitle: "Pełna obsada",
+        cast: "Obsada",
+        crew: "Twórcy",
+        castEmpty: "Brak danych o obsadzie",
+        crewEmpty: "Brak danych",
+
+        footerText: "Nadchodzące premiery",
+
+        readMore: "więcej",
+        loading: "Ładowanie...",
+        movie: "film",
+        tvSeries: "serial",
+        seasons: "Sezony",
     }
 }

@@ -2,12 +2,17 @@ import { useState, useEffect } from "react"
 import { getTopMoviesMultiPages } from "../services/api"
 import MediaChart from "../components/MediaChart"
 import Loading from "../components/Loading"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function TopRatedMovies() {
 
     const [movies, setMovies] = useState([])
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(true)
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     useEffect(() => {
     const loadData = async () => {
@@ -23,7 +28,7 @@ function TopRatedMovies() {
       }
     }
       loadData()
-      document.title = "Top Rated Movies"
+      document.title = t.topRatedMovies
     }, [])
 
     return (
@@ -33,7 +38,7 @@ function TopRatedMovies() {
       {loading ? (
         <Loading/>
       ) : (
-        <MediaChart movies={movies} header="Top rated movies of all time"/>
+        <MediaChart movies={movies} header={t.topRatedMovies}/>
       )}
     </div>
     )

@@ -1,12 +1,13 @@
 import MediaCard from "./MediaCard"
 import { Link } from "react-router-dom"
 import "../css/MediaList.css"
+import Loading from "./Loading"
 
 function MediaList({ mediaList, mediaListHeader, mediaNumber = null, URLto}) {
 
 
     if (mediaList === null) {
-        return <div className="loading">Loading media list</div>
+        return <Loading />
     }
 
     return (

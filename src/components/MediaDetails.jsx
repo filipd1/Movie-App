@@ -10,6 +10,8 @@ import starIcon from "../assets/star.svg"
 import starFilledIcon from "../assets/star-filled.svg"
 import ratingIcon from "../assets/star-icon.svg"
 import "../css/MediaDetails.css"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function MediaDetails({ media, credits, images }) {
     const [lightboxImage, setLightboxImage] = useState(null)
@@ -21,6 +23,9 @@ function MediaDetails({ media, credits, images }) {
     const [isWatchlistUnclicked, setIsWatchlistUnclicked] = useState(false)
     const [hoverRating, setHoverRating] = useState(null)
     const [userRating, setUserRating] = useState(null)
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     const mediaType = media?.first_air_date ? "tv" : "movie"
     const directors = credits.crew?.filter(c => c.job === "Director")
@@ -146,13 +151,13 @@ function MediaDetails({ media, credits, images }) {
                             : "N/A"
                         }
                     </p>
-                    <p>{media.vote_count} votes</p>
+                    <p>{media.vote_count} {t.movieDetailsVotes}</p>
                 </div>
 
                 <div className="movie-rating">
                     <div>
                         <img src={ratingIcon} alt="rating-star" />
-                        <p>{userCurrentRating ? `Your rating:  ${userCurrentRating}/10` : `Rate this ${mediaType === "movie" ? "movie" : "TV series"}:`}</p>
+                        <p>{userCurrentRating ? `${t.movieDetailsRated}:  ${userCurrentRating}/10` : `${t.movieDetailsRate} ${mediaType === "movie" ? t.movie : t.tvSeries}:`}</p>
                     </div>
                     {Array(10).fill().map((_, index) => {
                         const starValue = index +1
@@ -179,7 +184,7 @@ function MediaDetails({ media, credits, images }) {
                             ${isInFavorites ? "btn-clicked" : ""}
                         `}>
                         <img src={favoriteIcon} alt="favorite" />
-                        <span className={isInFavorites ? "hide-text" : ""}>Add to favorites</span>
+                        <span className={isInFavorites ? "hide-text" : ""}>{t.movieDetailsFavorites}</span>
                     </button>
                     <button onClick={handleWatchlist}
                         className={`
@@ -188,7 +193,7 @@ function MediaDetails({ media, credits, images }) {
                             ${isInWatchlist ? "btn-clicked" : ""}
                         `}>
                         <img src={watchLaterIcon} alt="watch later" />
-                        <span>{isInWatchlist ? "" : "Add to watchlist"}</span>
+                        <span>{isInWatchlist ? "" : t.movieDetailsWatchlist}</span>
                     </button>
                 </div>
 

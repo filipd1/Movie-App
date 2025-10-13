@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom"
 import "../css/MediaChart.css"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function MediaChart( { movies, header } ) {
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     return (
         <div className="movie-chart">
@@ -26,7 +31,7 @@ function MediaChart( { movies, header } ) {
                                     : m.overview
                                 }
                                 {m.overview.length > 150 &&
-                                    <Link to={m.title ? `/movie/${m.id}` : `/tv/${m.id}`}> read more</Link>
+                                    <Link to={m.title ? `/movie/${m.id}` : `/tv/${m.id}`}> {t.readMore}</Link>
                                 }
                             </p>
                             
@@ -37,7 +42,7 @@ function MediaChart( { movies, header } ) {
                                         : "N/A"
                                     }
                                 </p>
-                                <p>{m.vote_count} votes</p>
+                                <p>{m.vote_count} {t.movieDetailsVotes}</p>
                             </div>
                         </div>
                     </div>

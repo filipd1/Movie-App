@@ -2,12 +2,17 @@ import { useState, useEffect } from "react"
 import { getTopTVSeriesMultiPages } from "../services/api"
 import MediaChart from "../components/MediaChart"
 import Loading from "../components/Loading"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function TopRatedMovies() {
 
     const [tv, setTV] = useState([])
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     useEffect(() => {
     const loadData = async () => {
@@ -24,7 +29,7 @@ function TopRatedMovies() {
       }
     }
       loadData()
-      document.title = "Top Rated TV Series"
+      document.title = t.topRatedTVSeries
     }, [])
 
     return (
@@ -34,7 +39,7 @@ function TopRatedMovies() {
       {loading ? (
         <Loading/>
       ) : (
-        <MediaChart movies={tv} header="Top rated TV Series of all time"/>
+        <MediaChart movies={tv} header={t.topRatedTVSeries}/>
       )}
     </div>
     )

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Loading from "../components/Loading"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function FullCast() {
 
@@ -12,6 +14,9 @@ function FullCast() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [active, setActive] = useState("cast")
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     const uniqueCrew = credits.crew
         ? [...new Map(credits.crew.map(member => [member.id, member])).values()]
@@ -36,7 +41,7 @@ function FullCast() {
 
     return (
         <div className="container">
-            <h1 className="container-title">Full credits</h1>
+            <h1 className="container-title">{t.castTitle}</h1>
             {error && <div>{error}</div>}
             {loading ? <Loading/> : (
                 <>
@@ -45,13 +50,13 @@ function FullCast() {
                             className={`media-switch-button ${active === "cast" ? "active" : ""}`}
                             onClick={() => setActive("cast")}
                         >
-                            Cast
+                            {t.cast}
                         </button>
                         <button
                             className={`media-switch-button ${active === "crew" ? "active" : ""}`}
                             onClick={() => setActive("crew")}
                         >
-                            Crew
+                            {t.crew}
                         </button>
                     </div>
                     <hr className="full-cast-hr"/>
@@ -85,7 +90,7 @@ function FullCast() {
                                 </div>
                         ))
                             ) : (
-                                <p>No cast data available.</p>
+                                <p>{t.castEmpty}</p>
                             )}
                         </div>
                     ) : (
@@ -114,7 +119,7 @@ function FullCast() {
                                 </div>
                             ))
                                 ) : (
-                                    <p>No crew data available.</p>
+                                    <p>{t.crewEmpty}</p>
                             )}
                         </div>
                     )}

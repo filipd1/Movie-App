@@ -61,7 +61,7 @@ function MoviePage() {
       if (movie?.title) {
          document.title = movie.title
       } else {
-         document.title = "Loading..."
+         document.title = t.loading
       }
     }, [movie])
 
@@ -71,7 +71,7 @@ function MoviePage() {
             {loading ? <Loading/> : (
                 <div className="container">
                     <div className="movie-title-wrapper"> 
-                        <h5 className="media-type">Movie</h5>
+                        <h5 className="media-type">{t.movie}</h5>
                         <h1 className="movie-title">{movie.title}</h1>
                         {(language === "pl" && movie.title !== movie.original_title) && <h2 className="movie-original-title">{movie.original_title}</h2>}
                         <p className="movie-subtitle">{movie.tagline}</p>
