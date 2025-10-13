@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react"
 import trailerIcon from "../assets/trailer.svg"
 import "../css/Gallery.css"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function Gallery({ videos, photos }) {
     const [active, setActive] = useState("videos")
     const [activeVideo, setActiveVideo] = useState(null)
     const [activePhoto, setActivePhoto] = useState(null)
     const [lightboxImage, setLightboxImage] = useState(null)
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     useEffect(() => {
         if (videos && videos.length > 0) setActiveVideo(videos[0])
@@ -25,19 +30,19 @@ function Gallery({ videos, photos }) {
                     className={`media-switch-button ${active === "videos" ? "active" : ""}`}
                     onClick={() => setActive("videos")}
                 >
-                    Trailers
+                    {t.movieDetailsTrailers}
                 </button>
                 <button
                     className={`media-switch-button ${active === "photos" ? "active" : ""}`}
                     onClick={() => setActive("photos")}
                 >
-                    Photos
+                    {t.movieDetailsPhotos}
                 </button>
             </div>
 
             {active === "videos" ? (
                 !videos || videos.length === 0 ? (
-                    <p className="component-empty">No videos found</p>
+                    <p className="component-empty">{t.movieDetailsTrailersEmpty}</p>
                 ) : (
                     <>
                         <div className="media-main-video">
@@ -53,7 +58,7 @@ function Gallery({ videos, photos }) {
                             )}
                         </div>
 
-                        <h4 className="media-slider-title">All trailers</h4>
+                        <h4 className="media-slider-title">{t.movieDetailsTrailersAll}</h4>
                         <div className="media-slider">
                             {videos.length > 1 ? (
                                 videos.map((video, i) =>
@@ -71,14 +76,14 @@ function Gallery({ videos, photos }) {
                                 ) : null
                             )
                             ) : (
-                                <p className="component-empty">No more videos found</p>
+                                <p className="component-empty">{t.movieDetailsTrailersAllEmpty}</p>
                             )}
 
                         </div>
                     </>
                 )
             ) : !photos || !photos.backdrops || photos.backdrops.length === 0 ? (
-                <p className="component-empty">No photos found</p>
+                <p className="component-empty">{t.movieDetailsPhotosEmpty}</p>
             ) : (
                 <>
                     <div className="media-main-video">
@@ -92,7 +97,7 @@ function Gallery({ videos, photos }) {
                         )}
                     </div>
 
-                    <h4 className="media-slider-title">All images</h4>
+                    <h4 className="media-slider-title">{t.movieDetailsPhotosAll}</h4>
                     <div className="media-slider">
                         {photos.backdrops.length > 1 ? (
                             photos.backdrops.map((photo, i) => (
@@ -105,7 +110,7 @@ function Gallery({ videos, photos }) {
                                 />
                         ))
                         ) : (
-                            <p className="component-empty">No more photos found</p>
+                            <p className="component-empty">{t.movieDetailsPhotosAllEmpty}</p>
                         )}
                     </div>
 

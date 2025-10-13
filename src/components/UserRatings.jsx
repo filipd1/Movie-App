@@ -3,11 +3,16 @@ import starIcon from "../assets/star.svg"
 import starFilledIcon from "../assets/star-filled.svg"
 import ratingIcon from "../assets/ratings.svg"
 import "../css/UserRatings.css"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function userRatings({ ratings }) {
 
     const { id } = useParams()
     const location = useLocation()
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     const mediaType = location.pathname.startsWith("/movie") ? "movie" : "tv"
     const usersRatings = ratings
@@ -21,7 +26,7 @@ function userRatings({ ratings }) {
         <>
             <div className="flex">
                 <img src={ratingIcon} alt="" className="star-icon"/>
-                <h2 className="container-title">All ratings for this movie</h2>
+                <h2 className="container-title">{t.movieDetailsRatingsAll}</h2>
             </div>
             {usersRatings.length > 0 ? (
                 <div className="user-ratings">
@@ -45,7 +50,7 @@ function userRatings({ ratings }) {
                     ))}
                 </div>
             ) : (
-                <p className="component-empty">Be first to rate this {mediaType === "movie" ? "movie" : "TV series"}</p>
+                <p className="component-empty">{t.movieDetailsRatingsAllEmpty}</p>
             )}
 
         </>

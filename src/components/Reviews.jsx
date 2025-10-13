@@ -1,19 +1,25 @@
-import reviewsIcon from "../assets/review.svg";
-import { useState } from "react";
-import "../css/Reviews.css";
+import reviewsIcon from "../assets/review.svg"
+import { useState } from "react"
+import "../css/Reviews.css"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function Reviews({ reviews, mediaType }) {
-    const [expandedIndex, setExpandedIndex] = useState(null);
+    const [expandedIndex, setExpandedIndex] = useState(null)
+
+    const { language } = useLanguage()
+    const t = translations[language]
+
 
     const sortedReviews = reviews?.results.slice().sort((a, b) => {
-        return new Date(b.created_at) - new Date(a.created_at);
-    });
-
+        return new Date(b.created_at) - new Date(a.created_at)
+    })
+    
     return (
         <div className="reviews-container">
             <div className="flex">
                 <img src={reviewsIcon} alt="reviews-icon" />
-                <h2 className="container-title">Reviews</h2>
+                <h2 className="container-title">{t.movieDetailsReviews}</h2>
             </div>
 
             {sortedReviews.length > 0 ? (
@@ -47,10 +53,10 @@ function Reviews({ reviews, mediaType }) {
                     ))}
                 </div>
             ) : (
-                <p className="component-empty">No reviews for this {mediaType === "movie" ? "movie" : "TV series"}</p>
+                <p className="component-empty">{t.movieDetailsReviewsEmpty}</p>
             )}
         </div>
-    );
+    )
 }
 
 export default Reviews;

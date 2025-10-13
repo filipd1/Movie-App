@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom"
 import "../css/Cast.css"
 import infoIcon from "../assets/info.svg"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function Cast({ movie, credits }) {
 
     const directors = credits.crew?.filter(c => c.job === "Director")
     const mediaType = movie.title ? "movie" : "tv"
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     return (
         <div className="cast-container"> 
@@ -13,12 +18,12 @@ function Cast({ movie, credits }) {
             <div className="movie-detailed-info">
                 <div className="flex">
                     <img src={infoIcon} alt="movie-info" />
-                    <p className="movie-info-header"> Information</p>
+                    <p className="movie-info-header">{t.movieDetailsInfo}</p>
                 </div>
 
                 {movie.title ? (
                     <>
-                        <p>Director</p>
+                        <p>{t.movieDetailsDirector}</p>
                         {directors && directors.length > 0 ? (
                             directors.map((d, i) => (
                                 <Link to={`/person/${d.id}`} key={i}>
@@ -31,7 +36,7 @@ function Cast({ movie, credits }) {
                     </>
                 ) : (
                     <>
-                        <p>Creator</p>
+                        <p>{t.movieDetailsCreator}</p>
                         {movie.created_by && movie.created_by.length > 0 ? (
                             movie.created_by.map((c, i) => (
                                 <Link to={`/person/${c.id}`} key={i}>
@@ -44,28 +49,28 @@ function Cast({ movie, credits }) {
                     </>
                 )}
 
-                <p>Original Language</p>
+                <p>{t.movieDetailsLanguage}</p>
                 <strong>{movie.original_language.toUpperCase()}</strong>
-                <p>Production</p>
+                <p>{t.movieDetailsProduction}</p>
                 {movie.production_companies.slice(0, 1).map((c, i) => (
                     <strong key={i}>{c.name}</strong>
                 ))}
                 <div className="flex mrg-top">
                     <img src={infoIcon} alt="movie-info" />
-                    <p className="movie-info-header">Numbers</p>
+                    <p className="movie-info-header">{t.movieDetailsNumbers}</p>
                 </div>
                 {movie.title ? (
                     <>
-                        <p>Budget</p>
+                        <p>{t.movieDetailsBudget}</p>
                         <strong>${movie.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</strong>
-                        <p>Revenue</p>
+                        <p>{t.movieDetailsRevenue}</p>
                         <strong>${(movie.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "))}</strong>
                     </>
                 ) : (
                     <>
-                        <p>Number of Seasons</p>
+                        <p>{t.movieDetailsSeasons}</p>
                         <strong>{movie.number_of_seasons}</strong>
-                        <p>Total episodes</p>
+                        <p>{t.movieDetailsEpisodes}</p>
                         <strong>{movie.number_of_episodes}</strong>
                     </>
                 )}
@@ -75,7 +80,7 @@ function Cast({ movie, credits }) {
 
             <div className="cast-wrapper">
                 <p className="actor-title">
-                    {movie.title ? (`${movie.title}'s cast:`) : (`${movie.name}'s cast:`)}
+                    {movie.title ? (`${movie.title}${t.movieDetailsCast}`) : (`${movie.name}'s cast:`)}
                 </p>
                 <div className="actor-slider">
                     {directors && directors.length > 0 && (
@@ -131,7 +136,7 @@ function Cast({ movie, credits }) {
                     ))}    
                 </div>
                 <Link to={`/${mediaType}/${movie.id}/cast/`} className="view-more">
-                    View full cast & crew
+                    {t.movieDetailsFullCast}
                 </Link>
             </div>
 

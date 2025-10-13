@@ -1,14 +1,19 @@
 import MediaCard from "./MediaCard"
 import similarIcon from "../assets/similar.svg"
 import "../css/Similar.css"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function Similar({ movie }) {
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     return (
         <div className="similar-movies-container">
             <div className="flex">
                 <img src={similarIcon} alt="similar-icon" />
-                <h2 className="container-title">Similar</h2>
+                <h2 className="container-title">{t.movieDetailsSimilar}</h2>
             </div>
             <div className="similar-movies">
                 {movie.results.length > 0 ? (
@@ -16,7 +21,7 @@ function Similar({ movie }) {
                         <MediaCard movie={m} pageType="favorites" key={i}/>
                     ))
                 ) : (
-                    <p>Nothing here yet</p>
+                    <p>{t.movieDetailsSimilarEmpty}</p>
                 )}
 
             </div>
