@@ -1,4 +1,5 @@
 import { useLanguage } from "../contexts/LangContext"
+import "../css/LangSwitch.css"
 
 function LangSwitch() {
   const { language, toggleLanguage } = useLanguage()
@@ -9,7 +10,7 @@ function LangSwitch() {
         <input type="checkbox" onChange={toggleLanguage} checked={language === "pl"} />
         <span className="slider"></span>
       </label>
-      <p>{language === "pl" ? "PL" : "EN"}</p>
+      <p>{language === "pl" ? "PL" : "ENG"}</p>
     </div>
   )
 }
