@@ -16,6 +16,11 @@ export const translations = {
         navbarMovies: "Movies",
         navbarTV: "TV Series",
 
+        dropdownMenuItem1: "Movies",
+        dropdownMenuItem2: "TV Series",
+        dropdownMenuItem3: "Account",
+        dropdownMenuItem4: "Logout",
+
         loginTitle: "Welcome to",
         loginSubtitle: "Your universe of movies, reviews & ratings",
         loginFormDesc1: "Rate, review and track your favorite movies & shows.",
@@ -98,6 +103,11 @@ export const translations = {
 
         navbarMovies: "Filmy",
         navbarTV: "Seriale",
+
+        dropdownMenuItem1: "Filmy",
+        dropdownMenuItem2: "Seriale",
+        dropdownMenuItem3: "Profil",
+        dropdownMenuItem4: "Wyloguj",
 
         loginTitle: "Witamy w",
         loginSubtitle: "Odkrywaj filmy, seriale, recenzje i wiele więcej",

@@ -120,10 +120,10 @@ function NavBar() {
 
                     <div className={`dropdown-menu ${showDropdownMenu ? "show" : ""}`} ref={dropdownMenuRef} aria-hidden={!showDropdownMenu}>
                         <div className="dropdown-menu-links">
-                            <Link to="/movies" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
-                            <Link to="/tvseries" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
-                            <Link to={`/users/${user.username}`} className="dropdown-menu-link" onClick={() => setShowDropdownMenu(false)}>Account</Link>
-                            <Link to="/" className="dropdown-menu-link" onClick={handleLogout}>Logout</Link>
+                            <Link to="/movies" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>{t.dropdownMenuItem1}</Link>
+                            <Link to="/tvseries" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>{t.dropdownMenuItem2}</Link>
+                            <Link to={user ? `/users/${user.username}` : "#"} className="dropdown-menu-link" onClick={() => setShowDropdownMenu(false)}>{t.dropdownMenuItem3}</Link>
+                            <Link to="/" className="dropdown-menu-link" onClick={handleLogout}>{t.dropdownMenuItem4}</Link>
                         </div>
                     </div>
                     
@@ -135,10 +135,10 @@ function NavBar() {
                 
                 <div className={`mobile-menu ${showMobileMenu ? "mobile-menu-active" : ""}`} ref={mobileMenuRef}>
                     <div className="mobile-menu-links">
-                        <Link to="/movies" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
-                        <Link to="/tvseries" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
-                        <Link to="/" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>Account</Link>
-                        <Link to="/" className="mobile-menu-link" onClick={handleLogout}>Logout</Link>
+                        <Link to="/movies" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>{t.dropdownMenuItem1}</Link>
+                        <Link to="/tvseries" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>{t.dropdownMenuItem2}</Link>
+                        <Link to="/" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>{t.dropdownMenuItem3}</Link>
+                        <Link to="/" className="mobile-menu-link" onClick={handleLogout}>{t.dropdownMenuItem4}</Link>
                     </div>
                 </div>
 
