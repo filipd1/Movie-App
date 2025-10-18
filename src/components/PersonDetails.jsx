@@ -66,7 +66,7 @@ function PersonDetails({ person }) {
                         {person.deathday && 
                             <>
                                 <div className="flex"><img src={deathIcon} alt="death-icon" /><strong>{t.personDeathday}</strong></div>
-                                <p>{person.deathday}</p>
+                                <p>{formatDate(person.deathday)}</p>
                             </>
                         }
                         <div className="flex"><img src={personIcon} alt="place-icon" /><strong>{t.personGender}</strong></div>         
