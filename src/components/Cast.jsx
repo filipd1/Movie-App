@@ -80,7 +80,7 @@ function Cast({ movie, credits }) {
 
             <div className="cast-wrapper">
                 <p className="actor-title">
-                    {movie.title ? (`${movie.title}${t.movieDetailsCast}`) : (`${movie.name}'s cast:`)}
+                    {movie.title ? (`${movie.title}${t.movieDetailsCast}`) : (`${movie.name}${t.movieDetailsCast}`)}
                 </p>
                 <div className="actor-slider">
                     {directors && directors.length > 0 && (
