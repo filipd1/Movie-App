@@ -154,6 +154,15 @@ header {
   border-radius: 4px;
   font-size: 14px;
   min-width: 180px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .dropdown-menu-links {

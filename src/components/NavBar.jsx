@@ -118,16 +118,15 @@ function NavBar() {
 
                     <LangSwitch></LangSwitch>
 
-                    {showDropdownMenu && 
-                        <div className="dropdown-menu" ref={dropdownMenuRef}>
-                            <div className="dropdown-menu-links">
-                                <Link to="/movies" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
-                                <Link to="/tvseries" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
-                                <Link to={`/users/${user.username}`} className="dropdown-menu-link" onClick={() => setShowDropdownMenu(false)}>Account</Link>
-                                <Link to="/" className="dropdown-menu-link" onClick={handleLogout}>Logout</Link>
-                            </div>
+                    <div className={`dropdown-menu ${showDropdownMenu ? "show" : ""}`} ref={dropdownMenuRef} aria-hidden={!showDropdownMenu}>
+                        <div className="dropdown-menu-links">
+                            <Link to="/movies" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>Movies</Link>
+                            <Link to="/tvseries" className="dropdown-menu-link" onClick={() => setShowMobileMenu(false)}>TV Series</Link>
+                            <Link to={`/users/${user.username}`} className="dropdown-menu-link" onClick={() => setShowDropdownMenu(false)}>Account</Link>
+                            <Link to="/" className="dropdown-menu-link" onClick={handleLogout}>Logout</Link>
                         </div>
-                    }
+                    </div>
+                    
                 </div>
 
                 <button onClick={() => setShowMobileMenu(prev => !prev)} className="mobile-menu-button" ref={menuButtonRef}>
