@@ -58,6 +58,16 @@ export const translations = {
         movieDetailsRatingsAll: "All ratings for this movie",
         movieDetailsRatingsAllEmpty: "Be first to rate this movie",
         
+        personBiography: "Biography",
+        personBirthday: "Birthday",
+        personPlaceOfBirth: "Place of birth",
+        personDeathday: "Deathday",
+        personGender: "Gender",
+        personCredits: "Known for",
+        personCreditsActing: "Acting",
+        personCreditsDirecting: "Directing",
+        personCreditsRole: "as",
+
         castTitle: "Full credits",
         cast: "Cast",
         crew: "Crew",
@@ -131,6 +141,16 @@ export const translations = {
         movieDetailsRatingsAll: "Oceny innych użytkowników",
         movieDetailsRatingsAllEmpty: "Bądź pierwszą osobą, która to oceni",
         
+        personBiography: "Biografia",
+        personBirthday: "Data urodzenia",
+        personPlaceOfBirth: "Miejsce urodzenia",
+        personDeathday: "Data śmierci",
+        personGender: "Gender",
+        personCredits: "Znany z",
+        personCreditsActing: "Aktor",
+        personCreditsDirecting: "Reżyser",
+        personCreditsRole: "jako",
+
         castTitle: "Pełna obsada",
         cast: "Obsada",
         crew: "Twórcy",

@@ -2,10 +2,15 @@ import starIcon from "../assets/ratings.svg"
 import { Link } from "react-router-dom"
 import "../css/PersonCredits.css"
 import { useState } from "react"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function PersonCredits({ credits, person }) {
 
     const [active, setActive] = useState("acting")
+    
+    const { language } = useLanguage()
+    const t = translations[language]
 
     const directedMovies = credits?.crew.filter(c => c.job === "Director" ) || []
     const uniqueDirectedMovies = Array.from(
@@ -69,7 +74,7 @@ function PersonCredits({ credits, person }) {
         <div className="credits-container">
             <div className="flex">
                 <img src={starIcon} alt="star-icon" className="star-icon"/>
-                <h2 className="container-title">Known for</h2>
+                <h2 className="container-title">{t.personCredits}</h2>
             </div>
             
             <div className="combined-credits">
@@ -111,14 +116,14 @@ function PersonCredits({ credits, person }) {
                         className={`media-switch-button ${active === "acting" ? "active" : ""}`}
                         onClick={() => setActive("acting")}
                     >
-                        Acting
+                        {t.personCreditsActing}
                     </button>
                     {uniqueDirectedMovies.length > 0 &&
                         <button
                             className={`media-switch-button ${active === "directing" ? "active" : ""}`}
                             onClick={() => setActive("directing")}
                         >
-                            Directing
+                            {t.personCreditsDirecting}
                         </button>
                     }
                 </div>
@@ -133,7 +138,7 @@ function PersonCredits({ credits, person }) {
                                         <Link to={`/${role.media_type}/${role.id}`}>
                                             <p>{role.title ? role.title : role.name}</p>
                                         </Link>
-                                        <p>as {role.character}</p>
+                                        <p>{t.personCreditsRole} {role.character}</p>
                                     </div>
                                     {role.episode_count && 
                                         <p>{`${role.episode_count} ${role.episode_count === 1 ? "episode" : "episodes"}`}</p>
@@ -154,7 +159,7 @@ function PersonCredits({ credits, person }) {
                                         <Link to={`/${role.media_type}/${role.id}`}>
                                             <p>{role.title ? role.title : role.name}</p>
                                         </Link>
-                                        <p>director</p>
+                                        <p>{t.personCreditsDirecting}</p>
                                     </div>
                                     {role.episode_count && 
                                         <p>{`${role.episode_count} ${role.episode_count === 1 ? "episode" : "episodes"}`}</p>

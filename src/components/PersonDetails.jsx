@@ -5,7 +5,8 @@ import placeIcon from "../assets/location.svg"
 import deathIcon from "../assets/tombstone.svg"
 import personIcon from "../assets/person.svg"
 import { useState, useEffect } from "react"
-
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function PersonDetails({ person }) {
 
@@ -20,6 +21,9 @@ function PersonDetails({ person }) {
 
     const [isExpanded, setIsExpanded] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    
+    const { language } = useLanguage()
+    const t = translations[language]
 
     useEffect(() => {
         const handleResize = () => {
@@ -55,23 +59,23 @@ function PersonDetails({ person }) {
                         alt={person.name}
                     />
                     <div className="person-left-info">
-                        <div className="flex"><img src={birthIcon} alt="birth-icon" /><strong>Birthday</strong></div>
+                        <div className="flex"><img src={birthIcon} alt="birth-icon" /><strong>{t.personBirthday}</strong></div>
                         <p>{formatDate(person.birthday)}</p>
-                        <div className="flex"><img src={placeIcon} alt="place-icon" /><strong>Place of birth</strong></div>         
+                        <div className="flex"><img src={placeIcon} alt="place-icon" /><strong>{t.personPlaceOfBirth}</strong></div>         
                         <p>{person.place_of_birth}</p>
                         {person.deathday && 
                             <>
-                                <div className="flex"><img src={deathIcon} alt="death-icon" /><strong>Deathday</strong></div>
+                                <div className="flex"><img src={deathIcon} alt="death-icon" /><strong>{t.personDeathday}</strong></div>
                                 <p>{person.deathday}</p>
                             </>
                         }
-                        <div className="flex"><img src={personIcon} alt="place-icon" /><strong>Gender</strong></div>         
+                        <div className="flex"><img src={personIcon} alt="place-icon" /><strong>{t.personGender}</strong></div>         
                         <p>{person.gender === 1 ? "Female" : person.gender === 2 ? "Male" : "XD"}</p>
                     </div>
                 </div>
 
                 <div className="person-details-right">
-                    <div className="flex"><img src={bioIcon} alt="bio-icon" /><h4>Biography</h4></div>                   
+                    <div className="flex"><img src={bioIcon} alt="bio-icon" /><h4>{t.personBiography}</h4></div>                   
                     <p className="person-bio">{displayedBio}</p>
                     {shouldTruncate && (
                     <button
