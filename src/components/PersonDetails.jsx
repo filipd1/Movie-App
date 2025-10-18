@@ -35,7 +35,7 @@ function PersonDetails({ person }) {
     }, [])
 
     const truncateToWord = (text, limit) => {
-        if (!text) return "No biography found"
+        if (!text) return t.personBiographyEmpty
         if (text.length <= limit) return text
         const truncated = text.slice(0, limit)
         const lastSpace = truncated.lastIndexOf(" ")
@@ -70,7 +70,7 @@ function PersonDetails({ person }) {
                             </>
                         }
                         <div className="flex"><img src={personIcon} alt="place-icon" /><strong>{t.personGender}</strong></div>         
-                        <p>{person.gender === 1 ? "Female" : person.gender === 2 ? "Male" : "XD"}</p>
+                        <p>{person.gender === 1 ? t.personGender1 : person.gender === 2 ? t.personGender2 : t.personGender3}</p>
                     </div>
                 </div>
 
