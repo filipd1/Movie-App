@@ -1,6 +1,7 @@
 import AddedMediaList from "../components/AddedMediaList"
 import { getMovieById, getTVSeriesById } from "../services/api"
 import { useEffect, useState } from "react"
+import Loading from "../components/Loading"
 
 function Favorites({ favorites }) {
     const [favoritesDetails, setFavoritesDetails] = useState([])
@@ -41,7 +42,7 @@ function Favorites({ favorites }) {
 
     return (
         <>
-            {!favorites && <div className="loading">Loading favorites...</div>}
+            {!favorites && <Loading/>}
             <AddedMediaList mediaList={favoritesDetails} pageType="favorites" />
         </>
     )

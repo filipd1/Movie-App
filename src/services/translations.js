@@ -79,6 +79,15 @@ export const translations = {
         castEmpty: "No cast data available",
         crewEmpty: "No crew data available",
 
+        userProfileDocTitle: "'s Profile",
+        userProfileRatings: "Ratings",
+        userProfileWatchlist: "Watchlist",
+        userProfileFavorites: "Favorites",
+        userProfileJoined: "Joined",
+
+        addedListTitle: "Nothing here yet",
+        addedListSubitle: "Start adding movies or TV shows",
+
         footerText: "Upcoming",
 
         readMore: "read more",
@@ -166,6 +175,15 @@ export const translations = {
         crew: "Twórcy",
         castEmpty: "Brak danych o obsadzie",
         crewEmpty: "Brak danych",
+
+        userProfileDocTitle: " - Profil użytkownika",
+        userProfileRatings: "Oceny",
+        userProfileWatchlist: "Do obejrzenia",
+        userProfileFavorites: "Ulubione",
+        userProfileJoined: "Dołączył",
+
+        addedListTitle: "Nic tu jeszcze nie ma",
+        addedListSubitle: "Dodawaj filmy lub seriale",
 
         footerText: "Nadchodzące premiery",
 

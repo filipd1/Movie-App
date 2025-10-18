@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getMovieById, getTVSeriesById } from "../services/api"
 import AddedMediaList from "./AddedMediaList"
+import Loading from "../components/Loading"
 
 function Ratings({ ratings }) {
     const [ratingsDetails, setRatingsDetails] = useState([])
@@ -40,7 +41,7 @@ function Ratings({ ratings }) {
 
     return (
         <>
-            {!ratings && <div className="loading">Loading ratings...</div>}
+            {!ratings && <Loading/>}
             <AddedMediaList mediaList={ratingsDetails} pageType="ratings" />
         </>
     )

@@ -1,6 +1,7 @@
 import AddedMediaList from "../components/AddedMediaList"
 import { getMovieById, getTVSeriesById } from "../services/api"
 import { useEffect, useState } from "react"
+import Loading from "../components/Loading"
 
 function Watchlist({ watchlist }) {
     const [watchlistDetails, setWatchlistDetails] = useState([])
@@ -40,7 +41,7 @@ function Watchlist({ watchlist }) {
 
     return (
         <>
-            {!watchlist && <div className="loading">Loading watchlist...</div>}
+            {!watchlist && <Loading/>}
             <AddedMediaList mediaList={watchlistDetails} pageType="watchlist" />
         </>
     )

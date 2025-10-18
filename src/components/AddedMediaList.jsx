@@ -1,13 +1,19 @@
 import MediaCard from "./MediaCard"
+import Loading from "../components/Loading"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function AddedMediaList({ mediaList, pageType}) {
 
     if (!mediaList) {
-    return <div className="loading">Loading movie list</div>
+        return <Loading/>
     }
     
     const filteredTVSeries = mediaList.filter(f => f.media_type === "tv")
     const filteredMovies = mediaList.filter(f => f.media_type === "movie")
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     return (
         <>
@@ -15,7 +21,7 @@ function AddedMediaList({ mediaList, pageType}) {
                 <>
                     {filteredMovies.length > 0 && 
                         <>
-                            <h3>{`${filteredMovies.length} ${filteredMovies.length > 1 ? "Movies" : "Movie"}`}</h3>
+                            <h3>{filteredMovies.length} {filteredMovies.length > 1 ? t.navbarMovies : t.navbarMovies.slice(0, -1)}</h3>
                             <hr className="movie-list-hr" />
                             <div className="movies-grid">
                                 {filteredMovies.map(movie => (
@@ -26,7 +32,7 @@ function AddedMediaList({ mediaList, pageType}) {
                     }
                     {filteredTVSeries.length > 0 && 
                         <>
-                            <h3>{filteredTVSeries.length} TV Series</h3>
+                            <h3>{filteredTVSeries.length} {filteredTVSeries.length > 1 ? t.navbarTV : t.navbarTV.slice(0, -1)}</h3>
                             <hr className="movie-list-hr" />
                             <div className="movies-grid">
                                 {filteredTVSeries.map(movie => (
@@ -39,8 +45,8 @@ function AddedMediaList({ mediaList, pageType}) {
                 
                 ) : (
                     <div className="movie-list-empty">
-                        <h2>No added movies yet</h2>
-                        <p>Start adding movies or TV shows</p>
+                        <h2>{t.addedListTitle}</h2>
+                        <p>{t.addedListSubitle}</p>
                     </div>
                 )}
         </>

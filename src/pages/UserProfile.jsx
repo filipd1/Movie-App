@@ -6,6 +6,8 @@ import Favorites from "../components/Favorites.jsx"
 import Watchlist from "../components/Watchlist.jsx"
 import Ratings from "../components/Ratings.jsx"
 import Loading from "../components/Loading.jsx"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 const UserProfile = () => {
   const { username } = useParams()
@@ -14,15 +16,18 @@ const UserProfile = () => {
   const [favoritesShown, setfavoritesShown] = useState(false)
   const [watchlistShown, setwatchlistShown] = useState(false)
 
+  const { language } = useLanguage()
+  const t = translations[language]
+
   useEffect(() => {
     axios.get(`https://movie-app-backend-xcuo.onrender.com/users/${username}`)
       .then(res => setUser(res.data))
       .catch(err => console.log(err))
 
     if (username) {
-      document.title = username + "'s Profile"
+      document.title = username + t.userProfileDocTitle
     } else {
-      document.title = "Loading..."
+      document.title = t.loading
     }
   }, [username])
 
@@ -35,8 +40,7 @@ const UserProfile = () => {
           <img src="https://avatar.iran.liara.run/public/boy" alt="user-avatar" />
           <div className="user-info">
             <h2>{user.username}</h2>
-            <p>E-mail: {user.email}</p>
-            <p>Joined: {new Date(user.createdAt).toLocaleDateString()}</p>
+            <p>{t.userProfileJoined}: {new Date(user.createdAt).toLocaleDateString()}</p>
           </div>
         </div>
         <hr className="user-hr"/>
@@ -50,7 +54,7 @@ const UserProfile = () => {
               setwatchlistShown(false)
             }}
           >
-            Ratings ({user.ratings.length})
+            {t.userProfileRatings} ({user.ratings.length})
           </button>
 
           <button
@@ -61,7 +65,7 @@ const UserProfile = () => {
               setwatchlistShown(true)
             }}
           >
-            Watchlist ({user.watchlist.length})
+            {t.userProfileWatchlist} ({user.watchlist.length})
           </button>
 
           <button
@@ -72,7 +76,7 @@ const UserProfile = () => {
               setwatchlistShown(false)
             }}
           >
-            Favorites ({user.favorites.length})
+            {t.userProfileFavorites} ({user.favorites.length})
           </button>
         </div>
       </div>
