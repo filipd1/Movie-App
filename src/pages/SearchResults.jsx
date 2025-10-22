@@ -84,7 +84,7 @@ function SearchResults() {
     <form className="search-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Search.."
+        placeholder={t.searchText}
         className="search-input"
         value={inputQuery}
         onChange={(e) => setInputQuery(e.target.value)}
