@@ -13,6 +13,7 @@ export const translations = {
 
         searchText: "Search",
         searchClear: "Clear search",
+        searchResults: "Search results for:",
 
         navbarMovies: "Movies",
         navbarTV: "TV Series",
@@ -121,6 +122,8 @@ export const translations = {
         popularTVSeries: "Najbardziej popularne seriale",
 
         searchText: "Szukaj",
+        searchClear: "Wyczyść wyszukiwanie",
+        searchResults: "Wyniki wyszukiwania dla:",
 
         navbarMovies: "Filmy",
         navbarTV: "Seriale",
