@@ -31,7 +31,6 @@ const fetchFromTMDB = async (url, res, language = "en-US") => {
       data &&
       (!data.overview || (typeof data.overview === "string" && data.overview.trim() === ""))
       ) {
-        console.log(`[Fallback] Missing PL overview for ${url}, fetching EN...`)
         const fallback = await axios.get(`${BASE_URL}${url}`, {
           params: { api_key: API_KEY, language: "en-US" }
         })
@@ -49,7 +48,6 @@ const fetchFromTMDB = async (url, res, language = "en-US") => {
   } catch (error) {
     const status = error.response?.status || 500
     const message = error.response?.data?.status_message || "Error fetching data from TMDB"
-    console.error(`TMDB fetch error for ${url}:`, message)
     res.status(status).json({ error: message })
   }
 }
