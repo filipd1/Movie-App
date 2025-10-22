@@ -34,7 +34,14 @@ const fetchFromTMDB = async (url, res, language = "en-US") => {
         const fallback = await axios.get(`${BASE_URL}${url}`, {
           params: { api_key: API_KEY, language: "en-US" }
         })
-        data.overview = fallback.data.overview
+        //data.overview = fallback.data.overview
+        data = {
+          ...fallback.data,
+          ...data,
+          overview: data.overview && data.overview.trim() !== "" ? data.overview : fallback.data.overview,
+          name: data.name || fallback.data.name,
+          title: data.title || fallback.data.title,
+        }
     }
 
     res.json(data)
