@@ -25,7 +25,7 @@ function TVSeries() {
             setError(null)
         } catch (err) {
             console.log(err)
-            setError("Failed to load movies...")
+            setError(t.failedLoad)
         } finally {
             setLoading(false)
         }
@@ -34,7 +34,7 @@ function TVSeries() {
     }, [])
 
     useEffect(() => {
-        document.title = "TV Series"
+        document.title = t.navbarTV
     }, [])
     
     return (

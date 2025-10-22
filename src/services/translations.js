@@ -12,6 +12,7 @@ export const translations = {
         popularTVSeries: "Currently popular TV Series",
 
         searchText: "Search",
+        searchClear: "Clear search",
 
         navbarMovies: "Movies",
         navbarTV: "TV Series",
@@ -99,6 +100,13 @@ export const translations = {
         movie: "movie",
         tvSeries: "TV series",
         seasons: "Seasons",
+        listEmpty: "List empty",
+        failedLoad: "Failed to load data...",
+        failedSearch: "No matching results",
+        searchResults: "Search for:",
+
+        errorPageTitle: "Page not found",
+        errorPageBack: "← Back to Home Page",
     },
     pl: {
         homeText1: "Filmy zyskujące popularność",
@@ -200,5 +208,12 @@ export const translations = {
         movie: "film",
         tvSeries: "serial",
         seasons: "Sezony",
+        listEmpty: "Pusto",
+        failedLoad: "Błąd z pobieraniem danych...",
+        failedSearch: "Nic nie znaleziono",
+        searchResults: "Wyniki wyszukiwania:",
+
+        errorPageTitle: "Nie znaleziono strony",
+        errorPageBack: "← Powrót do strony głównej",
     }
 }

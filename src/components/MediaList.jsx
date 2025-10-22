@@ -2,9 +2,13 @@ import MediaCard from "./MediaCard"
 import { Link } from "react-router-dom"
 import "../css/MediaList.css"
 import Loading from "./Loading"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function MediaList({ mediaList, mediaListHeader, mediaNumber = null, URLto}) {
 
+    const { language } = useLanguage()
+    const t = translations[language]
 
     if (mediaList === null) {
         return <Loading />
@@ -21,7 +25,7 @@ function MediaList({ mediaList, mediaListHeader, mediaNumber = null, URLto}) {
                 </div>
                 ) : (
                     <div className="movie-list-empty">
-                        <h2>No movies found</h2>
+                        <h2>{t.listEmpty}</h2>
                     </div>
                 )}
                 

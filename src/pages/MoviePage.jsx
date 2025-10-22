@@ -48,7 +48,7 @@ function MoviePage() {
                 setUserRatings(ratingsData)
             } catch (err) {
                 console.log(err)
-                setError("Failed to load movie...")
+                setError(t.failedLoad)
             } finally {
                 setLoading(false)
             }

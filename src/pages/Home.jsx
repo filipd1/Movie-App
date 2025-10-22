@@ -29,7 +29,7 @@ function Home() {
         setError(null)
       } catch (err) {
         console.log(err)
-        setError("Failed to load movies...")
+        setError(t.failedLoad)
       } finally {
         setLoading(false)
       }

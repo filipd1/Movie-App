@@ -23,7 +23,7 @@ function TopRatedMovies() {
         console.log(tvData)
       } catch (err) {
         console.log(err)
-        setError("Failed to load tv series...")
+        setError(t.failedLoad)
       } finally {
         setLoading(false)
       }

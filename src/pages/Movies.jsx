@@ -24,7 +24,7 @@ function Movies() {
         setError(null)
       } catch (err) {
         console.log(err)
-        setError("Failed to load movies...")
+        setError(t.failedLoad)
       } finally {
         setLoading(false)
       }
@@ -33,7 +33,7 @@ function Movies() {
   }, [])
 
   useEffect(() => {
-    document.title = "Movies"
+    document.title = t.navbarMovies
   }, [])
 
   return (

@@ -49,7 +49,7 @@ function TVSeriesPage() {
             setUserRatings(ratingsData)
          } catch (err) {
             console.log(err)
-            setError("Failed to load tv series...")
+            setError(t.failedLoad)
          } finally {
             setLoading(false)
          }

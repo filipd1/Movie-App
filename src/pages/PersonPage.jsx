@@ -23,7 +23,7 @@ function PersonPage() {
                 setPersonCredits(personCreditsData)
             } catch (err) {
                 console.log(err)
-                setError("Failed to load details...")
+                setError(t.failedLoad)
             } finally {
                 setLoading(false)
             }
@@ -33,9 +33,9 @@ function PersonPage() {
 
     useEffect(() => {
       if (person?.name) {
-         document.title = person.name
+        document.title = person.name
       } else {
-         document.title = "Ładowanie..."
+        document.title = t.loading
       }
     }, [person])
 

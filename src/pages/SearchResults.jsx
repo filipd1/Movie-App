@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { searchMedia } from "../services/api"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 import MediaCard from "../components/MediaCard"
 import Loading from "../components/Loading"
 
@@ -13,6 +15,9 @@ function SearchResults() {
 
     const location = useLocation()
     const query = new URLSearchParams(location.search).get("q")
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     useEffect(() => {
         const fetchSearchResults = async () => {
@@ -28,7 +33,7 @@ function SearchResults() {
                 setError(null)
             } catch (err) {
                 console.log(err)
-                setError("No matching movies")
+                setError(t.failedSearch)
                 setSearchResults([])
             } finally {
                 setLoading(false)
@@ -39,9 +44,9 @@ function SearchResults() {
 
     useEffect(() => {
       if (query) {
-         document.title = `Search for: ${query}`
+         document.title = `${t.searchResults}: ${query}`
       } else {
-         document.title = "Loading..."
+         document.title = t.loading
       }
     }, [query])
 
@@ -56,7 +61,7 @@ function SearchResults() {
         setError(null)
       } catch (err) {
         console.log(err)
-        setError("No matching movies")
+        setError(t.failedSearch)
         setSearchResults([])
       } finally {
         setLoading(false)
@@ -84,8 +89,8 @@ function SearchResults() {
             value={inputQuery}
             onChange={(e) => setInputQuery(e.target.value)}
           />
-          <button type="submit" className="search-button">Search</button>
-          <button type="submit" className="search-button" onClick={clearSearch}>Clear search</button>
+          <button type="submit" className="search-button">{t.searchText}</button>
+          <button type="submit" className="search-button" onClick={clearSearch}>{t.searchClear}</button>
         </form>
 
         <h2>Search results for: <i>{query}</i></h2>
@@ -100,7 +105,7 @@ function SearchResults() {
                       <MediaCard movie={movie} key={movie.id} pageType="none"/>
                   ))
                 ) : (
-                  <p>No matching movies</p>
+                  <p>{t.failedSearch}</p>
                 )}
               </div>
           )}

@@ -31,7 +31,7 @@ function FullCast() {
                 setCredits(credits)
             } catch (err) {
                 console.log(err)
-                setError("Failed to load credits...")
+                setError(t.failedLoad)
             } finally {
                 setLoading(false)
             }
