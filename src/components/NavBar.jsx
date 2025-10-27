@@ -138,7 +138,7 @@ function NavBar() {
                         <Link to="/movies" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>{t.dropdownMenuItem1}</Link>
                         <Link to="/tvseries" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>{t.dropdownMenuItem2}</Link>
                         <Link to="/" className="mobile-menu-link" onClick={() => setShowMobileMenu(false)}>{t.dropdownMenuItem3}</Link>
-                        <Link to="/" className="mobile-menu-link" onClick={handleLogout}>{t.dropdownMenuItem4}</Link>
+                        {userLoggedIn ? <Link to="/" className="mobile-menu-link" onClick={handleLogout}>{t.dropdownMenuItem4}</Link> : <Link to="/login" className="mobile-menu-link">Login</Link>}
                     </div>
                 </div>
 
