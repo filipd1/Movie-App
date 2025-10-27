@@ -21,7 +21,7 @@
     min-width: 1000px;
     min-height: 500px;
     background: transparent;
-    backdrop-filter: blur(12px); 
+    backdrop-filter: blur(12px);
 }
 
 .login-form {
@@ -81,4 +81,21 @@
 
 .form-desc-paragraph {
     margin-top: 1.2em;
+}
+
+@media (max-width: 768px) {
+
+    .form-wrapper {
+        flex-direction: column;
+        box-shadow: unset;
+    }
+
+    .form-btn {
+        align-self: center;
+    }
+
+    .login-container {
+        background-image: unset;
+    }
+
 }
