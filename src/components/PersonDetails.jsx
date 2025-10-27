@@ -43,7 +43,7 @@ function PersonDetails({ person }) {
     }
 
     const shouldTruncate = isMobile && person && person.biography && person.biography.length > 300
-    const displayedBio = shouldTruncate && !isExpanded ? truncateToWord(person.biography, 300) : (person.biography || 'No biography found')
+    const displayedBio = shouldTruncate && !isExpanded ? truncateToWord(person.biography, 300) : (person.biography || t.personBiographyEmpty)
 
     return (
         <div className="person-details">

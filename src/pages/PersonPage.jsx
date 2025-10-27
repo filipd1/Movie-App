@@ -4,6 +4,8 @@ import { getPersonById, getPersonCombinedCredits } from "../services/api"
 import PersonDetails from "../components/PersonDetails"
 import PersonCredits from "../components/PersonCredits"
 import Loading from "../components/Loading"
+import { useLanguage } from "../contexts/LangContext"
+import { translations } from "../services/translations"
 
 function PersonPage() {
     const { id } = useParams()
@@ -11,6 +13,9 @@ function PersonPage() {
     const [personCredits, setPersonCredits] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+
+    const { language } = useLanguage()
+    const t = translations[language]
 
     useEffect(() => {
         const loadPersonData = async () => {
